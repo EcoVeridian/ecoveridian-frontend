@@ -15,7 +15,6 @@ Open [http://localhost:3000](http://localhost:3000) to view the page.
 Main code lives in `src/`:
 - `src/app/` — Next.js app routes and pages
 - `src/components/` — UI components and layout
-- `src/hooks/` — Custom React hooks for shared logic
 - `src/lib/` — Small utilities and data
 
 ## Code License

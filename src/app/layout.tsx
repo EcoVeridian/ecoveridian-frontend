@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 
 // Page metadata
@@ -43,8 +42,6 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased">
         {children}
-        {/* Toast notification container */}
-        <Toaster />
       </body>
     </html>
   );
