@@ -18,7 +18,7 @@ export default function UseCaseSelector() {
             Common Questions
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Have questions? We've got answers. If you can't find what you're
+            Have questions? We&apos;ve got answers. If you can&apos;t find what you&apos;re
             looking for, feel free to contact us.
           </p>
         </div>
