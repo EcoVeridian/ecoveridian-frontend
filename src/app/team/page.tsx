@@ -7,16 +7,25 @@ import Footer from '@/components/landing/footer';
 const teamMembers = [
   {
     name: 'Risith Kankanamge',
+    role: 'Founder & Lead Developer',
+    description:
+      'Founder and principal architect behind EcoVeridian. Designed and built the entire platform from the ground up, leading all technical decisions and implementation.',
     imageUrl: '/risith-portrait.jpg',
-    alt: 'Portrait of Risith',
+    alt: 'Portrait of Risith Kankanamge',
   },
   {
-    name: 'Santhosh',
+    name: 'Santhosh Ilaiyaraja',
+    role: 'Co-Founder & Co-Lead Frontend Dev',
+    description:
+      'Co-founder contributing to frontend development, user experience design, and strategic planning. Helps shape the product vision and technical direction.',
     imageUrl: '/santhosh-portrait.jpg',
     alt: 'Portrait of Santhosh',
   },
   {
-    name: 'Ritvik',
+    name: 'Ritvik Rajkumar',
+    role: 'Co-Founder & Co-Lead Frontend Dev',
+    description:
+      'Co-founder contributing to frontend development, interface design, and product strategy. Collaborates on technical architecture and user-facing features.',
     imageUrl: '/ritvik-portrait.jpg',
     alt: 'Portrait of Ritvik',
   },
@@ -57,9 +66,15 @@ export default function TeamPage() {
                   </div>
                 </CardHeader>
                 <CardContent className="flex flex-1 flex-col p-6">
-                  <CardTitle className="text-xl font-bold">
+                  <CardTitle className="text-xl font-bold mb-2">
                     {member.name}
                   </CardTitle>
+                  <p className="text-sm font-semibold text-primary mb-3">
+                    {member.role}
+                  </p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {member.description}
+                  </p>
                 </CardContent>
               </Card>
             ))}
