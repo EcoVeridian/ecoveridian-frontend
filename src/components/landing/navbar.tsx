@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/common/logo';
 import ThemeToggle from '@/components/ui/theme-toggle';
@@ -17,9 +18,11 @@ export default function Navbar() {
           {/* Theme toggle (sun/moon) */}
           <ThemeToggle />
           {/* Primary CTA */}
-          <Button className="rounded-full px-6 font-medium" size="sm">
-            Get started
-          </Button>
+          <Link href="/auth">
+            <Button className="rounded-full px-6 font-medium" size="sm">
+              Get started
+            </Button>
+          </Link>
         </div>
       </div>
     </nav>

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRightIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 
@@ -20,12 +21,14 @@ export default function Hero() {
 
         {/* Primary CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up [animation-delay:300ms] opacity-0 fill-mode-forwards">
-          <Button
-            size="lg"
-            className="rounded-full px-8 h-12 text-base font-medium w-full sm:w-auto"
-          >
-            Get started <ArrowRightIcon className="ml-2 w-4 h-4" />
-          </Button>
+          <Link href="/auth">
+            <Button
+              size="lg"
+              className="rounded-full px-8 h-12 text-base font-medium w-full sm:w-auto"
+            >
+              Get started <ArrowRightIcon className="ml-2 w-4 h-4" />
+            </Button>
+          </Link>
           <Button
             variant="outline"
             size="lg"
