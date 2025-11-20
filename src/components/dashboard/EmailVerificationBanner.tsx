@@ -46,7 +46,7 @@ export default function EmailVerificationBanner() {
                   <span className="block mt-1">{message}</span>
                 ) : (
                   <>
-                    {' '}Didn't receive it?{' '}
+                    {' '}Didn&apos;t receive it?{' '}
                     <button
                       onClick={handleResendVerification}
                       disabled={resending}
