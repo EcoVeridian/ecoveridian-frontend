@@ -9,6 +9,7 @@ import {
 } from 'react';
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
+import { syncAuthToExtension, notifyExtensionLogout } from '@/lib/extensionBridge';
 
 interface AuthContextType {
   user: User | null;
@@ -26,9 +27,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     // Subscribe to auth state changes
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
       setLoading(false);
+
+      // If there's a logged-in user, send token to extension
+      if (user) {
+        try {
+          const token = await user.getIdToken();
+          // Best-effort: don't block UI if extension missing
+          syncAuthToExtension(token, {
+            email: user.email ?? undefined,
+            displayName: user.displayName ?? undefined,
+            photoURL: user.photoURL ?? undefined,
+          });
+        } catch (err) {
+          // ignore token errors
+        }
+      } else {
+        // User logged out, notify extension
+        notifyExtensionLogout();
+      }
     });
 
     // Cleanup subscription on unmount
