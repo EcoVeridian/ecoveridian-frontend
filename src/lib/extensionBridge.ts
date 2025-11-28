@@ -3,7 +3,7 @@
  * Handles communication between the website and browser extension
  */
 
-const EXTENSION_ID = "cjepofimmkceohajfndfopkpohbacnld";
+const EXTENSION_ID = "bmfbcdnooeejjlhnpgbmijnjkepmlaaf"; // Replace with the actual one after demo: jpmehcioggeadmlndekobedppcoiiaop
 
 /**
  * Sync the Firebase auth token to the extension
