@@ -66,9 +66,24 @@ export async function getUserDashboardData(): Promise<DashboardData | null> {
 
     // Sort by timestamp descending (most recent first), client-side
     history.sort((a, b) => {
-      const aTime = a.timestamp?.toMillis?.() ?? a.timestamp?.getTime?.() ?? 0;
-      const bTime = b.timestamp?.toMillis?.() ?? b.timestamp?.getTime?.() ?? 0;
-      return bTime - aTime;
+      // Handle Firestore Timestamp or JS Date
+      const getTime = (ts: any): number => {
+        if (!ts) return 0;
+        // Firestore Timestamp has toDate() method
+        if (typeof ts.toDate === 'function') {
+          return ts.toDate().getTime();
+        }
+        // Already a Date object
+        if (ts instanceof Date) {
+          return ts.getTime();
+        }
+        // Firestore Timestamp with seconds/nanoseconds
+        if (ts.seconds !== undefined) {
+          return ts.seconds * 1000 + (ts.nanoseconds || 0) / 1000000;
+        }
+        return 0;
+      };
+      return getTime(b.timestamp) - getTime(a.timestamp);
     });
 
     console.log('Dashboard data loaded:', { stats, historyCount: history.length });
