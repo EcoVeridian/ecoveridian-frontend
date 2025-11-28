@@ -37,10 +37,10 @@ export default function LegalPage() {
             <p className="text-muted-foreground leading-relaxed">
               If you have questions or need additional information, please contact us at{' '}
               <a
-                href="mailto:help@ecoveridian.org"
+                href="mailto:ecoveridian@gmail.com"
                 className="underline hover:text-foreground transition-colors"
               >
-                help@ecoveridian.org
+                ecoveridian@gmail.com
               </a>
               .
             </p>

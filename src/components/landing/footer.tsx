@@ -38,23 +38,21 @@ export default function Footer() {
                 >
                   Team
                 </Link>
-                <a
-                  href="https://risithcha.com/blog/building-ecoveridian-v100"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/legal"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  Read The Journey
-                </a>
-                <a
-                  href="#"
+                  Legal
+                </Link>
+                <Link
+                  href="/privacy"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  Changelog
-                </a>
+                  Privacy Policy
+                </Link>
               </div>
 
-              {/* Right side - Branding and legal */}
+              {/* Right side - Branding */}
               <div className="flex flex-col items-start md:items-end gap-3">
                 {/* Logo */}
                 <Logo />
@@ -64,22 +62,6 @@ export default function Footer() {
                 </p>
                 <p className="text-sm text-muted-foreground">
                   All rights reserved.
-                </p>
-                {/* Legal links */}
-                <p className="text-xs text-muted-foreground space-x-3">
-                  <Link
-                    href="/legal"
-                    className="underline hover:text-foreground transition-colors"
-                  >
-                    Legal
-                  </Link>
-                  <span>•</span>
-                  <Link
-                    href="/privacy"
-                    className="underline hover:text-foreground transition-colors"
-                  >
-                    Privacy Policy
-                  </Link>
                 </p>
               </div>
             </div>

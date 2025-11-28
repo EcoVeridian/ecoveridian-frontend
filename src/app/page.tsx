@@ -4,6 +4,7 @@ import IconWave from '@/components/landing/icon-wave';
 import UseCaseSelector from '@/components/landing/use-case-selector';
 import Features from '@/components/landing/features';
 import GridSection from '@/components/landing/grid-section';
+import Journal from '@/components/landing/journal';
 import Footer from '@/components/landing/footer';
 
 // Main landing page
@@ -16,6 +17,7 @@ export default function Home() {
       <UseCaseSelector />
       <Features />
       <GridSection />
+      <Journal />
       <Footer />
     </main>
   );
