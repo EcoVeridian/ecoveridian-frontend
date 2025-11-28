@@ -39,7 +39,9 @@ export default function Footer() {
                   Team
                 </Link>
                 <a
-                  href="#"
+                  href="https://risithcha.com/blog/building-ecoveridian-v100"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Read The Journey
