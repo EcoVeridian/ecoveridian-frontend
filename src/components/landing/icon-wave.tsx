@@ -82,21 +82,37 @@ export default function IconWave() {
   return (
     <section className="relative w-full py-32 overflow-hidden">
       {/* Hero text above icon wave */}
-      <div className="container">
-        <div className="max-w-3xl mb-16 ml-12">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-tight">
+      <div className="container px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mb-16 mx-auto lg:ml-12 lg:mx-0">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-relaxed">
             {isMounted ? (
-              'EcoVeridian is our next-generation eco-innovation hub, shaping how communities build a greener future.'.split('').map((char, index) => (
-                <span
-                  key={index}
-                  className="animate-letter-wave"
-                  style={{
-                    animationDelay: `${index * 0.03}s`,
-                  }}
-                >
-                  {char === ' ' ? '\u00A0' : char}
-                </span>
-              ))
+              (() => {
+                const text = 'EcoVeridian is our next-generation eco-innovation hub, shaping how communities build a greener future.';
+                const words = text.split(' ');
+                let charIndex = 0;
+                
+                return words.map((word, wordIndex) => (
+                  <span key={wordIndex} className="inline-block whitespace-nowrap">
+                    {word.split('').map((char) => {
+                      const currentIndex = charIndex++;
+                      return (
+                        <span
+                          key={currentIndex}
+                          className="animate-letter-wave inline-block"
+                          style={{
+                            animationDelay: `${currentIndex * 0.03}s`,
+                          }}
+                        >
+                          {char}
+                        </span>
+                      );
+                    })}
+                    {wordIndex < words.length - 1 && (
+                      <span className="inline-block">&nbsp;</span>
+                    )}
+                  </span>
+                ));
+              })()
             ) : (
               'EcoVeridian is our next-generation eco-innovation hub, shaping how communities build a greener future.'
             )}
