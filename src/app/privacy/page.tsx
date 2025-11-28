@@ -95,10 +95,10 @@ export default function PrivacyPage() {
               <li><strong>Right to rectification:</strong> You can request correction of inaccurate data.</li>
               <li><strong>Right to erasure:</strong> You may request deletion of your user data by contacting us at{' '}
                 <a 
-                  href="mailto:privacy@ecoveridian.org" 
+                  href="mailto:ecoveridian@gmail.com" 
                   className="text-primary hover:underline"
                 >
-                  privacy@ecoveridian.org
+                  ecoveridian@gmail.com
                 </a>.
               </li>
               <li><strong>Right to data portability:</strong> You can request your data in a portable format.</li>
@@ -164,19 +164,19 @@ export default function PrivacyPage() {
             <p className="leading-relaxed">
               Questions about this privacy policy? Contact us at:{' '}
               <a 
-                href="mailto:privacy@ecoveridian.org" 
+                href="mailto:ecoveridian@gmail.com" 
                 className="text-primary hover:underline"
               >
-                privacy@ecoveridian.org
+                ecoveridian@gmail.com
               </a>
             </p>
             <p className="leading-relaxed mt-4">
               For general support inquiries, please email{' '}
               <a 
-                href="mailto:help@ecoveridian.org" 
+                href="mailto:ecoveridian@gmail.com" 
                 className="text-primary hover:underline"
               >
-                help@ecoveridian.org
+                ecoveridian@gmail.com
               </a>
             </p>
           </div>
