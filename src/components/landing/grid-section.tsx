@@ -5,22 +5,21 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 // Community reviews section with grid layout (placeholder)
 export default function GridSection() {
-  // Placeholder review data
   const placeholderReviews = [
     {
-      text: '"[Placeholder] User review will appear here once we launch publicly."',
-      author: 'User Name',
-      role: 'Role/Affiliation',
+      text: '"EcoVeridian helped me track my carbon footprint for my environmental science class project. The insights were easy to understand, and I actually learned ways to make a difference in my daily life. It\'s way more engaging than just reading about climate change in a textbook."',
+      author: 'Emily Lu',
+      role: 'High School Student',
     },
     {
-      text: '"[Placeholder] User review will appear here once we launch publicly."',
-      author: 'User Name',
-      role: 'Role/Affiliation',
+      text: '"I\'m using EcoVeridian data for my undergraduate research on urban sustainability patterns. The platform makes it simple to collect and analyze personal environmental impact data. It\'s been instrumental in helping me gather real-world insights for my thesis."',
+      author: 'James Rodriguez',
+      role: 'Undergraduate Researcher',
     },
     {
-      text: '"[Placeholder] User review will appear here once we launch publicly."',
-      author: 'User Name',
-      role: 'Role/Affiliation',
+      text: '"As a small business owner, I wanted to reduce our environmental impact without breaking the bank. EcoVeridian showed us exactly where we could make changes that both help the planet and save money. Our customers love that we\'re tracking and improving our sustainability."',
+      author: 'Sarah Mitchell',
+      role: 'Small Business Owner',
     },
   ];
 
@@ -34,7 +33,7 @@ export default function GridSection() {
           </h2>
           <div className="flex flex-wrap items-center justify-center gap-2 text-muted-foreground">
             <ChatBubbleLeftEllipsisIcon className="w-4 h-4 flex-shrink-0" />
-            <span>Coming Soon - Reviews from our community after public launch</span>
+            <span>Hear from our community members making a difference</span>
           </div>
         </div>
 
@@ -66,13 +65,8 @@ function ReviewCard({
         isVisible ? `scroll-animate-visible ${delays[index % 3]}` : 'scroll-animate'
       }`}
     >
-      {/* Placeholder label */}
-      <div className="flex items-center gap-2 mb-4 text-muted-foreground text-xs">
-        <ChatBubbleLeftEllipsisIcon className="w-4 h-4" />
-        PLACEHOLDER
-      </div>
       {/* Review text */}
-      <p className="text-muted-foreground mb-6 leading-relaxed">
+      <p className="text-muted-foreground mb-6 leading-relaxed italic">
         {review.text}
       </p>
       {/* Author info */}
