@@ -8,18 +8,15 @@ export default function GridSection() {
   const placeholderReviews = [
     {
       text: '"EcoVeridian helped me track my carbon footprint for my environmental science class project. The insights were easy to understand, and I actually learned ways to make a difference in my daily life. It\'s way more engaging than just reading about climate change in a textbook."',
-      author: 'Emily Lu',
-      role: 'High School Student',
+      author: '@solomon5ive',
     },
     {
       text: '"I\'m using EcoVeridian data for my undergraduate research on urban sustainability patterns. The platform makes it simple to collect and analyze personal environmental impact data. It\'s been instrumental in helping me gather real-world insights for my thesis."',
-      author: 'James Rodriguez',
-      role: 'Undergraduate Researcher',
+      author: '@jrodrgz',
     },
     {
       text: '"As a small business owner, I wanted to reduce our environmental impact without breaking the bank. EcoVeridian showed us exactly where we could make changes that both help the planet and save money. Our customers love that we\'re tracking and improving our sustainability."',
-      author: 'Sarah Mitchell',
-      role: 'Small Business Owner',
+      author: '@smitchell22',
     },
   ];
 
@@ -52,7 +49,7 @@ function ReviewCard({
   review,
   index,
 }: {
-  review: { text: string; author: string; role: string };
+  review: { text: string; author: string };
   index: number;
 }) {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
@@ -72,7 +69,6 @@ function ReviewCard({
       {/* Author info */}
       <div className="border-t border-border pt-4">
         <p className="font-medium text-sm">{review.author}</p>
-        <p className="text-xs text-muted-foreground">{review.role}</p>
       </div>
     </div>
   );
