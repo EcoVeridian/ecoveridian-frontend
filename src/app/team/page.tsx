@@ -9,7 +9,7 @@ const teamMembers = [
     name: 'Risith Kankanamge',
     role: 'Co-Founder & Lead Full-Stack Developer',
     description:
-      'Founder and principal architect behind EcoVeridian. Designed and built the entire platform from the ground up, leading all technical decisions and implementation.',
+      'Co-founder responsible for full-stack development and backend systems. Collaborates on platform architecture, technical strategy, and user-facing features.',
     imageUrl: '/risith-portrait.jpg',
     alt: 'Portrait of Risith Kankanamge',
   },
