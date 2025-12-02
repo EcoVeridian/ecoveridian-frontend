@@ -9,15 +9,15 @@ const teamMembers = [
     name: 'Risith Kankanamge',
     role: 'Co-Founder & Lead Full-Stack Developer',
     description:
-      'Co-founder responsible for full-stack development and backend systems. Collaborates on platform architecture, technical strategy, and user-facing features.',
+      'Architected the core platform and AI processing pipeline. Responsible for full-stack development, backend systems, and technical strategy.',
     imageUrl: '/risith-portrait.jpg',
     alt: 'Portrait of Risith Kankanamge',
   },
   {
     name: 'Santhosh Ilaiyaraja',
-    role: 'Co-Founder & Lead Technical Developer',
+    role: 'Co-Founder & Lead Frontend Developer',
     description:
-      'Co-founder contributing to frontend development, user experience design, and strategic planning. Helps shape the product vision and technical direction.',
+      'Leads frontend development and frontend architecture. Owns UI/UX implementation, component systems, and performance across the React/Tailwind stack.',
     imageUrl: '/santhosh-portrait.jpg',
     alt: 'Portrait of Santhosh',
   },
@@ -25,7 +25,7 @@ const teamMembers = [
     name: 'Ritvik Rajkumar',
     role: 'Co-Founder & Lead Product Engineer',
     description:
-      'Co-founder contributing to frontend development, interface design, and product strategy. Collaborates on technical architecture and user-facing features.',
+      'Specializes in frontend architecture and user-facing features. Contributes to interface design and product flows across the React/Tailwind stack.',
     imageUrl: '/ritvik-portrait.jpg',
     alt: 'Portrait of Ritvik',
   },
