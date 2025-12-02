@@ -4,29 +4,48 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRightIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
-import { detectBrowser, getExtensionUrl } from '@/lib/browser-utils';
+import { detectBrowser, getExtensionUrl, isMobile } from '@/lib/browser-utils';
 import InteractiveBackground from '@/components/landing/interactive-background';
 
 // Hero section - main headline and CTA
 export default function Hero() {
-  const [browser, setBrowser] = useState<'chrome' | 'edge' | 'other'>('other');
+  const [browser, setBrowser] = useState<'chrome' | 'edge' | 'firefox' | 'other'>('other');
+  const [isOnMobile, setIsOnMobile] = useState(false);
   const [showUnsupportedMessage, setShowUnsupportedMessage] = useState(false);
+  const [unsupportedMessage, setUnsupportedMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    // Detect browser on mount
+    // Detect browser and device on mount
     setBrowser(detectBrowser());
+    setIsOnMobile(isMobile());
   }, []);
 
   const handleDownloadClick = () => {
+    // If on mobile, show message that extensions require desktop browsers
+    if (isOnMobile) {
+      setUnsupportedMessage("Extensions can't be installed on phones. Use a desktop browser to install the EcoVeridian extension.");
+      setShowUnsupportedMessage(true);
+      setTimeout(() => setShowUnsupportedMessage(false), 7000);
+      return;
+    }
+
+    // Firefox support is still under development
+    if (browser === 'firefox') {
+      setUnsupportedMessage('Mozilla Firefox support is currently under development. Please use a Chromium-based browser (Chrome, Edge, Brave, Vivaldi, etc.) to install the extension.');
+      setShowUnsupportedMessage(true);
+      setTimeout(() => setShowUnsupportedMessage(false), 7000);
+      return;
+    }
+
     const url = getExtensionUrl(browser);
-    
     if (url) {
       // Open the store URL in a new tab
       window.open(url, '_blank', 'noopener,noreferrer');
     } else {
-      // Show unsupported message
+      // Generic unsupported message
+      setUnsupportedMessage('Our extension is available for Chromium-based browsers (Chrome, Edge, Brave, Vivaldi, and others). Please use one of those browsers to download.');
       setShowUnsupportedMessage(true);
-      setTimeout(() => setShowUnsupportedMessage(false), 5000);
+      setTimeout(() => setShowUnsupportedMessage(false), 7000);
     }
   };
 
@@ -72,10 +91,7 @@ export default function Hero() {
         {showUnsupportedMessage && (
           <div className="mt-6 p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-lg text-yellow-600 dark:text-yellow-400 text-sm max-w-md mx-auto animate-fade-in">
             <p className="font-medium mb-1">Extension Not Available</p>
-            <p>
-              Our extension is currently available for Chrome and Edge browsers only. 
-              Please use one of these browsers to download.
-            </p>
+            <p>{unsupportedMessage ?? 'Our extension is currently available for Chromium-based browsers (Chrome, Edge, Brave, Vivaldi, and others). Please use one of those browsers to download.'}</p>
           </div>
         )}
       </div>

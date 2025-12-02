@@ -2,7 +2,7 @@
  * Detect the user's browser
  * Returns 'chrome', 'edge', or 'other'
  */
-export function detectBrowser(): 'chrome' | 'edge' | 'other' {
+export function detectBrowser(): 'chrome' | 'edge' | 'firefox' | 'other' {
   // Server-side rendering check
   if (typeof window === 'undefined') {
     return 'other';
@@ -21,6 +21,11 @@ export function detectBrowser(): 'chrome' | 'edge' | 'other' {
     return 'chrome';
   }
 
+  // Firefox
+  if (userAgent.includes('firefox')) {
+    return 'firefox';
+  }
+
   // All other browsers
   return 'other';
 }
@@ -28,15 +33,38 @@ export function detectBrowser(): 'chrome' | 'edge' | 'other' {
 /**
  * Get the extension store URL based on browser
  */
-export function getExtensionUrl(browser: 'chrome' | 'edge' | 'other'): string | null {
+export function getExtensionUrl(browser: 'chrome' | 'edge' | 'firefox' | 'other'): string | null {
+  // Use the Chrome Web Store canonical URL for the extension
+  const chromeWebStoreUrl =
+    'https://chrome.google.com/webstore/detail/ecoveridian/jpmehcioggeadmlndekobedppcoiiaop';
+
   switch (browser) {
     case 'chrome':
-      // Chrome Web Store URL - replace with actual extension ID
-      return 'https://chrome.google.com/webstore/category/extensions';
+      return chromeWebStoreUrl;
     case 'edge':
-      // Microsoft Edge Add-ons URL - replace with actual extension ID
-      return 'https://microsoftedge.microsoft.com/addons/Microsoft-Edge-Extensions-Home';
+      // Edge users can often install from the Chrome Web Store (or visit Edge Add-ons later)
+      return chromeWebStoreUrl;
+    case 'firefox':
+      // Firefox support is not yet available — return null so UI can show a message
+      return null;
     case 'other':
       return null; // No URL for unsupported browsers
   }
+}
+
+/**
+ * Detect whether the current device is mobile.
+ */
+export function isMobile(): boolean {
+  if (typeof window === 'undefined') return false;
+  // navigator.userAgentData.mobile is more accurate when available, fallback to UA
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  if (navigator.userAgentData && typeof navigator.userAgentData.mobile === 'boolean') {
+    // @ts-ignore
+    return navigator.userAgentData.mobile;
+  }
+
+  const ua = navigator.userAgent || '';
+  return /Mobi|Android|iPhone|iPad|iPod|IEMobile|Mobile/i.test(ua);
 }

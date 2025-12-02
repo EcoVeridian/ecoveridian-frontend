@@ -37,7 +37,7 @@ export const faqs = [
   {
     question: 'What browsers are supported?',
     answer:
-      'The EcoVeridian extension is currently available for Google Chrome and Microsoft Edge. Support for Mozilla Firefox is currently under development.',
+      'The EcoVeridian extension is currently available for Chromium-based browsers (Chrome, Edge, Brave, Vivaldi, and others). Support for Mozilla Firefox is currently under development.',
   },
   {
     question: 'How can I get started?',
