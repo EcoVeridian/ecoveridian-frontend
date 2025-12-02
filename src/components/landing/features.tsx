@@ -2,6 +2,7 @@
 
 import { features } from '@/lib/data';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import Image from 'next/image';
 
 // Features section with alternating text and image layout
 export default function Features() {
@@ -54,10 +55,39 @@ function FeatureItem({
 
       {/* Visual placeholder */}
       <div className={isEven ? '' : 'lg:order-1'}>
-        <div className="aspect-video rounded-2xl border border-border bg-secondary/20 flex items-center justify-center eco-card-hover">
-          <p className="text-muted-foreground text-sm">
-            [Visual for: {feature.title}]
-          </p>
+        <div className={`rounded-2xl border border-border bg-secondary/20 flex items-center justify-center eco-card-hover overflow-hidden ${
+          feature.title === 'Comprehensive Company Scan' ? 'w-fit mx-auto' : 'aspect-video'
+        }`}>
+          {feature.title === 'Powerful Score Generation' ? (
+            <Image 
+              src="/powerfulsc.png"
+              alt="Powerful Score Generation"
+              width={1920}
+              height={1080}
+              className="w-full h-full object-cover"
+              priority
+            />
+          ) : feature.title === 'Comprehensive Company Scan' ? (
+            <Image 
+              src="/Comprehensivecompanyscan.png"
+              alt="Comprehensive Company Scan"
+              width={600}
+              height={800}
+              className="w-auto h-[400px] max-w-full"
+            />
+          ) : feature.title === 'Detailed Factor Breakdown' ? (
+            <Image 
+              src="/Detailedfactorbreakdown.png"
+              alt="Detailed Factor Breakdown"
+              width={1920}
+              height={1080}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <p className="text-muted-foreground text-sm">
+              [Visual for: {feature.title}]
+            </p>
+          )}
         </div>
       </div>
     </div>
