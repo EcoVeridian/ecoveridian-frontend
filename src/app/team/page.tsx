@@ -7,7 +7,7 @@ import Footer from '@/components/landing/footer';
 const teamMembers = [
   {
     name: 'Risith Kankanamge',
-    role: 'Founder & Lead Developer',
+    role: 'Co-Founder & Lead Developer',
     description:
       'Founder and principal architect behind EcoVeridian. Designed and built the entire platform from the ground up, leading all technical decisions and implementation.',
     imageUrl: '/risith-portrait.jpg',
