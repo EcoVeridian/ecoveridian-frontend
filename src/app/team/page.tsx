@@ -7,7 +7,7 @@ import Footer from '@/components/landing/footer';
 const teamMembers = [
   {
     name: 'Risith Kankanamge',
-    role: 'Co-Founder & Lead Developer',
+    role: 'Co-Founder & Lead Full-Stack Developer',
     description:
       'Founder and principal architect behind EcoVeridian. Designed and built the entire platform from the ground up, leading all technical decisions and implementation.',
     imageUrl: '/risith-portrait.jpg',
@@ -15,7 +15,7 @@ const teamMembers = [
   },
   {
     name: 'Santhosh Ilaiyaraja',
-    role: 'Co-Founder & Co-Lead Frontend Dev',
+    role: 'Co-Founder & Lead Technical Developer',
     description:
       'Co-founder contributing to frontend development, user experience design, and strategic planning. Helps shape the product vision and technical direction.',
     imageUrl: '/santhosh-portrait.jpg',
@@ -23,7 +23,7 @@ const teamMembers = [
   },
   {
     name: 'Ritvik Rajkumar',
-    role: 'Co-Founder & Co-Lead Frontend Dev',
+    role: 'Co-Founder & Lead Product Engineer',
     description:
       'Co-founder contributing to frontend development, interface design, and product strategy. Collaborates on technical architecture and user-facing features.',
     imageUrl: '/ritvik-portrait.jpg',
