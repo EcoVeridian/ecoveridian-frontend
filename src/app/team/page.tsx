@@ -15,9 +15,9 @@ const teamMembers = [
   },
   {
     name: 'Santhosh Ilaiyaraja',
-    role: 'Co-Founder & Lead Frontend Developer',
+    role: 'Co-Founder & Lead Interface Architect',
     description:
-      'Leads frontend development and frontend architecture. Owns UI/UX implementation, component systems, and performance across the React/Tailwind stack.',
+      'Designs and optimizes the platform\'s visual layer. Oversees interface architecture, component engineering, and end-to-end frontend performance.',
     imageUrl: '/santhosh-portrait.jpg',
     alt: 'Portrait of Santhosh',
   },
@@ -25,7 +25,7 @@ const teamMembers = [
     name: 'Ritvik Rajkumar',
     role: 'Co-Founder & Lead Product Engineer',
     description:
-      'Specializes in frontend architecture and user-facing features. Contributes to interface design and product flows across the React/Tailwind stack.',
+      'Drives product vision across user flows and feature design. Focuses on usability, interaction patterns, prototyping, and product flows across React/Tailwind.',
     imageUrl: '/ritvik-portrait.jpg',
     alt: 'Portrait of Ritvik',
   },
