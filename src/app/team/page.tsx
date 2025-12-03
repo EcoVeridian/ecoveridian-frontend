@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { SiLinkedin } from 'react-icons/si';
 import { HiOutlineMail } from 'react-icons/hi';
+import { FiGlobe } from 'react-icons/fi';
 import Navbar from '@/components/landing/navbar';
 import Footer from '@/components/landing/footer';
 
@@ -16,6 +17,7 @@ const teamMembers = [
     alt: 'Portrait of Risith Kankanamge',
     linkedin: 'https://www.linkedin.com/in/risithcha',
     email: 'mailto:risithcha@gmail.com',
+    website: 'https://risithcha.com/',
   },
   {
     name: 'Santhosh Ilaiyaraja',
@@ -104,6 +106,19 @@ export default function TeamPage() {
                       <HiOutlineMail className="h-5 w-5" />
                       <span className="hidden sm:inline">Email</span>
                     </a>
+
+                    {member.website && (
+                      <a
+                        href={member.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${member.name} personal website`}
+                        className="inline-flex items-center gap-2 rounded-md border border-border bg-muted px-3 py-2 text-sm font-medium text-foreground hover:bg-muted/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                      >
+                        <FiGlobe className="h-5 w-5" />
+                        <span className="hidden sm:inline">Website</span>
+                      </a>
+                    )}
                   </div>
                 </CardContent>
               </Card>
