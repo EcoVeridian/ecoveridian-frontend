@@ -14,7 +14,7 @@ const teamMembers = [
       'Architected the core platform and proprietary scoring engine. Engineered the browser extension end-to-end and established the web application\'s technical foundation.',
     imageUrl: '/risith-portrait.jpg',
     alt: 'Portrait of Risith Kankanamge',
-    linkedin: 'www.linkedin.com/in/risithcha',
+    linkedin: 'https://www.linkedin.com/in/risithcha',
     email: 'mailto:risithcha@gmail.com',
   },
   {
