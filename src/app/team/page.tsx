@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { SiLinkedin } from 'react-icons/si';
+import { HiOutlineMail } from 'react-icons/hi';
 import Navbar from '@/components/landing/navbar';
 import Footer from '@/components/landing/footer';
 
@@ -9,9 +11,11 @@ const teamMembers = [
     name: 'Risith Kankanamge',
     role: 'Co-Founder & Lead Full-Stack Developer',
     description:
-      'Architected the core platform and AI processing pipeline. Responsible for full-stack development, backend systems, and technical strategy.',
+      'Architected the core platform and proprietary scoring engine. Engineered the browser extension end-to-end and established the web application\'s technical foundation.',
     imageUrl: '/risith-portrait.jpg',
     alt: 'Portrait of Risith Kankanamge',
+    linkedin: 'www.linkedin.com/in/risithcha',
+    email: 'mailto:risithcha@gmail.com',
   },
   {
     name: 'Santhosh Ilaiyaraja',
@@ -20,6 +24,8 @@ const teamMembers = [
       'Designs and optimizes the platform\'s visual layer. Oversees interface architecture, component engineering, and end-to-end frontend performance.',
     imageUrl: '/santhosh-portrait.jpg',
     alt: 'Portrait of Santhosh',
+    linkedin: 'https://www.linkedin.com/in/santhosh-ilaiyaraja-77871436a',
+    email: 'mailto:santhosh.ilaiyaraja21@gmail.com',
   },
   {
     name: 'Ritvik Rajkumar',
@@ -28,6 +34,8 @@ const teamMembers = [
       'Drives product vision across user flows and feature design. Focuses on usability, interaction patterns, prototyping, and product flows across React/Tailwind.',
     imageUrl: '/ritvik-portrait.jpg',
     alt: 'Portrait of Ritvik',
+    linkedin: 'https://www.linkedin.com/in/ritvik-sujan-rajkumar',
+    email: 'mailto:rajkumarritvik1@gmail.com',
   },
 ];
 
@@ -75,6 +83,28 @@ export default function TeamPage() {
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     {member.description}
                   </p>
+                  {/* Contact / Social buttons */}
+                  <div className="mt-4 flex items-center justify-center gap-3">
+                    <a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${member.name} on LinkedIn`}
+                      className="inline-flex items-center gap-2 rounded-md border border-border bg-muted px-3 py-2 text-sm font-medium text-foreground hover:bg-muted/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                    >
+                      <SiLinkedin className="h-5 w-5 text-blue-600" />
+                      <span className="hidden sm:inline">LinkedIn</span>
+                    </a>
+
+                    <a
+                      href={member.email}
+                      aria-label={`Email ${member.name}`}
+                      className="inline-flex items-center gap-2 rounded-md border border-border bg-muted px-3 py-2 text-sm font-medium text-foreground hover:bg-muted/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                    >
+                      <HiOutlineMail className="h-5 w-5" />
+                      <span className="hidden sm:inline">Email</span>
+                    </a>
+                  </div>
                 </CardContent>
               </Card>
             ))}
