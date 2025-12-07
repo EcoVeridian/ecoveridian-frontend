@@ -9,7 +9,12 @@ import {
 } from 'react';
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
-import { syncAuthToExtension, notifyExtensionLogout } from '@/lib/extensionBridge';
+import { 
+  syncAuthToExtension, 
+  notifyExtensionLogout,
+  onExtensionReady,
+  isExtensionInstalled
+} from '@/lib/extensionBridge';
 
 interface AuthContextType {
   user: User | null;
@@ -26,6 +31,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Listen for extension ready event
+    const cleanupExtensionListener = onExtensionReady((version) => {
+      console.log(`EcoVeridian extension detected (v${version})`);
+      
+      // If user is already logged in when extension becomes ready, sync immediately
+      if (user) {
+        user.getIdToken().then(token => {
+          syncAuthToExtension(token, {
+            email: user.email ?? undefined,
+            displayName: user.displayName ?? undefined,
+            photoURL: user.photoURL ?? undefined,
+          });
+        }).catch(() => {
+          // ignore token errors
+        });
+      }
+    });
+
     // Subscribe to auth state changes
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
@@ -36,11 +59,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         try {
           const token = await user.getIdToken();
           // Best-effort: don't block UI if extension missing
-          syncAuthToExtension(token, {
+          const syncSuccess = await syncAuthToExtension(token, {
             email: user.email ?? undefined,
             displayName: user.displayName ?? undefined,
             photoURL: user.photoURL ?? undefined,
           });
+          
+          if (syncSuccess) {
+            console.log('Successfully synced auth with extension');
+          } else if (isExtensionInstalled()) {
+            console.log('Extension installed but sync failed');
+          }
         } catch (err) {
           // ignore token errors
         }
@@ -51,8 +80,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
 
     // Cleanup subscription on unmount
-    return () => unsubscribe();
-  }, []);
+    return () => {
+      unsubscribe();
+      cleanupExtensionListener();
+    };
+  }, [user]);
 
   return (
     <AuthContext.Provider value={{ user, loading }}>

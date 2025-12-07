@@ -58,11 +58,11 @@ export function getExtensionUrl(browser: 'chrome' | 'edge' | 'firefox' | 'other'
 export function isMobile(): boolean {
   if (typeof window === 'undefined') return false;
   // navigator.userAgentData.mobile is more accurate when available, fallback to UA
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  if (navigator.userAgentData && typeof navigator.userAgentData.mobile === 'boolean') {
-    // @ts-ignore
-    return navigator.userAgentData.mobile;
+  if ('userAgentData' in navigator && navigator.userAgentData) {
+    const userAgentData = navigator.userAgentData as { mobile?: boolean };
+    if (typeof userAgentData.mobile === 'boolean') {
+      return userAgentData.mobile;
+    }
   }
 
   const ua = navigator.userAgent || '';
