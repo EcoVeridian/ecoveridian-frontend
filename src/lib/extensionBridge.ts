@@ -54,7 +54,6 @@ export function syncAuthWithExtension(
       const customEvent = event as CustomEvent<ExtensionSyncResponse>;
       if (customEvent.detail.requestId === requestId) {
         clearTimeout(timeout);
-        console.log('Extension sync result:', customEvent.detail);
         window.removeEventListener('ecoveridian-auth-sync-response', handleResponse);
         resolve(customEvent.detail.success);
       }
@@ -91,7 +90,7 @@ export async function syncAuthToExtension(
       return true;
     }
   } catch (error) {
-    console.debug('CustomEvent sync failed, falling back to chrome.runtime');
+    // Silent fallback to chrome.runtime
   }
 
   // Fallback to chrome.runtime API for older Chrome extensions
@@ -157,7 +156,6 @@ export function onExtensionReady(callback: (version: string) => void): () => voi
 
   const handleReady = (event: Event) => {
     const customEvent = event as ExtensionReadyEvent;
-    console.log('Extension ready, version:', customEvent.detail.version);
     callback(customEvent.detail.version);
   };
 

@@ -12,8 +12,7 @@ import { auth } from '@/lib/firebase';
 import { 
   syncAuthToExtension, 
   notifyExtensionLogout,
-  onExtensionReady,
-  isExtensionInstalled
+  onExtensionReady
 } from '@/lib/extensionBridge';
 
 interface AuthContextType {
@@ -32,9 +31,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     // Listen for extension ready event
-    const cleanupExtensionListener = onExtensionReady((version) => {
-      console.log(`EcoVeridian extension detected (v${version})`);
-      
+    const cleanupExtensionListener = onExtensionReady(() => {
       // If user is already logged in when extension becomes ready, sync immediately
       if (user) {
         user.getIdToken().then(token => {
@@ -59,17 +56,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         try {
           const token = await user.getIdToken();
           // Best-effort: don't block UI if extension missing
-          const syncSuccess = await syncAuthToExtension(token, {
+          await syncAuthToExtension(token, {
             email: user.email ?? undefined,
             displayName: user.displayName ?? undefined,
             photoURL: user.photoURL ?? undefined,
           });
-          
-          if (syncSuccess) {
-            console.log('Successfully synced auth with extension');
-          } else if (isExtensionInstalled()) {
-            console.log('Extension installed but sync failed');
-          }
         } catch (err) {
           // ignore token errors
         }
