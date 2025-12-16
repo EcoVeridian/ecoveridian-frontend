@@ -167,7 +167,7 @@ export default function TeamPage() {
                         src={member.imageUrl}
                         alt={member.alt}
                         fill
-                        className="rounded-full object-cover"
+                        className="rounded-full object-cover object-top"
                         sizes="150px"
                       />
                     </div>
