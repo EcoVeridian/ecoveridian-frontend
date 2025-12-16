@@ -41,6 +41,20 @@ const teamMembers = [
   },
 ];
 
+// Board of Directors data
+const boardMembers = [
+  {
+    name: 'David Shapiro',
+    role: 'Board Director & Environmental Ethics Professor',
+    description:
+      'Brings expertise in environmental ethics, sustainability, and systems thinking. Provides strategic oversight and mentorship, helping guide the organization\'s mission, values, and long-term direction.',
+    imageUrl: '/david-shapiro-portrait.jpg',
+    alt: 'Portrait of David Shapiro',
+    email: 'mailto:dshapiro@cascadia.edu',
+    website: 'https://www.cascadia.edu/about/faculty/shapiro.aspx',
+  },
+];
+
 // Team page
 export default function TeamPage() {
   return (
@@ -126,6 +140,80 @@ export default function TeamPage() {
           </div>
         </div>
       </section>
+
+      {/* Board of Directors Section */}
+      <section className="py-20 sm:py-28 border-t border-border">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+              Board of Directors
+            </h2>
+            <p className="mt-4 text-lg text-muted-foreground">
+              Our Board of Directors provides strategic guidance, ethical oversight, and long-term vision to ensure our work creates meaningful and responsible impact.
+            </p>
+          </div>
+          {/* Board member grid */}
+          <div className="mt-16 flex justify-center">
+            <div className="grid grid-cols-1 gap-8 max-w-md">
+              {boardMembers.map((member) => (
+                <Card
+                  key={member.name}
+                  className="flex flex-col items-center overflow-hidden text-center shadow-lg transition-shadow hover:shadow-xl"
+                >
+                  {/* Portrait image */}
+                  <CardHeader className="p-0 pt-6">
+                    <div className="relative w-[150px] h-[150px] mx-auto">
+                      <Image
+                        src={member.imageUrl}
+                        alt={member.alt}
+                        fill
+                        className="rounded-full object-cover"
+                        sizes="150px"
+                      />
+                    </div>
+                  </CardHeader>
+                  <CardContent className="flex flex-1 flex-col p-6">
+                    <CardTitle className="text-xl font-bold mb-2">
+                      {member.name}
+                    </CardTitle>
+                    <p className="text-sm font-semibold text-primary mb-3">
+                      {member.role}
+                    </p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {member.description}
+                    </p>
+                    {/* Contact / Social buttons */}
+                    <div className="mt-4 flex items-center justify-center gap-3">
+                      <a
+                        href={member.email}
+                        aria-label={`Email ${member.name}`}
+                        className="inline-flex items-center gap-2 rounded-md border border-border bg-muted px-3 py-2 text-sm font-medium text-foreground hover:bg-muted/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                      >
+                        <HiOutlineMail className="h-5 w-5" />
+                        <span className="hidden sm:inline">Email</span>
+                      </a>
+
+                      {member.website && (
+                        <a
+                          href={member.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${member.name} faculty page`}
+                          className="inline-flex items-center gap-2 rounded-md border border-border bg-muted px-3 py-2 text-sm font-medium text-foreground hover:bg-muted/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                        >
+                          <FiGlobe className="h-5 w-5" />
+                          <span className="hidden sm:inline">Website</span>
+                        </a>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </main>
   );
