@@ -2,6 +2,7 @@
 
 import { Logo } from '@/components/common/logo';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { Mail, Instagram, Linkedin } from 'lucide-react';
 
 // Footer section with CTA and two-column navigation
 export default function Footer() {
@@ -33,6 +34,34 @@ export default function Footer() {
               <div className="flex flex-col gap-1 text-sm text-muted-foreground">
                 <p>&copy; {new Date().getFullYear()} EcoVeridian.</p>
                 <p>All rights reserved.</p>
+              </div>
+
+              <div className="flex items-center gap-4 mt-2">
+                <a
+                  href="mailto:ecoveridian@gmail.com"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  aria-label="Email"
+                >
+                  <Mail className="w-5 h-5" />
+                </a>
+                <a
+                  href="https://www.instagram.com/ecoveridian/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="w-5 h-5" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/ecoveridian"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin className="w-5 h-5" />
+                </a>
               </div>
             </div>
           </div>
