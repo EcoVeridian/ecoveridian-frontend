@@ -3,10 +3,12 @@
 import { Logo } from '@/components/common/logo';
 import Link from 'next/link';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { usePathname } from 'next/navigation';
 
 // Footer section with CTA and two-column navigation
 export default function Footer() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
+  const pathname = usePathname();
 
   return (
     <footer className="bg-background border-t border-border py-16 px-4">
@@ -34,19 +36,19 @@ export default function Footer() {
                 <h3 className="font-semibold text-foreground">Resources</h3>
                 <Link
                   href="/team"
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className={pathname === '/team' ? 'text-primary font-medium transition-colors' : 'text-muted-foreground hover:text-primary transition-colors'}
                 >
                   Team
                 </Link>
                 <Link
                   href="/legal"
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className={pathname === '/legal' ? 'text-primary font-medium transition-colors' : 'text-muted-foreground hover:text-primary transition-colors'}
                 >
                   Legal
                 </Link>
                 <Link
                   href="/privacy"
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className={pathname === '/privacy' ? 'text-primary font-medium transition-colors' : 'text-muted-foreground hover:text-primary transition-colors'}
                 >
                   Privacy Policy
                 </Link>
