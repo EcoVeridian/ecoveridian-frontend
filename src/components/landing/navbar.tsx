@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Home, Scale, ShieldCheck, Users } from 'lucide-react';
+import { Clock3, Home, Scale, ShieldCheck, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/common/logo';
 import ThemeToggle from '@/components/ui/theme-toggle';
@@ -12,7 +12,8 @@ import { NavBar } from '@/components/ui/tubelight-navbar';
 const navItems = [
   { name: 'Home', url: '/', icon: Home },
   { name: 'Team', url: '/team', icon: Users },
-  { name: 'Legal', url: '/legal', icon: Scale },
+  { name: 'Timeline', url: '/timeline', icon: Clock3 },
+  { name: 'TOS', url: '/legal', icon: Scale },
   { name: 'Privacy', url: '/privacy', icon: ShieldCheck },
 ];
 
