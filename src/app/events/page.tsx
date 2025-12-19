@@ -50,7 +50,25 @@ export default function EventsPage() {
                         </span>
                       )}
                     </div>
-                    <h2 className="text-xl md:text-2xl font-semibold">{event.title}</h2>
+                    <div className="flex items-center gap-3">
+                      <h2 className="text-xl md:text-2xl font-semibold">{event.title}</h2>
+                      {event.title === 'EarthGen WSTA Youth Panel' && (
+                        <a
+                          href="https://earthgenwa.org/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:opacity-80 transition-opacity"
+                        >
+                          <Image
+                            src="/events/earthgenlogo.png"
+                            alt="EarthGen Logo"
+                            width={32}
+                            height={32}
+                            className="object-contain"
+                          />
+                        </a>
+                      )}
+                    </div>
                     <p className="text-muted-foreground">{event.description}</p>
                     
                     {event.images && event.images.length > 0 && (
