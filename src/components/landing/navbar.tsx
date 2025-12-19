@@ -13,8 +13,8 @@ const navItems = [
   { name: 'Home', url: '/', icon: Home },
   { name: 'Team', url: '/team', icon: Users },
   { name: 'Changelog', url: '/changelog', icon: Clock3 },
-  { name: 'TOS', url: '/tos', icon: Scale },
   { name: 'Privacy', url: '/privacy', icon: ShieldCheck },
+  { name: 'Terms', url: '/terms', icon: Scale },
 ];
 
 export default function Navbar() {
