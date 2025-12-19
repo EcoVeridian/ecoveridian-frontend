@@ -11,6 +11,8 @@ import {
   sendPasswordResetEmail,
   sendEmailVerification,
   User,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from 'firebase/auth';
 import { auth } from './firebase';
 import { getFirebaseErrorMessage } from './firebase-error-messages';
@@ -51,6 +53,19 @@ export async function signIn(email: string, password: string) {
       email,
       password
     );
+    return { user: userCredential.user, error: null };
+  } catch (error: any) {
+    return { user: null, error: getFirebaseErrorMessage(error) };
+  }
+}
+
+/**
+ * Sign in with Google using popup
+ */
+export async function signInWithGoogle() {
+  try {
+    const provider = new GoogleAuthProvider();
+    const userCredential = await signInWithPopup(auth, provider);
     return { user: userCredential.user, error: null };
   } catch (error: any) {
     return { user: null, error: getFirebaseErrorMessage(error) };

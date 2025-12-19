@@ -3,11 +3,12 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { signIn, signUp } from '@/lib/auth-utils';
+import { signIn, signUp, signInWithGoogle } from '@/lib/auth-utils';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Logo } from '@/components/common/logo';
 import { useAuth } from '@/contexts/AuthContext';
+import { FcGoogle } from 'react-icons/fc';
 
 export default function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -70,6 +71,24 @@ export default function AuthPage() {
       }
     } catch (err: any) {
       setError(err.message || 'An error occurred');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setError('');
+    setLoading(true);
+
+    try {
+      const { user, error } = await signInWithGoogle();
+      if (error) {
+        setError(error);
+      } else if (user) {
+        router.push('/dashboard');
+      }
+    } catch (err: any) {
+      setError(err.message || 'An error occurred with Google sign-in');
     } finally {
       setLoading(false);
     }
@@ -199,6 +218,28 @@ export default function AuthPage() {
                   : 'Sign In'}
             </Button>
           </form>
+
+          {/* Divider */}
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-border"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="bg-card px-2 text-muted-foreground">Or continue with</span>
+            </div>
+          </div>
+
+          {/* Google Sign In Button */}
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full h-11 text-base font-medium"
+            onClick={handleGoogleSignIn}
+            disabled={loading}
+          >
+            <FcGoogle className="w-6 h-6 mr-3" />
+            Google
+          </Button>
 
           {/* Toggle Between Sign In/Sign Up */}
           <div className="mt-6 text-center">
