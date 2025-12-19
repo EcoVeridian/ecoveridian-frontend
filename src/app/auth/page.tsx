@@ -1,12 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { signIn, signUp } from '@/lib/auth-utils';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Logo } from '@/components/common/logo';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -17,6 +18,14 @@ export default function AuthPage() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const router = useRouter();
+  const { user, loading: authLoading } = useAuth();
+
+  // Redirect to dashboard if user is already authenticated
+  useEffect(() => {
+    if (!authLoading && user) {
+      router.push('/dashboard');
+    }
+  }, [user, authLoading, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -65,6 +74,20 @@ export default function AuthPage() {
       setLoading(false);
     }
   };
+
+  // Show loading state while checking authentication
+  if (authLoading || user) {
+    return (
+      <main className="min-h-screen bg-background text-foreground flex items-center justify-center px-4 py-12">
+        <div className="text-center">
+          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
+          <p className="mt-4 text-muted-foreground">
+            {user ? 'Redirecting to dashboard...' : 'Loading...'}
+          </p>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-background text-foreground flex items-center justify-center px-4 py-12">
