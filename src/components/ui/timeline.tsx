@@ -59,9 +59,9 @@ export function Changelog({ data }: ChangelogProps) {
   return (
     <div ref={containerRef} className="w-full font-sans md:px-10 bg-transparent">
       <div className="max-w-6xl mx-auto py-16 px-4 md:px-8 lg:px-10">
-        <h2 className="text-2xl md:text-4xl mb-3 text-foreground">Product changelog</h2>
+        <h2 className="text-2xl md:text-4xl mb-3 text-foreground">Product Changelog</h2>
         <p className="text-muted-foreground text-sm md:text-base max-w-xl">
-          Key releases and changelog entries as we grow EcoVeridian.
+          Stay up to date with our latest updates, features, and improvements.
         </p>
       </div>
 

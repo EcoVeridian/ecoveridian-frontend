@@ -6,6 +6,25 @@ import { Changelog } from '@/components/ui/timeline';
 
 const timelineData = [
   {
+    title: 'v1.2.0',
+    content: (
+      <div className="space-y-4 text-foreground/90">
+        <div className="space-y-2">
+          <p className="text-sm md:text-base text-muted-foreground">Minor release adding new pages, events, and UI enhancements.</p>
+          <ul className="list-disc list-inside text-sm md:text-base text-muted-foreground space-y-1">
+            <li>Added Events page to showcase recent and upcoming EcoVeridian activities.</li>
+            <li>Added EarthGen WSTA Youth Panel event to the Events page.</li>
+            <li>Added EcoVeridian icons to the footer for branding and navigation.</li>
+            <li>Updated section titles site-wide for improved clarity and consistency.</li>
+          </ul>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="text-xs md:text-sm text-muted-foreground">Dec 19, 2025</span>
+        </div>
+      </div>
+    ),
+  },
+  {
     title: 'v1.1.0',
     content: (
       <div className="space-y-4 text-foreground/90">
@@ -19,7 +38,7 @@ const timelineData = [
           </ul>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-xs md:text-sm text-muted-foreground">Dec 19, 2025</span>
+          <span className="text-xs md:text-sm text-muted-foreground">Dec 18, 2025</span>
         </div>
       </div>
     ),
