@@ -6,6 +6,25 @@ import { Changelog } from '@/components/ui/timeline';
 
 const timelineData = [
   {
+    title: 'v1.2.1',
+    content: (
+      <div className="space-y-4 text-foreground/90">
+        <div className="space-y-2">
+          <p className="text-sm md:text-base text-muted-foreground">Patch release with minor UI improvements and bug fixes.</p>
+          <ul className="list-disc list-inside text-sm md:text-base text-muted-foreground space-y-1">
+            <li>Added EarthGen logo next to the EarthGen WSTA Youth Panel event title.</li>
+            <li>Linked EarthGen logo to earthgenwa.org website.</li>
+            <li>Enhanced event card hover animation with subtle scale and shadow effects.</li>
+            <li>Fixed build error caused by unused variable in EventCard component.</li>
+          </ul>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="text-xs md:text-sm text-muted-foreground">Dec 19, 2025</span>
+        </div>
+      </div>
+    ),
+  },
+  {
     title: 'v1.2.0',
     content: (
       <div className="space-y-4 text-foreground/90">
@@ -13,9 +32,9 @@ const timelineData = [
           <p className="text-sm md:text-base text-muted-foreground">Minor release adding new pages, events, and UI enhancements.</p>
           <ul className="list-disc list-inside text-sm md:text-base text-muted-foreground space-y-1">
             <li>Added Events page to showcase recent and upcoming EcoVeridian activities.</li>
-            <li>Added EarthGen WSTA Youth Panel event to the Events page.</li>
-            <li>Added EcoVeridian icons to the footer for branding and navigation.</li>
-            <li>Updated section titles site-wide for improved clarity and consistency.</li>
+            <li>Added the first EarthGen WSTA Youth Panel event to the Events page.</li>
+            <li>Added email, Instagram, and LinkedIn icons to the footer for contact and social links.</li>
+            <li>Updated section titles across the site for improved clarity and consistency.</li>
           </ul>
         </div>
         <div className="flex items-center gap-3">
