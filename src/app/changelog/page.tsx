@@ -6,6 +6,25 @@ import { Changelog } from '@/components/ui/timeline';
 
 const timelineData = [
   {
+    title: 'v1.1.0',
+    content: (
+      <div className="space-y-4 text-foreground/90">
+        <div className="space-y-2">
+          <p className="text-sm md:text-base text-muted-foreground">New minor release adding features and fixes.</p>
+          <ul className="list-disc list-inside text-sm md:text-base text-muted-foreground space-y-1">
+            <li>Added Google Sign-In to the dashboard.</li>
+            <li>Added a dedicated Changelog page to surface releases and launch notes.</li>
+            <li>Improved header/navigation: centered tubelight-style nav pill and better responsive behavior.</li>
+            <li>Fixed dashboard auth persistence bug. Users no longer get logged out when exiting the dashboard.</li>
+          </ul>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="text-xs md:text-sm text-muted-foreground">Dec 19, 2025</span>
+        </div>
+      </div>
+    ),
+  },
+  {
     title: 'v1.0.0',
     content: (
       <div className="space-y-4 text-foreground/90">
@@ -20,7 +39,15 @@ const timelineData = [
           </ul>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-xs md:text-sm text-muted-foreground">Dec 2025</span>
+          <Link
+            href="https://risithcha.com/blog/building-ecoveridian-v100"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex"
+          >
+            <Button size="sm" className="rounded-full px-4">Read the launch note</Button>
+          </Link>
+          <span className="text-xs md:text-sm text-muted-foreground">Dec 2, 2025</span>
         </div>
       </div>
     ),

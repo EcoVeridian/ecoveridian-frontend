@@ -8,16 +8,16 @@ import {
 } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 
-interface TimelineEntry {
+interface ChangelogEntry {
   title: string;
   content: React.ReactNode;
 }
 
-interface TimelineProps {
-  data: TimelineEntry[];
+interface ChangelogProps {
+  data: ChangelogEntry[];
 }
 
-export function Timeline({ data }: TimelineProps) {
+export function Changelog({ data }: ChangelogProps) {
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
@@ -29,9 +29,25 @@ export function Timeline({ data }: TimelineProps) {
     }
   }, []);
 
+  // Keep measured height in sync with layout changes
+  useEffect(() => {
+    if (!ref.current) return;
+    const el = ref.current;
+    const ro = new ResizeObserver((entries) => {
+      const cr = entries[0]?.contentRect;
+      if (cr) setHeight(cr.height);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
   const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start 10%', 'end 50%'],
+    // Track the inner timeline block as it moves through the viewport
+    target: ref,
+    // Start when the top of the timeline reaches 10% down the viewport,
+    // end when the bottom reaches the bottom of the viewport.
+    // This preserves natural scroll pacing but guarantees reaching 1.0 at the end.
+    offset: ['start', 'end'],
   });
 
   // Keep the motion subscription consistent across renders
@@ -43,9 +59,9 @@ export function Timeline({ data }: TimelineProps) {
   return (
     <div ref={containerRef} className="w-full font-sans md:px-10 bg-transparent">
       <div className="max-w-6xl mx-auto py-16 px-4 md:px-8 lg:px-10">
-        <h2 className="text-2xl md:text-4xl mb-3 text-foreground">Product timeline</h2>
+        <h2 className="text-2xl md:text-4xl mb-3 text-foreground">Product changelog</h2>
         <p className="text-muted-foreground text-sm md:text-base max-w-xl">
-          Key releases and changes as we grow EcoVeridian.
+          Key releases and changelog entries as we grow EcoVeridian.
         </p>
       </div>
 
