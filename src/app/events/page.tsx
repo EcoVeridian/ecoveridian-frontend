@@ -1,7 +1,10 @@
+'use client';
+
 import Navbar from '@/components/landing/navbar';
 import Footer from '@/components/landing/footer';
 import { Calendar, MapPin, Clock, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const eventsData = [
   {
@@ -19,10 +22,99 @@ const eventsData = [
   },
 ];
 
-export const metadata = {
-  title: 'Events | EcoVeridian',
-  description: 'Upcoming events and meetups from EcoVeridian.',
-};
+function EventCard({ event, index }: { event: typeof eventsData[0]; index: number }) {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
+
+  return (
+    <div
+      ref={ref}
+      className={`border border-border rounded-2xl p-6 bg-card transition-all duration-300 hover:scale-[1.03] hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/20 hover:border-primary/50 ${
+        isVisible ? 'scroll-animate-visible' : 'scroll-animate'
+      }`}
+    >
+      <div className="flex items-start justify-between flex-wrap gap-4">
+        <div className="space-y-3 flex-1">
+          <div className="flex items-center gap-2">
+            {event.upcoming && (
+              <span className="text-xs font-medium bg-primary/10 text-primary px-2 py-1 rounded-full">
+                Upcoming
+              </span>
+            )}
+          </div>
+          <div className="flex items-center gap-3">
+            <h2 className="text-xl md:text-2xl font-semibold">{event.title}</h2>
+            {event.title === 'EarthGen WSTA Youth Panel' && (
+              <a
+                href="https://earthgenwa.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:opacity-80 transition-opacity"
+              >
+                <Image
+                  src="/events/earthgenlogo.png"
+                  alt="EarthGen Logo"
+                  width={32}
+                  height={32}
+                  className="object-contain"
+                />
+              </a>
+            )}
+          </div>
+          <p className="text-muted-foreground">{event.description}</p>
+          
+          {event.images && event.images.length > 0 && (
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
+              {event.images.map((image, imgIndex) => (
+                <div key={imgIndex} className="relative aspect-video rounded-lg overflow-hidden bg-muted border border-border hover:border-primary/50 transition-colors">
+                  <Image
+                    src={image}
+                    alt={`${event.title} - Image ${imgIndex + 1}`}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+              {event.articleLink && (
+                <a
+                  href={event.articleLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative aspect-video rounded-lg overflow-hidden bg-muted flex items-center justify-center border border-border hover:border-primary/50 transition-colors group"
+                >
+                  <Image
+                    src="/events/earthgenthird.png"
+                    alt="Article background"
+                    fill
+                    className="object-cover opacity-50 group-hover:opacity-70 transition-opacity"
+                  />
+                  <div className="relative z-10 flex flex-col items-center gap-2 text-foreground group-hover:text-primary transition-colors">
+                    <ExternalLink className="w-8 h-8" />
+                    <span className="text-sm font-medium">Read Article</span>
+                  </div>
+                </a>
+              )}
+            </div>
+          )}
+          
+          <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+            <div className="flex items-center gap-1.5">
+              <Calendar className="w-4 h-4" />
+              <span>{event.date}</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <Clock className="w-4 h-4" />
+              <span>{event.time}</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <MapPin className="w-4 h-4" />
+              <span>{event.location}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function EventsPage() {
   return (
@@ -37,91 +129,7 @@ export default function EventsPage() {
           
           <div className="space-y-6">
             {eventsData.map((event, index) => (
-              <div
-                key={index}
-                className="border border-border rounded-xl p-6 bg-card hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-300"
-              >
-                <div className="flex items-start justify-between flex-wrap gap-4">
-                  <div className="space-y-3 flex-1">
-                    <div className="flex items-center gap-2">
-                      {event.upcoming && (
-                        <span className="text-xs font-medium bg-primary/10 text-primary px-2 py-1 rounded-full">
-                          Upcoming
-                        </span>
-                      )}
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <h2 className="text-xl md:text-2xl font-semibold">{event.title}</h2>
-                      {event.title === 'EarthGen WSTA Youth Panel' && (
-                        <a
-                          href="https://earthgenwa.org/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="hover:opacity-80 transition-opacity"
-                        >
-                          <Image
-                            src="/events/earthgenlogo.png"
-                            alt="EarthGen Logo"
-                            width={32}
-                            height={32}
-                            className="object-contain"
-                          />
-                        </a>
-                      )}
-                    </div>
-                    <p className="text-muted-foreground">{event.description}</p>
-                    
-                    {event.images && event.images.length > 0 && (
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
-                        {event.images.map((image, imgIndex) => (
-                          <div key={imgIndex} className="relative aspect-video rounded-lg overflow-hidden bg-muted border border-border hover:border-primary/50 transition-colors">
-                            <Image
-                              src={image}
-                              alt={`${event.title} - Image ${imgIndex + 1}`}
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
-                        ))}
-                        {event.articleLink && (
-                          <a
-                            href={event.articleLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="relative aspect-video rounded-lg overflow-hidden bg-muted flex items-center justify-center border border-border hover:border-primary/50 transition-colors group"
-                          >
-                            <Image
-                              src="/events/earthgenthird.png"
-                              alt="Article background"
-                              fill
-                              className="object-cover opacity-50 group-hover:opacity-70 transition-opacity"
-                            />
-                            <div className="relative z-10 flex flex-col items-center gap-2 text-foreground group-hover:text-primary transition-colors">
-                              <ExternalLink className="w-8 h-8" />
-                              <span className="text-sm font-medium">Read Article</span>
-                            </div>
-                          </a>
-                        )}
-                      </div>
-                    )}
-                    
-                    <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-                      <div className="flex items-center gap-1.5">
-                        <Calendar className="w-4 h-4" />
-                        <span>{event.date}</span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <Clock className="w-4 h-4" />
-                        <span>{event.time}</span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <MapPin className="w-4 h-4" />
-                        <span>{event.location}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <EventCard key={index} event={event} index={index} />
             ))}
           </div>
 
