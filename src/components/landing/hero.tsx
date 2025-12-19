@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRightIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 import { detectBrowser, getExtensionUrl, isMobile } from '@/lib/browser-utils';
 import InteractiveBackground from '@/components/landing/interactive-background';
+import { useAuth } from '@/contexts/AuthContext';
 
 // Hero section - main headline and CTA
 export default function Hero() {
@@ -13,6 +14,7 @@ export default function Hero() {
   const [isOnMobile, setIsOnMobile] = useState(false);
   const [showUnsupportedMessage, setShowUnsupportedMessage] = useState(false);
   const [unsupportedMessage, setUnsupportedMessage] = useState<string | null>(null);
+  const { user, loading: authLoading } = useAuth();
 
   useEffect(() => {
     // Detect browser and device on mount
@@ -69,14 +71,16 @@ export default function Hero() {
 
         {/* Primary CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up animate-delay-300 opacity-0 animation-fill-both">
-          <Link href="/auth">
-            <Button
-              size="lg"
-              className="rounded-full px-8 h-12 text-base font-medium w-full sm:w-auto hover-lift"
-            >
-              Get started <ArrowRightIcon className="ml-2 w-4 h-4" />
-            </Button>
-          </Link>
+          {!authLoading && (
+            <Link href={user ? '/dashboard' : '/auth'}>
+              <Button
+                size="lg"
+                className="rounded-full px-8 h-12 text-base font-medium w-full sm:w-auto hover-lift"
+              >
+                {user ? 'Go to Dashboard' : 'Get started'} <ArrowRightIcon className="ml-2 w-4 h-4" />
+              </Button>
+            </Link>
+          )}
           <Button
             variant="outline"
             size="lg"
