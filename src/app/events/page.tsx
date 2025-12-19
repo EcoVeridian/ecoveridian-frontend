@@ -1,15 +1,21 @@
 import Navbar from '@/components/landing/navbar';
 import Footer from '@/components/landing/footer';
-import { Calendar, MapPin, Clock } from 'lucide-react';
+import { Calendar, MapPin, Clock, ExternalLink } from 'lucide-react';
+import Image from 'next/image';
 
 const eventsData = [
   {
-    title: 'EcoVeridian Launch Event',
+    title: 'EarthGen WSTA Youth Panel',
     date: 'December 2025',
-    time: 'TBD',
-    location: 'Virtual',
-    description: 'Join us for the official launch of EcoVeridian! Learn about our mission to make sustainable shopping easier and how our browser extension helps you make eco-friendly choices.',
-    upcoming: true,
+    time: 'N/A',
+    location: 'University of Washington, Tacoma: 1900 Commerce St, Tacoma, WA 98402',
+    description: 'During the EarthGen Youth Climate Panel at the Washington Science Teachers Association (WSTA) Science Education Conference, EcoVeridian was highlighted as a student-led nonprofit resource for data-driven sustainability. Panelists shared strategies for supporting youth climate action, resilience, and wellbeing, and EcoVeridian was showcased as a tool that educators and students can use to access transparent ESG data, scientific sources, and sustainability insights to support evidence-based climate learning and youth-led environmental initiatives.',
+    upcoming: false,
+    images: [
+      '/events/earthgenfirst.jpg',
+      '/events/earthgensecond.jpg',
+    ],
+    articleLink: 'https://earthgenwa.org/news/washington-students-share-climate-perspectives-with-educators/',
   },
 ];
 
@@ -26,14 +32,14 @@ export default function EventsPage() {
         <div className="container mx-auto px-4 max-w-4xl">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center">Events</h1>
           <p className="text-muted-foreground text-center mb-12 text-lg">
-            Stay updated with our recent events, webinars, and upcoming activites.
+            Discover our recent events, panels, and initiatives advancing data-driven sustainability.
           </p>
           
           <div className="space-y-6">
             {eventsData.map((event, index) => (
               <div
                 key={index}
-                className="border border-border rounded-xl p-6 bg-card hover:border-primary/50 transition-colors"
+                className="border border-border rounded-xl p-6 bg-card hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="flex items-start justify-between flex-wrap gap-4">
                   <div className="space-y-3 flex-1">
@@ -46,6 +52,41 @@ export default function EventsPage() {
                     </div>
                     <h2 className="text-xl md:text-2xl font-semibold">{event.title}</h2>
                     <p className="text-muted-foreground">{event.description}</p>
+                    
+                    {event.images && event.images.length > 0 && (
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
+                        {event.images.map((image, imgIndex) => (
+                          <div key={imgIndex} className="relative aspect-video rounded-lg overflow-hidden bg-muted border border-border hover:border-primary/50 transition-colors">
+                            <Image
+                              src={image}
+                              alt={`${event.title} - Image ${imgIndex + 1}`}
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                        ))}
+                        {event.articleLink && (
+                          <a
+                            href={event.articleLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="relative aspect-video rounded-lg overflow-hidden bg-muted flex items-center justify-center border border-border hover:border-primary/50 transition-colors group"
+                          >
+                            <Image
+                              src="/events/earthgenthird.png"
+                              alt="Article background"
+                              fill
+                              className="object-cover opacity-50 group-hover:opacity-70 transition-opacity"
+                            />
+                            <div className="relative z-10 flex flex-col items-center gap-2 text-foreground group-hover:text-primary transition-colors">
+                              <ExternalLink className="w-8 h-8" />
+                              <span className="text-sm font-medium">Read Article</span>
+                            </div>
+                          </a>
+                        )}
+                      </div>
+                    )}
+                    
                     <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                       <div className="flex items-center gap-1.5">
                         <Calendar className="w-4 h-4" />
