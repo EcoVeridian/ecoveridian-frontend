@@ -22,7 +22,7 @@ const eventsData = [
   },
 ];
 
-function EventCard({ event, index }: { event: typeof eventsData[0]; index: number }) {
+function EventCard({ event }: { event: typeof eventsData[0] }) {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
 
   return (
@@ -129,7 +129,7 @@ export default function EventsPage() {
           
           <div className="space-y-6">
             {eventsData.map((event, index) => (
-              <EventCard key={index} event={event} index={index} />
+              <EventCard key={index} event={event} />
             ))}
           </div>
 
