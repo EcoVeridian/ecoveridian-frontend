@@ -265,7 +265,7 @@ export default function AuthPage() {
         {/* Footer Note */}
         <p className="text-center text-sm text-muted-foreground mt-8">
           By continuing, you agree to our{' '}
-          <Link href="/legal" className="text-primary hover:underline">
+          <Link href="/terms" className="text-primary hover:underline">
             Terms of Service
           </Link>{' '}
           and{' '}
