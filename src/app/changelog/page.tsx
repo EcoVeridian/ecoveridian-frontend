@@ -35,6 +35,8 @@ const timelineData = [
             <li>Added the first EarthGen WSTA Youth Panel event to the Events page.</li>
             <li>Added email, Instagram, and LinkedIn icons to the footer for contact and social links.</li>
             <li>Updated section titles across the site for improved clarity and consistency.</li>
+            <li>Implemented legal agreement modal system that blocks access until users accept updated Terms of Service or Privacy Policy.</li>
+            <li>Added configurable legal document versioning system for easy management of policy updates.</li>
           </ul>
         </div>
         <div className="flex items-center gap-3">

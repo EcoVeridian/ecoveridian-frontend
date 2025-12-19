@@ -3,6 +3,7 @@ import './globals.css';
 import './animations.css';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { ThemeProvider } from '@/contexts/ThemeContext';
+import LegalAgreementModal from '@/components/legal/LegalAgreementModal';
 
 // Page metadata
 export const metadata: Metadata = {
@@ -58,7 +59,10 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased" suppressHydrationWarning>
         <ThemeProvider>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            {children}
+            <LegalAgreementModal />
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>
