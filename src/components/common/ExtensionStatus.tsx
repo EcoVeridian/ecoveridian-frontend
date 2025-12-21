@@ -18,7 +18,7 @@ export function ExtensionStatus() {
     // Listen for extension ready event
     const cleanup = onExtensionReady((version) => {
       setExtensionInstalled(true);
-      setExtensionVersion(version);
+      setExtensionVersion(version ?? null);
     });
 
     return cleanup;
