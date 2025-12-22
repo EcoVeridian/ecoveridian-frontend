@@ -6,6 +6,32 @@ import { Changelog } from '@/components/ui/timeline';
 
 const timelineData = [
   {
+    title: 'v2.0.0',
+    content: (
+      <div className="space-y-4 text-foreground/90">
+        <div className="space-y-2">
+          <p className="text-sm md:text-base text-muted-foreground">Major release bringing full cross-browser support to Firefox and other Chromium-based browsers.</p>
+          <ul className="list-disc list-inside text-sm md:text-base text-muted-foreground space-y-1">
+            <li>Added full Firefox support via Mozilla AMO.</li>
+            <li>Extension now works on Chrome, Firefox, Edge, Brave, Vivaldi, and other Chromium-based browsers.</li>
+            <li>User data and authentication history carry over seamlessly when switching browsers.</li>
+          </ul>
+        </div>
+        <div className="flex items-center gap-3">
+          <Link
+            href="https://risithcha.com/blog/ecoveridian-for-firefox"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex"
+          >
+            <Button size="sm" className="rounded-full px-4">Read the deep dive</Button>
+          </Link>
+          <span className="text-xs md:text-sm text-muted-foreground">Dec 22, 2025</span>
+        </div>
+      </div>
+    ),
+  },
+  {
     title: 'v1.2.1',
     content: (
       <div className="space-y-4 text-foreground/90">
