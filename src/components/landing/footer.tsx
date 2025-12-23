@@ -17,6 +17,14 @@ export default function Footer() {
             isVisible ? 'scroll-animate-visible' : 'scroll-animate'
           }`}
         >
+          {/* Quote */}
+          <p className="text-lg md:text-xl italic mb-8">
+            <span className="purple-wave-text">
+              "55% of global customers are skeptical of the sustainability claims of most brands."
+            </span>
+            <span className="block text-sm mt-2 not-italic text-muted-foreground">— YouGov, 2023</span>
+          </p>
+
           {/* Final CTA section */}
           <h2 className="text-3xl md:text-4xl font-bold tracking-tighter mb-4">
             Start Your Journey to Sustainability Today

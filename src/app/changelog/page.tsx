@@ -6,6 +6,28 @@ import { Changelog } from '@/components/ui/timeline';
 
 const timelineData = [
   {
+    title: 'v2.1.0',
+    content: (
+      <div className="space-y-4 text-foreground/90">
+        <div className="space-y-2">
+          <p className="text-sm md:text-base text-muted-foreground">Major dashboard revamp with comprehensive Environmental Risk Reports and improved user experience.</p>
+          <ul className="list-disc list-inside text-sm md:text-base text-muted-foreground space-y-1">
+            <li>Introduced detailed Environmental Risk Reports with 4-section layout: Company overview, GreenScore breakdown, Findings summary, and Articles table.</li>
+            <li>Added clickable reports in Analysis History that open full environmental risk details with scores, key articles, and insights.</li>
+            <li>Moved stats cards (Total Sites Analyzed, Average Eco Score, High Score Sites) from Activity History to Account Settings.</li>
+            <li>Simplified Analysis History table to show Reports and Date columns only.</li>
+            <li>Updated FAQ section with comprehensive answers about GreenScore calculation, browser support, and getting started.</li>
+            <li>Added YouGov quote with animated purple wave effect to the footer.</li>
+            <li>Firefox browser support now fully documented in FAQ.</li>
+          </ul>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="text-xs md:text-sm text-muted-foreground">Dec 23, 2025</span>
+        </div>
+      </div>
+    ),
+  },
+  {
     title: 'v2.0.0',
     content: (
       <div className="space-y-4 text-foreground/90">

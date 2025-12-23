@@ -164,3 +164,34 @@
 .transition-smooth {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* Purple wave text animation */
+@keyframes purpleWaveFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.purple-wave-text {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--muted-foreground)) 0%,
+    hsl(var(--muted-foreground)) 20%,
+    hsl(270, 70%, 60%) 40%,
+    hsl(280, 80%, 65%) 50%,
+    hsl(270, 70%, 60%) 60%,
+    hsl(var(--muted-foreground)) 80%,
+    hsl(var(--muted-foreground)) 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: purpleWaveFlow 4s ease-in-out infinite;
+}
