@@ -4,30 +4,36 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Card } from '@/components/ui/card';
 import {
-  ChartBarIcon,
   GlobeAltIcon,
   ClockIcon,
-  SparklesIcon,
+  ChevronRightIcon,
 } from '@heroicons/react/24/outline';
 import { getUserDashboardData } from '@/lib/dashboard';
-import type { DashboardStats, AnalysisHistory } from '@/types/dashboard';
+import type { AnalysisHistory } from '@/types/dashboard';
+import EnvironmentalRiskReportModal from './EnvironmentalRiskReportModal';
 
 export default function ActivityHistory() {
   const { user } = useAuth();
   const [history, setHistory] = useState<AnalysisHistory[]>([]);
-  const [stats, setStats] = useState<DashboardStats>({
-    totalSitesAnalyzed: 0,
-    averageEcoScore: 0,
-    highScoreSites: 0,
-  });
   const [loading, setLoading] = useState(true);
+  const [selectedAnalysis, setSelectedAnalysis] = useState<AnalysisHistory | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleRowClick = (item: AnalysisHistory) => {
+    setSelectedAnalysis(item);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedAnalysis(null);
+  };
 
   useEffect(() => {
     const load = async () => {
       setLoading(true);
       if (!user) {
         setHistory([]);
-        setStats({ totalSitesAnalyzed: 0, averageEcoScore: 0, highScoreSites: 0 });
         setLoading(false);
         return;
       }
@@ -36,15 +42,12 @@ export default function ActivityHistory() {
         const res = await getUserDashboardData();
         if (!res) {
           setHistory([]);
-          setStats({ totalSitesAnalyzed: 0, averageEcoScore: 0, highScoreSites: 0 });
         } else {
-          setStats(res.stats);
           setHistory(res.history);
         }
       } catch (err) {
         console.error('Error loading dashboard data', err);
         setHistory([]);
-        setStats({ totalSitesAnalyzed: 0, averageEcoScore: 0, highScoreSites: 0 });
       } finally {
         setLoading(false);
       }
@@ -52,13 +55,6 @@ export default function ActivityHistory() {
 
     load();
   }, [user]);
-
-  // Get score color (EcoVeridian theme: Green >80, Yellow 50-79, Red <50)
-  const getScoreColor = (score: number) => {
-    if (score >= 80) return 'text-green-500';
-    if (score >= 50) return 'text-yellow-500';
-    return 'text-red-500';
-  };
 
   // Get score badge styling
   const getScoreBadgeColor = (score: number) => {
@@ -85,18 +81,6 @@ export default function ActivityHistory() {
     });
   };
 
-  // Skeleton loader for stats cards
-  const StatSkeleton = () => (
-    <Card className="p-6 shadow-sm animate-pulse">
-      <div className="flex items-start gap-4">
-        <div className="p-3 bg-muted rounded-lg w-12 h-12" />
-        <div className="flex-1">
-          <div className="h-4 bg-muted rounded w-24 mb-2" />
-          <div className="h-8 bg-muted rounded w-16" />
-        </div>
-      </div>
-    </Card>
-  );
 
   // Skeleton loader for table rows
   const TableSkeleton = () => (
@@ -117,66 +101,6 @@ export default function ActivityHistory() {
 
   return (
     <div className="space-y-8">
-      {/* Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {loading ? (
-          <>
-            <StatSkeleton />
-            <StatSkeleton />
-            <StatSkeleton />
-          </>
-        ) : (
-          <>
-            {/* Total Sites Analyzed */}
-            <Card className="p-6 shadow-sm">
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-primary/10 rounded-lg">
-                  <GlobeAltIcon className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">
-                    Total Sites Analyzed
-                  </p>
-                  <p className="text-3xl font-bold">{stats.totalSitesAnalyzed}</p>
-                </div>
-              </div>
-            </Card>
-
-            {/* Average Eco Score */}
-            <Card className="p-6 shadow-sm">
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-primary/10 rounded-lg">
-                  <ChartBarIcon className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">
-                    Average Eco Score
-                  </p>
-                  <p className={`text-3xl font-bold ${getScoreColor(stats.averageEcoScore)}`}>
-                    {Math.round(stats.averageEcoScore)}
-                  </p>
-                </div>
-              </div>
-            </Card>
-
-            {/* High Score Sites */}
-            <Card className="p-6 shadow-sm">
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-primary/10 rounded-lg">
-                  <SparklesIcon className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">
-                    High Score Sites
-                  </p>
-                  <p className="text-3xl font-bold text-green-500">{stats.highScoreSites}</p>
-                </div>
-              </div>
-            </Card>
-          </>
-        )}
-      </div>
-
       {/* History Table */}
       <Card className="p-6 shadow-sm">
         <h2 className="text-xl font-semibold mb-6">Analysis History</h2>
@@ -209,13 +133,17 @@ export default function ActivityHistory() {
                   <th className="text-left py-3 px-4 font-medium text-sm text-muted-foreground">
                     Date
                   </th>
+                  <th className="text-right py-3 px-4 font-medium text-sm text-muted-foreground">
+                    <span className="sr-only">View Report</span>
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {history.map((item) => (
                   <tr
                     key={item.id}
-                    className="border-b border-border hover:bg-secondary/50 transition-colors"
+                    onClick={() => handleRowClick(item)}
+                    className="border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer group"
                   >
                     <td className="py-4 px-4">
                       <div>
@@ -245,6 +173,9 @@ export default function ActivityHistory() {
                         {formatDate(item.timestamp)}
                       </div>
                     </td>
+                    <td className="py-4 px-4 text-right">
+                      <ChevronRightIcon className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors inline-block" />
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -261,6 +192,13 @@ export default function ActivityHistory() {
           extension to start tracking your sustainability journey.
         </p>
       </div>
+
+      {/* Environmental Risk Report Modal */}
+      <EnvironmentalRiskReportModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        analysis={selectedAnalysis}
+      />
     </div>
   );
 }

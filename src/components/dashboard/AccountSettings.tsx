@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
@@ -11,6 +11,8 @@ import {
   deleteAccount,
   reauthenticate,
 } from '@/lib/auth-utils';
+import { getUserDashboardData } from '@/lib/dashboard';
+import type { DashboardStats } from '@/types/dashboard';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import {
@@ -19,11 +21,69 @@ import {
   TrashIcon,
   ExclamationTriangleIcon,
   PaintBrushIcon,
+  GlobeAltIcon,
+  ChartBarIcon,
+  SparklesIcon,
 } from '@heroicons/react/24/outline';
 
 export default function AccountSettings() {
   const { user } = useAuth();
   const router = useRouter();
+
+  // Stats state
+  const [stats, setStats] = useState<DashboardStats>({
+    totalSitesAnalyzed: 0,
+    averageEcoScore: 0,
+    highScoreSites: 0,
+  });
+  const [statsLoading, setStatsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadStats = async () => {
+      setStatsLoading(true);
+      if (!user) {
+        setStats({ totalSitesAnalyzed: 0, averageEcoScore: 0, highScoreSites: 0 });
+        setStatsLoading(false);
+        return;
+      }
+
+      try {
+        const res = await getUserDashboardData();
+        if (!res) {
+          setStats({ totalSitesAnalyzed: 0, averageEcoScore: 0, highScoreSites: 0 });
+        } else {
+          setStats(res.stats);
+        }
+      } catch (err) {
+        console.error('Error loading stats data', err);
+        setStats({ totalSitesAnalyzed: 0, averageEcoScore: 0, highScoreSites: 0 });
+      } finally {
+        setStatsLoading(false);
+      }
+    };
+
+    loadStats();
+  }, [user]);
+
+  // Get score color (EcoVeridian theme: Green >80, Yellow 50-79, Red <50)
+  const getScoreColor = (score: number) => {
+    if (score >= 80) return 'text-green-500';
+    if (score >= 50) return 'text-yellow-500';
+    return 'text-red-500';
+  };
+
+  // Skeleton loader for stats cards
+  const StatSkeleton = () => (
+    <Card className="p-6 shadow-sm animate-pulse">
+      <div className="flex items-start gap-4">
+        <div className="p-3 bg-muted rounded-lg w-12 h-12" />
+        <div className="flex-1">
+          <div className="h-4 bg-muted rounded w-24 mb-2" />
+          <div className="h-8 bg-muted rounded w-16" />
+        </div>
+      </div>
+    </Card>
+  );
 
   // Email update state
   const [newEmail, setNewEmail] = useState('');
@@ -164,6 +224,66 @@ export default function AccountSettings() {
 
   return (
     <div className="space-y-8">
+      {/* Stats Overview */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {statsLoading ? (
+          <>
+            <StatSkeleton />
+            <StatSkeleton />
+            <StatSkeleton />
+          </>
+        ) : (
+          <>
+            {/* Total Sites Analyzed */}
+            <Card className="p-6 shadow-sm">
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-primary/10 rounded-lg">
+                  <GlobeAltIcon className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground mb-1">
+                    Total Sites Analyzed
+                  </p>
+                  <p className="text-3xl font-bold">{stats.totalSitesAnalyzed}</p>
+                </div>
+              </div>
+            </Card>
+
+            {/* Average Eco Score */}
+            <Card className="p-6 shadow-sm">
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-primary/10 rounded-lg">
+                  <ChartBarIcon className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground mb-1">
+                    Average Eco Score
+                  </p>
+                  <p className={`text-3xl font-bold ${getScoreColor(stats.averageEcoScore)}`}>
+                    {Math.round(stats.averageEcoScore)}
+                  </p>
+                </div>
+              </div>
+            </Card>
+
+            {/* High Score Sites */}
+            <Card className="p-6 shadow-sm">
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-primary/10 rounded-lg">
+                  <SparklesIcon className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground mb-1">
+                    High Score Sites
+                  </p>
+                  <p className="text-3xl font-bold text-green-500">{stats.highScoreSites}</p>
+                </div>
+              </div>
+            </Card>
+          </>
+        )}
+      </div>
+
       {/* Theme Selector Section */}
       <Card className="p-6 shadow-sm">
         <div className="flex items-start gap-4">
