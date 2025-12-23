@@ -56,20 +56,6 @@ export default function ActivityHistory() {
     load();
   }, [user]);
 
-  // Get score badge styling
-  const getScoreBadgeColor = (score: number) => {
-    if (score >= 80) return 'bg-green-500/10 text-green-500 border-green-500/20';
-    if (score >= 50) return 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20';
-    return 'bg-red-500/10 text-red-500 border-red-500/20';
-  };
-
-  // Get grade badge styling
-  const getGradeBadgeColor = (grade: string) => {
-    if (grade.startsWith('A')) return 'bg-green-500/10 text-green-500 border-green-500/20';
-    if (grade.startsWith('B')) return 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20';
-    return 'bg-red-500/10 text-red-500 border-red-500/20';
-  };
-
   // Format timestamp
   const formatDate = (ts: any): string => {
     if (!ts) return 'N/A';
@@ -122,13 +108,7 @@ export default function ActivityHistory() {
               <thead>
                 <tr className="border-b border-border">
                   <th className="text-left py-3 px-4 font-medium text-sm text-muted-foreground">
-                    Company
-                  </th>
-                  <th className="text-center py-3 px-4 font-medium text-sm text-muted-foreground">
-                    Score
-                  </th>
-                  <th className="text-center py-3 px-4 font-medium text-sm text-muted-foreground">
-                    Grade
+                    Reports
                   </th>
                   <th className="text-left py-3 px-4 font-medium text-sm text-muted-foreground">
                     Date
@@ -152,20 +132,6 @@ export default function ActivityHistory() {
                           {item.domain}
                         </p>
                       </div>
-                    </td>
-                    <td className="py-4 px-4 text-center">
-                      <span
-                        className={`inline-block px-3 py-1 text-sm font-bold border rounded-full ${getScoreBadgeColor(item.score)}`}
-                      >
-                        {item.score}
-                      </span>
-                    </td>
-                    <td className="py-4 px-4 text-center">
-                      <span
-                        className={`inline-block px-3 py-1 text-sm font-bold border rounded-full ${getGradeBadgeColor(item.grade)}`}
-                      >
-                        {item.grade}
-                      </span>
                     </td>
                     <td className="py-4 px-4">
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
