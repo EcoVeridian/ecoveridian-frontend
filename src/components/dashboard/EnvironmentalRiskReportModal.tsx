@@ -314,15 +314,15 @@ export default function EnvironmentalRiskReportModal({
               {/* Risk Levels Legend */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <div className="flex items-center gap-3 p-3 rounded-lg bg-green-500/10 border border-green-500/20">
-                  <span className="font-bold text-green-500">80–100</span>
+                  <span className="font-bold text-green-500 whitespace-nowrap">80–100</span>
                   <span className="text-sm text-muted-foreground">Low environmental risk, strong record.</span>
                 </div>
                 <div className="flex items-center gap-3 p-3 rounded-lg bg-yellow-500/10 border border-yellow-500/20">
-                  <span className="font-bold text-yellow-500">50–79</span>
+                  <span className="font-bold text-yellow-500 whitespace-nowrap">50–79</span>
                   <span className="text-sm text-muted-foreground">Medium risk, mixed record.</span>
                 </div>
                 <div className="flex items-center gap-3 p-3 rounded-lg bg-red-500/10 border border-red-500/20">
-                  <span className="font-bold text-red-500">0–49</span>
+                  <span className="font-bold text-red-500 whitespace-nowrap">0–49</span>
                   <span className="text-sm text-muted-foreground">High risk, repeated or serious issues.</span>
                 </div>
               </div>

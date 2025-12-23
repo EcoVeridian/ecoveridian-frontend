@@ -6,6 +6,23 @@ import { Changelog } from '@/components/ui/timeline';
 
 const timelineData = [
   {
+    title: 'v2.1.1',
+    content: (
+      <div className="space-y-4 text-foreground/90">
+        <div className="space-y-2">
+          <p className="text-sm md:text-base text-muted-foreground">Patch release with visual enhancements and UI fixes.</p>
+          <ul className="list-disc list-inside text-sm md:text-base text-muted-foreground space-y-1">
+            <li>Added dynamic company logos to Analysis History and Environmental Risk Reports, fetched automatically from scanned domains.</li>
+            <li>Fixed risk level legend numbers (80–100, 50–79, 0–49) wrapping incorrectly in the GreenScore section.</li>
+          </ul>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="text-xs md:text-sm text-muted-foreground">Dec 23, 2025</span>
+        </div>
+      </div>
+    ),
+  },
+  {
     title: 'v2.1.0',
     content: (
       <div className="space-y-4 text-foreground/90">
