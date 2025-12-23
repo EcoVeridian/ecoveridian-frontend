@@ -22,12 +22,12 @@ export const faqs = [
   {
     question: 'What is EcoVeridian?',
     answer:
-      "EcoVeridian is a tool that provides sustainability scores for companies. Our platform analyzes various factors, from energy consumption to ethical practices, giving you a clear picture of a company's environmental and social impact.",
+      "EcoVeridian is a browser extension and platform that generates comprehensive environmental risk reports for companies. By scanning recent news articles and independent reports, we provide a GreenScore (0-100) that indicates a company's environmental risk level. Our dashboard lets you track all your analyzed companies, view detailed reports with key articles, event breakdowns, and actionable insights to help you make more informed, sustainability-conscious decisions.",
   },
   {
     question: 'How is the sustainability score calculated?',
     answer:
-      'Our score is calculated using an algorithm that assesses publicly available information on a company. It considers factors like environmental reporting, use of renewable energy, supply chain transparency, community engagement, and certifications.',
+      'Our GreenScore (0-100) is calculated using a 6-factor model that analyzes recent, independent news articles and reports about a company. The algorithm weighs each event based on severity, credibility of the source, recency, scope of impact, and confidence level. We use log compression to ensure no single event disproportionately skews the overall assessment. Higher scores indicate lower environmental risk. Each report shows the key articles that influenced the score, along with detailed metrics like impact, contribution percentage, and source credibility.',
   },
   {
     question: 'Is this an ESG rating?',
@@ -37,11 +37,11 @@ export const faqs = [
   {
     question: 'What browsers are supported?',
     answer:
-      'The EcoVeridian extension is currently available for Chromium-based browsers (Chrome, Edge, Brave, Vivaldi, and others). Support for Mozilla Firefox is currently under development.',
+      'The EcoVeridian extension is available for all major browsers. This includes Chromium-based browsers such as Google Chrome, Microsoft Edge, Brave, Vivaldi, Opera, and others that support Chrome extensions. We also fully support Mozilla Firefox. Safari support is planned for a future release. The extension works seamlessly across Windows, macOS, and Linux operating systems.',
   },
   {
     question: 'How can I get started?',
     answer:
-      'Clicking the "Get started" button on our homepage will direct you to the appropriate web store to download the EcoVeridian browser extension. Once installed, you can start scanning companies immediately.',
+      'Clicking the "Get started" button on our homepage will direct you to the appropriate web store to download the EcoVeridian browser extension. Once installed, you can start scanning companies immediately by visiting any company website. The extension will analyze the company and generate an environmental risk report. All your scanned reports are automatically saved to your dashboard, where you can review detailed environmental risk scores, key articles, and in-depth insights for each company you\'ve analyzed.',
   },
 ];

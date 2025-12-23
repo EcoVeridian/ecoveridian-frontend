@@ -91,7 +91,7 @@ export default function ActivityHistory() {
       <Card className="p-6 shadow-sm">
         <h2 className="text-xl font-semibold mb-1">Analysis History</h2>
         <p className="text-sm text-muted-foreground mb-6">
-          Click a report to see an in-depth analysis to explore full environmental risk details, scores, and insights
+          Click a report to see an in-depth analysis to explore full environmental risk details, scores, and insights.
         </p>
 
         {loading ? (
