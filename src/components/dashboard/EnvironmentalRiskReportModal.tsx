@@ -4,8 +4,8 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import {
   XMarkIcon,
-  BuildingOffice2Icon,
 } from '@heroicons/react/24/outline';
+import CompanyLogo from '@/components/common/CompanyLogo';
 import type { AnalysisHistory, EnvironmentalRiskReport, KeyArticle } from '@/types/dashboard';
 
 interface EnvironmentalRiskReportModalProps {
@@ -193,9 +193,11 @@ export default function EnvironmentalRiskReportModal({
             
             <Card className="p-6">
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <BuildingOffice2Icon className="w-6 h-6 text-primary" />
-                </div>
+                <CompanyLogo 
+                  domain={analysis.domain} 
+                  companyName={report.company} 
+                  size="md" 
+                />
                 <div>
                   <h4 className="text-xl font-bold">{report.company}</h4>
                   <p className="text-sm text-muted-foreground">Company audited</p>

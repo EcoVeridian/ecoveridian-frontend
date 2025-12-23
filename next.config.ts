@@ -8,6 +8,22 @@ const nextConfig: NextConfig = {
   // and silence the migration warning
   turbopack: {},
   
+  // Configure external image domains for company logos
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'logo.clearbit.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.google.com',
+        pathname: '/s2/favicons/**',
+      },
+    ],
+  },
+  
   webpack: (config) => {
     // Exclude Veridian folder from compilation
     config.module.rules.push({

@@ -11,6 +11,7 @@ import {
 import { getUserDashboardData } from '@/lib/dashboard';
 import type { AnalysisHistory } from '@/types/dashboard';
 import EnvironmentalRiskReportModal from './EnvironmentalRiskReportModal';
+import CompanyLogo from '@/components/common/CompanyLogo';
 
 export default function ActivityHistory() {
   const { user } = useAuth();
@@ -129,11 +130,18 @@ export default function ActivityHistory() {
                     className="border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer group"
                   >
                     <td className="py-4 px-4">
-                      <div>
-                        <p className="font-medium">{item.companyName}</p>
-                        <p className="text-sm text-muted-foreground truncate max-w-xs">
-                          {item.domain}
-                        </p>
+                      <div className="flex items-center gap-3">
+                        <CompanyLogo 
+                          domain={item.domain} 
+                          companyName={item.companyName} 
+                          size="sm" 
+                        />
+                        <div>
+                          <p className="font-medium">{item.companyName}</p>
+                          <p className="text-sm text-muted-foreground truncate max-w-xs">
+                            {item.domain}
+                          </p>
+                        </div>
                       </div>
                     </td>
                     <td className="py-4 px-4">
