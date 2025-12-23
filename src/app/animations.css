@@ -183,9 +183,9 @@
     90deg,
     hsl(var(--muted-foreground)) 0%,
     hsl(var(--muted-foreground)) 20%,
-    hsl(270, 70%, 60%) 40%,
-    hsl(280, 80%, 65%) 50%,
-    hsl(270, 70%, 60%) 60%,
+    hsl(242, 76%, 58%) 40%,
+    hsl(242, 80%, 65%) 50%,
+    hsl(242, 76%, 58%) 60%,
     hsl(var(--muted-foreground)) 80%,
     hsl(var(--muted-foreground)) 100%
   );
