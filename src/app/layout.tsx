@@ -9,7 +9,7 @@ import Snowfall from '@/components/common/Snowfall';
 // Page metadata
 export const metadata: Metadata = {
   title: 'EcoVeridian',
-  description: "Unlock a company's sustainability potential with Veridian.",
+  description: "Clarity in Corporate Sustainability.",
 };
 
 // Root layout wrapper
