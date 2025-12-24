@@ -8,7 +8,7 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const eventsData = [
   {
-    title: 'EarthGen WSTA Youth Panel',
+    title: 'EarthGen WSTA Youth Climate Panel',
     date: 'December 2025',
     time: 'N/A',
     location: 'University of Washington, Tacoma: 1900 Commerce St, Tacoma, WA 98402',
@@ -42,8 +42,17 @@ function EventCard({ event }: { event: typeof eventsData[0] }) {
             )}
           </div>
           <div className="flex items-center gap-3">
-            <h2 className="text-xl md:text-2xl font-semibold">{event.title}</h2>
-            {event.title === 'EarthGen WSTA Youth Panel' && (
+            <h2 className="text-xl md:text-2xl font-semibold">
+              <a
+                href="https://www.wsta.net/2025Conference"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors"
+              >
+                {event.title}
+              </a>
+            </h2>
+            {event.title === 'EarthGen WSTA Youth Climate Panel' && (
               <a
                 href="https://earthgenwa.org/"
                 target="_blank"
@@ -102,12 +111,12 @@ function EventCard({ event }: { event: typeof eventsData[0] }) {
               <span>{event.date}</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <Clock className="w-4 h-4" />
-              <span>{event.time}</span>
-            </div>
-            <div className="flex items-center gap-1.5">
               <MapPin className="w-4 h-4" />
               <span>{event.location}</span>
+              <span className="flex items-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 21v-2a4 4 0 014-4h10a4 4 0 014 4v2M16 3.13a4 4 0 010 7.75M12 7v4m0 0v4m0-4h4m-4 0H8" /></svg>
+                <span>Washington Science Teachers Association</span>
+              </span>
             </div>
           </div>
         </div>
