@@ -20,9 +20,9 @@ export default function Footer() {
           {/* Quote */}
           <p className="text-lg md:text-xl italic mb-8">
             <span className="purple-wave-text">
-              "55% of global customers are skeptical of the sustainability claims of most brands."
+              "The greatest threat to our planet is the belief that someone else will save it."
             </span>
-            <span className="block text-sm mt-2 not-italic text-muted-foreground">— YouGov, 2023</span>
+            <span className="block text-sm mt-2 not-italic text-muted-foreground">— Robert Swan</span>
           </p>
 
           {/* Final CTA section */}
