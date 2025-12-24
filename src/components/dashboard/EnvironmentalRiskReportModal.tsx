@@ -1,5 +1,6 @@
 'use client';
 
+import React, { useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import {
@@ -98,6 +99,10 @@ export default function EnvironmentalRiskReportModal({
   // Use backend report if available, otherwise generate mock
   const report = analysis.riskReport || generateMockReport(analysis);
 
+  // Refs to adjust scrolling so sections clear the sticky header inside the modal
+  const modalScrollRef = useRef<HTMLDivElement | null>(null);
+  const headerRef = useRef<HTMLDivElement | null>(null);
+
   const getVerdictColor = (verdict: string) => {
     switch (verdict) {
       case 'Low':
@@ -133,15 +138,42 @@ export default function EnvironmentalRiskReportModal({
     return 'text-red-500';
   };
 
-  // Step indicator component
-  const StepIndicator = ({ number, label, active = false }: { number: number; label: string; active?: boolean }) => (
-    <div className="flex items-center gap-3">
-      <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${active ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'}`}>
-        {number}
-      </div>
-      <span className={`text-sm ${active ? 'text-foreground font-medium' : 'text-muted-foreground'}`}>{label}</span>
-    </div>
-  );
+  // Step indicator component (clickable to smooth-scroll to sections)
+  const StepIndicator = ({ number, label, active = false }: { number: number; label: string; active?: boolean }) => {
+    const handleClick = () => {
+      const el = document.getElementById(`report-section-${number}`);
+      const container = modalScrollRef.current;
+      const header = headerRef.current;
+
+      if (el && container) {
+        // compute position relative to the scrollable modal container so sticky header doesn't overlap
+        const containerRect = container.getBoundingClientRect();
+        const elRect = el.getBoundingClientRect();
+        const headerHeight = header ? header.getBoundingClientRect().height : 0;
+
+        const offset = elRect.top - containerRect.top - headerHeight - 12; // small gap
+        const target = Math.max(0, container.scrollTop + offset);
+        container.scrollTo({ top: target, behavior: 'smooth' });
+        return;
+      }
+
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    return (
+      <button
+        type="button"
+        onClick={handleClick}
+        aria-controls={`report-section-${number}`}
+        className="group flex items-center gap-3 focus:outline-none cursor-pointer"
+      >
+        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${active ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'} group-hover:bg-primary/10 group-hover:text-primary`}>
+          {number}
+        </div>
+        <span className={`text-sm transition-colors ${active ? 'text-foreground font-medium' : 'text-muted-foreground'} group-hover:text-primary`}>{label}</span>
+      </button>
+    );
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -152,9 +184,9 @@ export default function EnvironmentalRiskReportModal({
       />
 
       {/* Modal */}
-      <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto m-4 bg-background border border-border rounded-xl shadow-2xl">
+      <div ref={modalScrollRef} className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto m-4 bg-background border border-border rounded-xl shadow-2xl">
         {/* Header */}
-        <div className="sticky top-0 z-10 bg-background border-b border-border p-6">
+        <div ref={headerRef} className="sticky top-0 z-10 bg-background border-b border-border p-6">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-2xl font-bold">Environmental Risk Report</h2>
@@ -185,7 +217,7 @@ export default function EnvironmentalRiskReportModal({
         <div className="p-6 space-y-8">
           
           {/* Section 1: Company */}
-          <section>
+          <section id="report-section-1">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">1</div>
               <h3 className="text-lg font-semibold">Company you asked us to check</h3>
@@ -260,7 +292,7 @@ export default function EnvironmentalRiskReportModal({
           </section>
 
           {/* Section 2: GreenScore */}
-          <section>
+          <section id="report-section-2">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">2</div>
               <h3 className="text-lg font-semibold">GreenScore</h3>
@@ -350,7 +382,7 @@ export default function EnvironmentalRiskReportModal({
           </section>
 
           {/* Section 3: What we found */}
-          <section>
+          <section id="report-section-3">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">3</div>
               <h3 className="text-lg font-semibold">What we found</h3>
@@ -392,14 +424,14 @@ export default function EnvironmentalRiskReportModal({
           </section>
 
           {/* Section 4: Articles we checked */}
-          <section>
+          <section id="report-section-4">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">4</div>
               <h3 className="text-lg font-semibold">Articles we checked</h3>
             </div>
             
             <Card className="p-0 overflow-hidden">
-              <div className="overflow-x-auto">
+              <div className="overflow-x-auto modal-table-scroll">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="bg-muted/50 border-b border-border">
@@ -485,6 +517,64 @@ export default function EnvironmentalRiskReportModal({
           </div>
         </div>
       </div>
+      <style jsx global>{`
+        /* Light theme (default): darker thumb on light table */
+        .modal-table-scroll {
+          scrollbar-width: thin; /* Firefox */
+          /* thumb color then track color */
+          scrollbar-color: rgba(0,0,0,0.45) rgba(0,0,0,0.06);
+        }
+        .modal-table-scroll::-webkit-scrollbar {
+          height: 12px; /* horizontal scrollbar height */
+        }
+        .modal-table-scroll::-webkit-scrollbar-track {
+          background: rgba(0,0,0,0.04);
+        }
+        .modal-table-scroll::-webkit-scrollbar-thumb {
+          background: rgba(0,0,0,0.45);
+          border-radius: 9999px;
+          border: 2px solid transparent; /* keep thumb slightly inset */
+          background-clip: padding-box;
+          -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+        }
+        .modal-table-scroll::-webkit-scrollbar-thumb:hover {
+          background: rgba(0,0,0,0.6);
+        }
+        .modal-table-scroll::-webkit-scrollbar-corner {
+          background: transparent;
+        }
+
+        /* Dark theme overrides: use lighter thumb for dark backgrounds.
+           Support common dark-theme selectors and prefers-color-scheme. */
+        .dark .modal-table-scroll,
+        [data-theme="dark"] .modal-table-scroll {
+          scrollbar-color: rgba(255,255,255,0.16) rgba(255,255,255,0.03);
+        }
+        .dark .modal-table-scroll::-webkit-scrollbar-track,
+        [data-theme="dark"] .modal-table-scroll::-webkit-scrollbar-track {
+          background: rgba(255,255,255,0.02);
+        }
+        .dark .modal-table-scroll::-webkit-scrollbar-thumb,
+        [data-theme="dark"] .modal-table-scroll::-webkit-scrollbar-thumb {
+          background: rgba(255,255,255,0.12);
+          -webkit-box-shadow: none;
+        }
+        .dark .modal-table-scroll::-webkit-scrollbar-thumb:hover,
+        [data-theme="dark"] .modal-table-scroll::-webkit-scrollbar-thumb:hover {
+          background: rgba(255,255,255,0.18);
+        }
+
+        /* Respect user's OS preference as an additional fallback */
+        @media (prefers-color-scheme: dark) {
+          .modal-table-scroll {
+            scrollbar-color: rgba(255,255,255,0.16) rgba(255,255,255,0.03);
+          }
+          .modal-table-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+          .modal-table-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); -webkit-box-shadow: none; }
+          .modal-table-scroll::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.18); }
+        }
+      `}</style>
     </div>
   );
 }
+
