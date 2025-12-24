@@ -153,7 +153,7 @@ export default function Snowfall() {
       const viewportHeight = canvas.height;
       const worldHeight = worldHeightRef.current;
 
-      snowflakesRef.current.forEach((flake, index) => {
+      snowflakesRef.current.forEach((flake) => {
         // Update wobble angle for wavy movement
         flake.wobbleAngle += flake.wobbleSpeed;
 
