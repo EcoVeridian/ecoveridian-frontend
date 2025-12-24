@@ -4,6 +4,7 @@ import './animations.css';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import LegalAgreementModal from '@/components/legal/LegalAgreementModal';
+import Snowfall from '@/components/common/Snowfall';
 
 // Page metadata
 export const metadata: Metadata = {
@@ -60,6 +61,7 @@ export default function RootLayout({
       <body className="font-body antialiased" suppressHydrationWarning>
         <ThemeProvider>
           <AuthProvider>
+            <Snowfall />
             {children}
             <LegalAgreementModal />
           </AuthProvider>

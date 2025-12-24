@@ -6,6 +6,26 @@ import { Changelog } from '@/components/ui/timeline';
 
 const timelineData = [
   {
+    title: 'v2.2.0',
+    content: (
+      <div className="space-y-4 text-foreground/90">
+        <div className="space-y-2">
+          <p className="text-sm md:text-base text-muted-foreground">Holiday release bringing festive vibes to EcoVeridian! ❄️</p>
+          <ul className="list-disc list-inside text-sm md:text-base text-muted-foreground space-y-1">
+            <li>Added animated snowfall effect across the entire website for the holiday season.</li>
+            <li>Snowflakes are theme-aware: white in dark mode, dark in light mode.</li>
+            <li>Realistic snowflake physics with varied sizes, speeds, and gentle drifting motion.</li>
+            <li>Canvas-based animation for smooth 60fps performance on desktop and mobile.</li>
+            <li>Snowflakes distributed across full page height for consistent experience while scrolling.</li>
+          </ul>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="text-xs md:text-sm text-muted-foreground">Dec 23, 2025</span>
+        </div>
+      </div>
+    ),
+  },
+  {
     title: 'v2.1.1',
     content: (
       <div className="space-y-4 text-foreground/90">

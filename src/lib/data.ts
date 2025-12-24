@@ -37,7 +37,7 @@ export const faqs = [
   {
     question: 'What browsers are supported?',
     answer:
-      'The EcoVeridian extension is available for all major browsers. This includes Chromium-based browsers such as Google Chrome, Microsoft Edge, Brave, Vivaldi, Opera, and others that support Chrome extensions. We also fully support Mozilla Firefox. Safari support is planned for a future release. The extension works seamlessly across Windows, macOS, and Linux operating systems.',
+      'The EcoVeridian extension is available for all major browsers. This includes Chromium-based browsers such as Google Chrome, Microsoft Edge, Brave, Vivaldi, Opera, and others that support Chrome extensions. We also fully support Mozilla Firefox. Safari support is planned for a future release.',
   },
   {
     question: 'How can I get started?',
