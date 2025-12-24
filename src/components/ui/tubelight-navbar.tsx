@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { playJingleSound } from '@/lib/sounds';
 
 interface NavItem {
   name: string;
@@ -60,7 +61,10 @@ export function NavBar({ items, className, variant = 'floating' }: NavBarProps) 
             <Link
               key={item.name}
               href={item.url}
-              onClick={() => setActiveTab(item.name)}
+              onClick={() => {
+                setActiveTab(item.name);
+                playJingleSound();
+              }}
               aria-current={isActive ? 'page' : undefined}
               className={cn(
                 'relative cursor-pointer text-xs sm:text-sm font-semibold px-3 sm:px-5 py-2 sm:py-2 rounded-full transition-colors',

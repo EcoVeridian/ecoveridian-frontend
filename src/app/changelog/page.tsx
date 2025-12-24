@@ -15,7 +15,7 @@ const timelineData = [
             <li>Added animated snowfall effect across the entire website for the holiday season.</li>
             <li>Snowflakes are theme-aware: white in dark mode, dark in light mode.</li>
             <li>Realistic snowflake physics with varied sizes, speeds, and gentle drifting motion.</li>
-            <li>Canvas-based animation for smooth 60fps performance on desktop and mobile.</li>
+            <li>Added festive jingle bell sound effect when navigating between pages.</li>
             <li>Snowflakes distributed across full page height for consistent experience while scrolling.</li>
           </ul>
         </div>
