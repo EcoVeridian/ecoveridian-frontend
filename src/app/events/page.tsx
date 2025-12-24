@@ -2,7 +2,7 @@
 
 import Navbar from '@/components/landing/navbar';
 import Footer from '@/components/landing/footer';
-import { Calendar, MapPin, Clock, ExternalLink } from 'lucide-react';
+import { Calendar, MapPin, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
