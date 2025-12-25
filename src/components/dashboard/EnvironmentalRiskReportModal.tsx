@@ -184,7 +184,7 @@ export default function EnvironmentalRiskReportModal({
       />
 
       {/* Modal */}
-      <div ref={modalScrollRef} className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto m-4 bg-background border border-border rounded-xl shadow-2xl">
+      <div ref={modalScrollRef} className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto m-4 bg-background border border-border rounded-xl shadow-2xl modal-table-scroll">
         {/* Header */}
         <div ref={headerRef} className="sticky top-0 z-10 bg-background border-b border-border p-6">
           <div className="flex items-center justify-between mb-4">
@@ -518,30 +518,40 @@ export default function EnvironmentalRiskReportModal({
         </div>
       </div>
       <style jsx global>{`
-        /* Light theme (default): darker thumb on light table */
+        /* Light theme (default): always visible, high-contrast scrollbars */
         .modal-table-scroll {
-          scrollbar-width: thin; /* Firefox */
-          /* thumb color then track color */
-          scrollbar-color: rgba(0,0,0,0.45) rgba(0,0,0,0.06);
+          scrollbar-width: auto; /* Firefox: always show, default width */
+          scrollbar-color: #222 #cfcfcf; /* thumb color, track color */
+          overscroll-behavior: contain;
         }
         .modal-table-scroll::-webkit-scrollbar {
-          height: 12px; /* horizontal scrollbar height */
+          width: 14px; /* vertical scrollbar width */
+          height: 14px; /* horizontal scrollbar height */
+          background: #cfcfcf;
         }
         .modal-table-scroll::-webkit-scrollbar-track {
-          background: rgba(0,0,0,0.04);
+          background: #cfcfcf;
         }
         .modal-table-scroll::-webkit-scrollbar-thumb {
-          background: rgba(0,0,0,0.45);
-          border-radius: 9999px;
-          border: 2px solid transparent; /* keep thumb slightly inset */
+          background: #222 !important;
+          border-radius: 8px;
+          border: 3px solid #cfcfcf;
           background-clip: padding-box;
-          -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+          min-height: 40px;
+          min-width: 40px;
+          opacity: 1 !important;
+          -webkit-box-shadow: 0 0 2px #000, 0 0 1px #000;
         }
         .modal-table-scroll::-webkit-scrollbar-thumb:hover {
-          background: rgba(0,0,0,0.6);
+          background: #222 !important;
         }
         .modal-table-scroll::-webkit-scrollbar-corner {
-          background: transparent;
+          background: #cfcfcf;
+        }
+        /* Fallback for browsers that ignore ::-webkit-scrollbar */
+        .modal-table-scroll {
+          scrollbar-face-color: #222;
+          scrollbar-track-color: #cfcfcf;
         }
 
         /* Dark theme overrides: use lighter thumb for dark backgrounds.
