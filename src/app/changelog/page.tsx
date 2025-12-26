@@ -6,6 +6,26 @@ import { Changelog } from '@/components/ui/timeline';
 
 const timelineData = [
   {
+    title: 'v2.3.0',
+    content: (
+      <div className="space-y-4 text-foreground/90">
+        <div className="space-y-2">
+          <p className="text-sm md:text-base text-muted-foreground">Firefox extension support and mobile browser improvements. 🦊</p>
+          <ul className="list-disc list-inside text-sm md:text-base text-muted-foreground space-y-1">
+            <li>Added Firefox Add-ons extension download link for desktop Firefox users.</li>
+            <li>Firefox for Android users can now install the extension directly from their mobile browser.</li>
+            <li>Improved mobile browser detection to identify Firefox mobile vs other mobile browsers.</li>
+            <li>Updated extension download messaging to include Firefox as a supported browser.</li>
+            <li>Non-Firefox mobile users now see helpful guidance about Firefox for Android extension support.</li>
+          </ul>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="text-xs md:text-sm text-muted-foreground">Dec 26, 2025</span>
+        </div>
+      </div>
+    ),
+  },
+  {
     title: 'v2.2.0',
     content: (
       <div className="space-y-4 text-foreground/90">
