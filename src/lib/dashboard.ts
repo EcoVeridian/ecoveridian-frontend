@@ -105,7 +105,7 @@ export async function getUserDashboardData(): Promise<DashboardData | null> {
                 date_source: dateSource,
               };
             }),
-            overall_concern_level: envReport.riskLevel === 'low' ? 'Low' : envReport.riskLevel === 'high' ? 'High' : 'Medium',
+            overall_concern_level: (envReport.riskLevel === 'low' ? 'Low' : envReport.riskLevel === 'high' ? 'High' : 'Medium') as 'Low' | 'Medium' | 'High',
             total_events: envReport.totalEvents || 0,
           };
         }
