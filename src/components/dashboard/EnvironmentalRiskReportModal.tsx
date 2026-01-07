@@ -15,80 +15,6 @@ interface EnvironmentalRiskReportModalProps {
   analysis: AnalysisHistory | null;
 }
 
-// Generate a mock Environmental Risk Report from existing analysis data
-// This will be replaced by actual backend data later
-function generateMockReport(analysis: AnalysisHistory): EnvironmentalRiskReport {
-  const score = analysis.score;
-  const verdict = score >= 80 ? 'Low' : score >= 50 ? 'Medium' : 'High';
-  const concernLevel = score >= 80 ? 'Low' : score >= 50 ? 'Medium' : 'High';
-  
-  // Calculate mock log risk (negative = beneficial, positive = harmful)
-  const meanLogRisk = -((score - 50) / 100) * 1.5; // Maps score to roughly -0.75 to +0.75
-  
-  // Generate mock articles based on the score
-  const mockArticles: KeyArticle[] = [
-    {
-      title: `${analysis.companyName} Signs Deal to Purchase Renewable Energy, Support Vulnerable Communities`,
-      event_score: Math.min(100, score + 5),
-      impact: -meanLogRisk,
-      severity: score >= 50 ? -0.70 : 0.50,
-      confidence: 0.80,
-      contribution_percent: 45,
-      credibility: 0.60,
-      recency: 1.00,
-      scope: 0.60,
-      date_source: `2025-12-03 • www.esgtoday.com`,
-    },
-    {
-      title: `${analysis.companyName} Announces Carbon Neutrality Goals for 2030`,
-      event_score: score,
-      impact: score >= 50 ? -0.45 : 0.30,
-      severity: score >= 50 ? -0.50 : 0.40,
-      confidence: 0.75,
-      contribution_percent: 35,
-      credibility: 0.80,
-      recency: 0.85,
-      scope: 0.70,
-      date_source: `2025-11-15 • reuters.com`,
-    },
-    {
-      title: `Environmental Compliance Report: ${analysis.companyName} Q4 Review`,
-      event_score: Math.max(0, score - 5),
-      impact: score >= 60 ? -0.30 : 0.25,
-      severity: score >= 60 ? -0.35 : 0.30,
-      confidence: 0.85,
-      contribution_percent: 20,
-      credibility: 0.90,
-      recency: 0.70,
-      scope: 0.50,
-      date_source: `2025-10-28 • bloomberg.com`,
-    },
-  ];
-
-  const harmfulCount = mockArticles.filter(a => a.impact > 0).length;
-  const beneficialCount = mockArticles.filter(a => a.impact <= 0).length;
-
-  return {
-    company: analysis.companyName,
-    summary_at_a_glance: {
-      environmental_verdict: verdict,
-      GreenScore: score,
-      events_reviewed: mockArticles.length,
-      serious_issues_flagged: score < 50 ? Math.floor(Math.random() * 2) + 1 : 0,
-      event_balance: {
-        harmful: harmfulCount,
-        beneficial: beneficialCount,
-      },
-    },
-    green_score_explanation: `${analysis.companyName} GreenScore = ${score} (risk=${meanLogRisk.toFixed(3)}). ${mockArticles.length} events analyzed: ${harmfulCount} harmful, ${beneficialCount} beneficial. Score is driven primarily by the top ${Math.min(3, mockArticles.length)} event(s) shown below; their combined contribution explains ~100.0% of total risk magnitude. Credibility and recency are incorporated, so regulator/NGO or very recent items weigh more.`,
-    mean_log_risk: meanLogRisk,
-    key_articles: mockArticles,
-    overall_concern_level: concernLevel,
-    total_events: mockArticles.length,
-    notes: `${mockArticles.length} sustainability-related developments analyzed for ${analysis.companyName}. Mean (log-compressed) risk: ${meanLogRisk.toFixed(3)} from ${mockArticles.length} events (risk level: ${concernLevel.toLowerCase()}).`,
-  };
-}
-
 export default function EnvironmentalRiskReportModal({
   isOpen,
   onClose,
@@ -96,8 +22,26 @@ export default function EnvironmentalRiskReportModal({
 }: EnvironmentalRiskReportModalProps) {
   if (!isOpen || !analysis) return null;
 
-  // Use backend report if available, otherwise generate mock
-  const report = analysis.riskReport || generateMockReport(analysis);
+  // Check if we have a real environmental risk report
+  if (!analysis.riskReport) {
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
+        <div className="relative w-full max-w-md m-4 bg-background border border-border rounded-xl shadow-2xl p-6">
+          <h2 className="text-xl font-bold mb-4">Report Not Available</h2>
+          <p className="text-muted-foreground mb-4">
+            The environmental risk report for this company is not yet available. This may be an older analysis that was completed before the environmental risk reporting feature was added.
+          </p>
+          <p className="text-sm text-muted-foreground mb-6">
+            Please re-analyze this company using the browser extension to generate a new detailed environmental risk report.
+          </p>
+          <Button onClick={onClose} className="w-full">Close</Button>
+        </div>
+      </div>
+    );
+  }
+
+  const report = analysis.riskReport;
 
   // Refs to adjust scrolling so sections clear the sticky header inside the modal
   const modalScrollRef = useRef<HTMLDivElement | null>(null);
@@ -508,13 +452,6 @@ export default function EnvironmentalRiskReportModal({
               </div>
             </Card>
           </section>
-
-          {/* Backend Note */}
-          <div className="p-4 bg-primary/5 border border-primary/10 rounded-lg">
-            <p className="text-sm text-muted-foreground">
-              <strong className="text-foreground">Note:</strong> This report is generated based on available analysis data. Full environmental risk reports with comprehensive article analysis will be available once the backend integration is complete.
-            </p>
-          </div>
         </div>
       </div>
       <style jsx global>{`

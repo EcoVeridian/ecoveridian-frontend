@@ -47,21 +47,86 @@ export async function getUserDashboardData(): Promise<DashboardData | null> {
     // console.log('History collection size:', historySnap.size);
     // console.log('History docs:', historySnap.docs.map(d => d.id));
 
-    const history: AnalysisHistory[] = historySnap.docs.map((d) => {
+    // Fetch full environmental risk reports from cache for each history item
+    const historyPromises = historySnap.docs.map(async (d) => {
       const data = d.data();
+      const domain = data.domain ?? d.id;
+      
+      // Fetch the cached analysis which contains the full environmentalRiskReport
+      const cacheDocId = domain.replace(/\./g, '_');
+      const cacheRef = doc(db, 'domainAnalysisCache', cacheDocId);
+      const cacheSnap = await getDoc(cacheRef);
+      
+      let riskReport = undefined;
+      
+      if (cacheSnap.exists()) {
+        const cacheData = cacheSnap.data();
+        const envReport = cacheData.environmentalRiskReport;
+        
+        // Map backend structure to frontend structure
+        if (envReport && envReport.articles) {
+          riskReport = {
+            company: cacheData.companyName || data.companyName || domain,
+            summary_at_a_glance: {
+              environmental_verdict: envReport.verdict?.replace(' risk', '') as 'Low' | 'Medium' | 'High' || 'Medium',
+              GreenScore: envReport.greenScore || 0,
+              events_reviewed: envReport.totalEvents || 0,
+              serious_issues_flagged: envReport.seriousIssuesCount || 0,
+              event_balance: {
+                harmful: envReport.harmfulEvents || 0,
+                beneficial: envReport.beneficialEvents || 0,
+              },
+            },
+            green_score_explanation: envReport.scoreSummary || '',
+            mean_log_risk: envReport.meanRisk || 0,
+            key_articles: (envReport.articles || []).map((article: any) => {
+              let dateSource = 'N/A';
+              try {
+                const hostname = new URL(article.url).hostname.replace(/^www\./, '');
+                dateSource = article.publishedDate 
+                  ? `${new Date(article.publishedDate).toISOString().split('T')[0]} • ${hostname}`
+                  : `N/A • ${hostname}`;
+              } catch {
+                dateSource = article.publishedDate 
+                  ? `${new Date(article.publishedDate).toISOString().split('T')[0]} • ${article.url}`
+                  : `N/A • ${article.url}`;
+              }
+              
+              return {
+                title: article.title || '',
+                event_score: article.eventScore || 0,
+                impact: article.impact || 0,
+                severity: article.severity || 0,
+                confidence: article.confidence || 0,
+                contribution_percent: Math.round(article.contribution || 0),
+                credibility: article.credibility || 0,
+                recency: article.recency || 0,
+                scope: article.scope || 0,
+                date_source: dateSource,
+              };
+            }),
+            overall_concern_level: envReport.riskLevel === 'low' ? 'Low' : envReport.riskLevel === 'high' ? 'High' : 'Medium',
+            total_events: envReport.totalEvents || 0,
+          };
+        }
+      }
+      
       // console.log('History doc:', d.id, data);
       return {
         id: d.id,
         domain: data.domain ?? d.id,
         companyName: data.companyName ?? data.domain ?? d.id,
-        score: data.ecoScore ?? data.score ?? 0,
+        score: data.greenScore ?? data.ecoScore ?? data.score ?? 0,
         grade: data.ecoGrade ?? data.grade ?? 'N/A',
         summary: data.summary ?? '',
         timestamp: data.timestamp ?? data.createdAt ?? data.analyzedAt ?? null,
         sources: Array.isArray(data.sources) ? data.sources : [],
         breakdown: data.breakdown,
+        riskReport,
       };
     });
+    
+    const history: AnalysisHistory[] = await Promise.all(historyPromises);
 
     // Sort by timestamp descending (most recent first), client-side
     history.sort((a, b) => {
