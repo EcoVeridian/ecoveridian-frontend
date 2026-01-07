@@ -7,7 +7,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import CompanyLogo from '@/components/common/CompanyLogo';
-import type { AnalysisHistory, EnvironmentalRiskReport, KeyArticle } from '@/types/dashboard';
+import type { AnalysisHistory } from '@/types/dashboard';
 
 interface EnvironmentalRiskReportModalProps {
   isOpen: boolean;
