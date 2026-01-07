@@ -53,9 +53,16 @@ export async function getUserDashboardData(): Promise<DashboardData | null> {
       const domain = data.domain ?? d.id;
       
       // Fetch the cached analysis which contains the full environmentalRiskReport
-      const cacheDocId = domain.replace(/\./g, '_');
-      const cacheRef = doc(db, 'domainAnalysisCache', cacheDocId);
-      const cacheSnap = await getDoc(cacheRef);
+      // First try 'companies' collection with the actual domain
+      let cacheRef = doc(db, 'companies', domain);
+      let cacheSnap = await getDoc(cacheRef);
+      
+      // Fallback to 'domainAnalysisCache' with underscore format if not found
+      if (!cacheSnap.exists()) {
+        const cacheDocId = domain.replace(/\./g, '_');
+        cacheRef = doc(db, 'domainAnalysisCache', cacheDocId);
+        cacheSnap = await getDoc(cacheRef);
+      }
       
       let riskReport = undefined;
       
