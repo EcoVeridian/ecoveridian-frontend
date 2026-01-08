@@ -10,7 +10,7 @@ const timelineData = [
     content: (
       <div className="space-y-4 text-foreground/90">
         <div className="space-y-2">
-          <p className="text-sm md:text-base text-muted-foreground">Not because the data was wrong, but because <strong>I was measuring the wrong thing</strong>. v2.4.0 replaces the old ESG-focused score with a purpose-built environmental risk engine: the GreenScore.</p>
+          <p className="text-sm md:text-base text-muted-foreground">Replaced the old ESG-focused score with a purpose-built environmental risk engine: the GreenScore.</p>
           <ul className="list-disc list-inside text-sm md:text-base text-muted-foreground space-y-1">
             <li>Replaced the aggregated ESG "Eco-Score" with the GreenScore — a 0–100 risk assessment focused solely on environmental events.</li>
             <li>New 6-factor scoring model (impact, severity, credibility, recency, scope, confidence) with log-compressed aggregation to prevent small positives from masking severe harms.</li>
