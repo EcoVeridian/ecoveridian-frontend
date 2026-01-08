@@ -63,12 +63,23 @@ function mapCompanyDataToRiskReport(cacheData: any, domain: string): Environment
 }
 
 /**
+ * Normalize domain ID by converting underscores to dots
+ * Handles mismatch between user history IDs (amazon_com) and companies collection IDs (amazon.com)
+ * @param domain The domain ID (may contain underscores or dots)
+ */
+function normalizeDomain(domain: string): string {
+  return domain.replace(/_/g, '.');
+}
+
+/**
  * Fetch company data from the normalized companies collection
- * @param domain The domain to fetch (e.g., "amazon.com")
+ * @param domain The domain to fetch (e.g., "amazon.com" or "amazon_com")
  */
 async function fetchCompanyData(domain: string): Promise<any | null> {
   try {
-    const companyRef = doc(db, 'companies', domain);
+    // Normalize domain: convert underscores to dots (amazon_com -> amazon.com)
+    const normalizedDomain = normalizeDomain(domain);
+    const companyRef = doc(db, 'companies', normalizedDomain);
     const companySnap = await getDoc(companyRef);
     
     if (companySnap.exists()) {
@@ -150,24 +161,43 @@ export async function getUserDashboardData(): Promise<DashboardData | null> {
 
     // 3. For each domain in history, fetch the company data from the global companies collection
     const historyPromises = historySnap.docs.map(async (historyDoc) => {
-      const domain = historyDoc.id; // The document ID is the domain
+      const rawDomainId = historyDoc.id; // May contain underscores (e.g., amazon_com)
+      const normalizedDomain = normalizeDomain(rawDomainId); // Convert to dots (e.g., amazon.com)
       const historyData = historyDoc.data();
       
-      // Fetch company data from normalized schema
-      const companyData = await fetchCompanyData(domain);
+      // Fetch company data from normalized schema using the normalized domain
+      const companyData = await fetchCompanyData(rawDomainId);
+      
+      // Extract greenScore from nested environmentalRiskReport if available
+      const greenScore = companyData?.environmentalRiskReport?.greenScore 
+        ?? companyData?.greenScore 
+        ?? historyData.greenScore 
+        ?? historyData.ecoScore 
+        ?? historyData.score 
+        ?? 0;
+      
+      // Extract timestamp from various possible locations
+      const timestamp = historyData.timestamp 
+        ?? historyData.analyzedAt 
+        ?? historyData.createdAt 
+        ?? historyData.scannedAt
+        ?? companyData?.analyzedAt 
+        ?? companyData?.createdAt 
+        ?? companyData?.cachedAt
+        ?? null;
       
       // Merge history metadata with company data
       return {
-        id: domain,
-        domain: domain,
-        companyName: companyData?.companyName || historyData.companyName || domain,
-        score: companyData?.greenScore ?? historyData.greenScore ?? historyData.ecoScore ?? historyData.score ?? 0,
+        id: rawDomainId,
+        domain: normalizedDomain, // Use normalized domain for display
+        companyName: companyData?.companyName || historyData.companyName || normalizedDomain,
+        score: greenScore,
         grade: companyData?.ecoGrade ?? historyData.ecoGrade ?? historyData.grade ?? 'N/A',
         summary: companyData?.summary ?? historyData.summary ?? '',
-        timestamp: historyData.timestamp ?? companyData?.analyzedAt ?? companyData?.createdAt ?? null,
+        timestamp: timestamp,
         sources: Array.isArray(companyData?.sources) ? companyData.sources : Array.isArray(historyData?.sources) ? historyData.sources : [],
         breakdown: companyData?.breakdown ?? historyData.breakdown,
-        riskReport: companyData ? mapCompanyDataToRiskReport(companyData, domain) : undefined,
+        riskReport: companyData ? mapCompanyDataToRiskReport(companyData, normalizedDomain) : undefined,
       };
     });
     

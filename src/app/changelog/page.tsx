@@ -6,6 +6,35 @@ import { Changelog } from '@/components/ui/timeline';
 
 const timelineData = [
   {
+    title: 'v2.4.0',
+    content: (
+      <div className="space-y-4 text-foreground/90">
+        <div className="space-y-2">
+          <p className="text-sm md:text-base text-muted-foreground">Not because the data was wrong, but because <strong>I was measuring the wrong thing</strong>. v2.4.0 replaces the old ESG-focused score with a purpose-built environmental risk engine: the GreenScore.</p>
+          <ul className="list-disc list-inside text-sm md:text-base text-muted-foreground space-y-1">
+            <li>Replaced the aggregated ESG "Eco-Score" with the GreenScore — a 0–100 risk assessment focused solely on environmental events.</li>
+            <li>New 6-factor scoring model (impact, severity, credibility, recency, scope, confidence) with log-compressed aggregation to prevent small positives from masking severe harms.</li>
+            <li>Environmental Risk Reports are now stored under <code>environmentalRiskReport</code> and include per-event contribution percentages and the top 3 events that drive the score.</li>
+            <li>Search & analysis engine now targets environmental news and regulatory filings; deeper search depth and more relevant queries for finding real incidents.</li>
+            <li>Cache migration: old cache entries using the legacy format are invalidated automatically to avoid stale/incompatible data.</li>
+            <li>UI overhaul: removed ESG breakdowns and letter grades; added GreenScore circle, simple risk verdict badge, a concise score summary, and a top-3 events list with links.</li>
+          </ul>
+        </div>
+        <div className="flex items-center gap-3">
+          <Link
+            href="https://risithcha.com/blog/ecoveridian-v240"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex"
+          >
+            <Button size="sm" className="rounded-full px-4">Read the deep dive</Button>
+          </Link>
+          <span className="text-xs md:text-sm text-muted-foreground">Jan 7, 2026</span>
+        </div>
+      </div>
+    ),
+  },
+  {
     title: 'v2.3.0',
     content: (
       <div className="space-y-4 text-foreground/90">
