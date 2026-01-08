@@ -26,7 +26,7 @@ export function NavBar({ items, className, variant = 'floating' }: NavBarProps) 
   const [activeTab, setActiveTab] = useState(fallbackActive);
 
   useEffect(() => {
-    if (!items.length) return;
+    if (!items.length || !pathname) return;
 
     const match = items.find((item) =>
       pathname === item.url || pathname.startsWith(`${item.url}/`),

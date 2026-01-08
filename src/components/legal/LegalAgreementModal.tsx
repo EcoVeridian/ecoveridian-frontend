@@ -20,7 +20,7 @@ export default function LegalAgreementModal() {
   const [isOpen, setIsOpen] = useState(false);
 
   // Check if current route is protected
-  const isProtectedRoute = PROTECTED_ROUTES.some(route => pathname.startsWith(route));
+  const isProtectedRoute = pathname ? PROTECTED_ROUTES.some((route: string) => pathname.startsWith(route)) : false;
 
   useEffect(() => {
     // Only check legal agreements if:
