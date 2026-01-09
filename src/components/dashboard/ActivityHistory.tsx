@@ -7,8 +7,9 @@ import {
   GlobeAltIcon,
   ClockIcon,
   ChevronRightIcon,
+  TrashIcon,
 } from '@heroicons/react/24/outline';
-import { getUserDashboardData } from '@/lib/dashboard';
+import { getUserDashboardData, deleteReport } from '@/lib/dashboard';
 import type { AnalysisHistory } from '@/types/dashboard';
 import EnvironmentalRiskReportModal from './EnvironmentalRiskReportModal';
 import CompanyLogo from '@/components/common/CompanyLogo';
@@ -28,6 +29,22 @@ export default function ActivityHistory() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedAnalysis(null);
+  };
+
+  const handleDeleteReport = async (e: React.MouseEvent, reportId: string) => {
+    e.stopPropagation(); // Prevent row click from opening modal
+    
+    if (!confirm('Are you sure you want to delete this report? This action cannot be undone.')) {
+      return;
+    }
+
+    const success = await deleteReport(reportId);
+    if (success) {
+      // Remove the report from local state
+      setHistory(prev => prev.filter(item => item.id !== reportId));
+    } else {
+      alert('Failed to delete report. Please try again.');
+    }
   };
 
   useEffect(() => {
@@ -151,7 +168,16 @@ export default function ActivityHistory() {
                       </div>
                     </td>
                     <td className="py-4 px-4 text-right">
-                      <ChevronRightIcon className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors inline-block" />
+                      <div className="flex items-center justify-end gap-2">
+                        <button
+                          onClick={(e) => handleDeleteReport(e, item.id)}
+                          className="p-1.5 rounded-md text-muted-foreground hover:text-red-500 hover:bg-red-500/10 transition-colors"
+                          title="Delete report"
+                        >
+                          <TrashIcon className="w-4 h-4" />
+                        </button>
+                        <ChevronRightIcon className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+                      </div>
                     </td>
                   </tr>
                 ))}

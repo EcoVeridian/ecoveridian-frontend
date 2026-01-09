@@ -1,5 +1,5 @@
 import { db, auth } from '@/lib/firebase';
-import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
+import { doc, getDoc, collection, getDocs, deleteDoc, updateDoc, increment } from 'firebase/firestore';
 import { DEFAULT_STATS } from '@/types/dashboard';
 import type { DashboardData, DashboardStats, AnalysisHistory, EnvironmentalRiskReport } from '@/types/dashboard';
 
@@ -217,4 +217,39 @@ export async function getUserDashboardData(): Promise<DashboardData | null> {
 
 // Keep legacy export for backwards compatibility
 export const fetchDashboardData = getUserDashboardData;
+
+/**
+ * Delete a report from the user's history
+ * @param reportId The domain ID of the report to delete (e.g., "amazon_com")
+ */
+export async function deleteReport(reportId: string): Promise<boolean> {
+  const user = auth.currentUser;
+  if (!user) {
+    console.error('No authenticated user');
+    return false;
+  }
+
+  try {
+    // Delete the report from user's history subcollection
+    const historyDocRef = doc(db, 'users', user.uid, 'history', reportId);
+    await deleteDoc(historyDocRef);
+
+    // Try to update user stats (decrement totalSitesAnalyzed)
+    // This may fail if security rules don't allow it, but the delete is the main operation
+    try {
+      const userDocRef = doc(db, 'users', user.uid);
+      await updateDoc(userDocRef, {
+        totalSitesAnalyzed: increment(-1),
+      });
+    } catch (statsErr) {
+      console.warn('Could not update stats after delete:', statsErr);
+      // Don't fail the whole operation if just stats update fails
+    }
+
+    return true;
+  } catch (err) {
+    console.error('Error deleting report:', err);
+    return false;
+  }
+}
 
