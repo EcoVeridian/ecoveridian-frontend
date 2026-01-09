@@ -2,7 +2,6 @@
 
 import { features } from '@/lib/data';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import Image from 'next/image';
 
 // Features section with alternating text and image layout
 export default function Features() {
