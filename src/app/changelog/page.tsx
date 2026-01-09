@@ -6,6 +6,24 @@ import { Changelog } from '@/components/ui/timeline';
 
 const timelineData = [
   {
+    title: 'v2.4.2',
+    content: (
+      <div className="space-y-4 text-foreground/90">
+        <div className="space-y-2">
+          <p className="text-sm md:text-base text-muted-foreground">Landing page visual refresh with dynamic video content.</p>
+          <ul className="list-disc list-inside text-sm md:text-base text-muted-foreground space-y-1">
+            <li>Replaced static images with engaging video previews for all feature sections</li>
+            <li>Updated descriptions with new features and company updates</li>
+            <li>Added new "Personalized Dashboard" feature section highlighting custom reports and trends</li>
+          </ul>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="text-xs md:text-sm text-muted-foreground">Jan 9, 2026</span>
+        </div>
+      </div>
+    ),
+  },
+  {
     title: 'v2.4.1',
     content: (
       <div className="space-y-4 text-foreground/90">

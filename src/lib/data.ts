@@ -6,14 +6,14 @@ export const features = [
       'Our advanced algorithms analyze companies to generate a comprehensive sustainability score, giving you instant insights.',
   },
   {
-    title: 'Comprehensive Company Scan',
-    description:
-      'Go beyond the surface. EcoVeridian scans companies for data on energy efficiency, waste reduction, supply chain, and more.',
-  },
-  {
     title: 'Detailed Factor Breakdown',
     description:
-      'Understand every aspect of the score with a detailed breakdown, showing where a company excels and where it can improve.',
+      'Understand every aspect of a company\'s score with a clear, detailed breakdown, highlighting strengths and areas for improvement.',
+  },
+  {
+    title: 'Professional Portfolio',
+    description:
+      'Track your sustainability impact and insights in one place. See your custom dashboard with personalized reports, trends, and settings.',
   },
 ];
 
@@ -22,7 +22,7 @@ export const faqs = [
   {
     question: 'What is EcoVeridian?',
     answer:
-      "EcoVeridian is a browser extension and platform that generates comprehensive environmental risk reports for companies. By scanning recent news articles and independent reports, we provide a GreenScore (0-100) that indicates a company's environmental risk level. Our dashboard lets you track all your analyzed companies, view detailed reports with key articles, event breakdowns, and actionable insights to help you make more informed, sustainability-conscious decisions.",
+      "EcoVeridian is a browser extension and platform that generates comprehensive environmental risk reports for companies. By scanning recent news articles and independent reports, we provide a GreenScore that indicates a company's environmental risk level. Our dashboard lets you track all your analyzed companies, view detailed reports with key articles, event breakdowns, and actionable insights to help you make more informed, sustainability-conscious decisions.",
   },
   {
     question: 'How is the sustainability score calculated?',

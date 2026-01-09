@@ -15,8 +15,9 @@ export default function Features() {
             const isEven = index % 2 === 0;
             return (
               <FeatureItem
-                key={feature.title}
+                key={index}
                 feature={feature}
+                index={index}
                 isEven={isEven}
               />
             );
@@ -29,12 +30,21 @@ export default function Features() {
 
 function FeatureItem({
   feature,
+  index,
   isEven,
 }: {
   feature: { title: string; description: string };
+  index: number;
   isEven: boolean;
 }) {
   const { ref, isVisible } = useScrollAnimation();
+
+  // Video sources for each feature by index
+  const videoSources = [
+    '/Video Scan 1.mp4',
+    '/Video Scan 2.mp4',
+    '/Video Scan 3.mp4',
+  ];
 
   return (
     <div
@@ -55,32 +65,14 @@ function FeatureItem({
 
       {/* Visual placeholder */}
       <div className={isEven ? '' : 'lg:order-1'}>
-        <div className={`rounded-2xl border border-border bg-secondary/20 flex items-center justify-center eco-card-hover overflow-hidden ${
-          feature.title === 'Comprehensive Company Scan' ? 'w-fit mx-auto' : 'aspect-video'
-        }`}>
-          {feature.title === 'Powerful Score Generation' ? (
-            <Image 
-              src="/powerfulsc.png"
-              alt="Powerful Score Generation"
-              width={1920}
-              height={1080}
-              className="w-full h-full object-cover"
-              priority
-            />
-          ) : feature.title === 'Comprehensive Company Scan' ? (
-            <Image 
-              src="/Comprehensivecompanyscan.png"
-              alt="Comprehensive Company Scan"
-              width={600}
-              height={800}
-              className="w-auto h-[400px] max-w-full"
-            />
-          ) : feature.title === 'Detailed Factor Breakdown' ? (
-            <Image 
-              src="/Detailedfactorbreakdown.png"
-              alt="Detailed Factor Breakdown"
-              width={1920}
-              height={1080}
+        <div className={`rounded-2xl border border-border bg-secondary/20 flex items-center justify-center eco-card-hover overflow-hidden aspect-video`}>
+          {videoSources[index] ? (
+            <video 
+              src={videoSources[index]}
+              autoPlay
+              muted
+              loop
+              playsInline
               className="w-full h-full object-cover"
             />
           ) : (
