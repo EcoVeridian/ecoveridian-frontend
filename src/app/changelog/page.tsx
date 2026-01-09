@@ -6,6 +6,24 @@ import { Changelog } from '@/components/ui/timeline';
 
 const timelineData = [
   {
+    title: 'v2.4.1',
+    content: (
+      <div className="space-y-4 text-foreground/90">
+        <div className="space-y-2">
+          <p className="text-sm md:text-base text-muted-foreground">UI refinements and bug fixes to improve overall usability.</p>
+          <ul className="list-disc list-inside text-sm md:text-base text-muted-foreground space-y-1">
+            <li>Removed the seasonal snowfall effect and navigation jingle for a cleaner, distraction-free experience</li>
+            <li>Refined interface text with clearer, more consistent descriptions</li>
+            <li>Fixed a scrollbar visibility issue in the Environmental Risk Report modal affecting light mode users</li>
+          </ul>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="text-xs md:text-sm text-muted-foreground">Jan 8, 2026</span>
+        </div>
+      </div>
+    ),
+  },
+  {
     title: 'v2.4.0',
     content: (
       <div className="space-y-4 text-foreground/90">

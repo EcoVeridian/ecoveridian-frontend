@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { playJingleSound } from '@/lib/sounds';
 
 interface NavItem {
   name: string;
@@ -63,7 +62,6 @@ export function NavBar({ items, className, variant = 'floating' }: NavBarProps) 
               href={item.url}
               onClick={() => {
                 setActiveTab(item.name);
-                playJingleSound();
               }}
               aria-current={isActive ? 'page' : undefined}
               className={cn(

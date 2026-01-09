@@ -153,7 +153,7 @@ export default function EnvironmentalRiskReportModal({
             <StepIndicator number={1} label="Company" active />
             <StepIndicator number={2} label="GreenScore" active />
             <StepIndicator number={3} label="Findings" active />
-            <StepIndicator number={4} label="Articles checked" active />
+            <StepIndicator number={4} label="Articles Checked" active />
           </div>
         </div>
 
@@ -371,7 +371,7 @@ export default function EnvironmentalRiskReportModal({
           <section id="report-section-4">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">4</div>
-              <h3 className="text-lg font-semibold">Articles we checked</h3>
+              <h3 className="text-lg font-semibold">Articles Checked</h3>
             </div>
             
             <Card className="p-0 overflow-hidden">
