@@ -9,14 +9,37 @@ import {
   ChevronRightIcon,
   TrashIcon,
 } from '@heroicons/react/24/outline';
-import { getUserDashboardData, deleteReport } from '@/lib/dashboard';
+import { getUserDashboardData } from '@/lib/dashboard';
 import type { AnalysisHistory } from '@/types/dashboard';
 import EnvironmentalRiskReportModal from './EnvironmentalRiskReportModal';
 import CompanyLogo from '@/components/common/CompanyLogo';
 
+// LocalStorage key for hidden reports
+const HIDDEN_REPORTS_KEY = 'ecoveridian_hidden_reports';
+
+// Helper functions for managing hidden reports in localStorage
+const getHiddenReports = (): string[] => {
+  if (typeof window === 'undefined') return [];
+  try {
+    const stored = localStorage.getItem(HIDDEN_REPORTS_KEY);
+    return stored ? JSON.parse(stored) : [];
+  } catch {
+    return [];
+  }
+};
+
+const addHiddenReport = (reportId: string): void => {
+  const hidden = getHiddenReports();
+  if (!hidden.includes(reportId)) {
+    hidden.push(reportId);
+    localStorage.setItem(HIDDEN_REPORTS_KEY, JSON.stringify(hidden));
+  }
+};
+
 export default function ActivityHistory() {
   const { user } = useAuth();
   const [history, setHistory] = useState<AnalysisHistory[]>([]);
+  const [hiddenReports, setHiddenReports] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedAnalysis, setSelectedAnalysis] = useState<AnalysisHistory | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,21 +54,23 @@ export default function ActivityHistory() {
     setSelectedAnalysis(null);
   };
 
-  const handleDeleteReport = async (e: React.MouseEvent, reportId: string) => {
+  const handleHideReport = (e: React.MouseEvent, reportId: string) => {
     e.stopPropagation(); // Prevent row click from opening modal
     
-    if (!confirm('Are you sure you want to delete this report? This action cannot be undone.')) {
+    if (!confirm('Are you sure you want to hide this report?')) {
       return;
     }
 
-    const success = await deleteReport(reportId);
-    if (success) {
-      // Remove the report from local state
-      setHistory(prev => prev.filter(item => item.id !== reportId));
-    } else {
-      alert('Failed to delete report. Please try again.');
-    }
+    // Add to hidden reports in localStorage
+    addHiddenReport(reportId);
+    // Update local state to hide the report
+    setHiddenReports(prev => [...prev, reportId]);
   };
+
+  // Load hidden reports from localStorage on mount
+  useEffect(() => {
+    setHiddenReports(getHiddenReports());
+  }, []);
 
   useEffect(() => {
     const load = async () => {
@@ -103,6 +128,9 @@ export default function ActivityHistory() {
     </div>
   );
 
+  // Filter out hidden reports
+  const visibleHistory = history.filter(item => !hiddenReports.includes(item.id));
+
   return (
     <div className="space-y-8">
       {/* History Table */}
@@ -114,7 +142,7 @@ export default function ActivityHistory() {
 
         {loading ? (
           <TableSkeleton />
-        ) : history.length === 0 ? (
+        ) : visibleHistory.length === 0 ? (
           <div className="text-center py-12">
             <GlobeAltIcon className="w-16 h-16 text-muted-foreground mx-auto mb-4 opacity-50" />
             <p className="text-muted-foreground mb-2">No analysis history yet</p>
@@ -140,7 +168,7 @@ export default function ActivityHistory() {
                 </tr>
               </thead>
               <tbody>
-                {history.map((item) => (
+                {visibleHistory.map((item) => (
                   <tr
                     key={item.id}
                     onClick={() => handleRowClick(item)}
@@ -170,9 +198,9 @@ export default function ActivityHistory() {
                     <td className="py-4 px-4 text-right">
                       <div className="flex items-center justify-end gap-2">
                         <button
-                          onClick={(e) => handleDeleteReport(e, item.id)}
+                          onClick={(e) => handleHideReport(e, item.id)}
                           className="p-1.5 rounded-md text-muted-foreground hover:text-red-500 hover:bg-red-500/10 transition-colors"
-                          title="Delete report"
+                          title="Hide report"
                         >
                           <TrashIcon className="w-4 h-4" />
                         </button>
