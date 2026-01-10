@@ -6,6 +6,23 @@ import { Changelog } from '@/components/ui/timeline';
 
 const timelineData = [
   {
+    title: 'v2.4.3',
+    content: (
+      <div className="space-y-4 text-foreground/90">
+        <div className="space-y-2">
+          <p className="text-sm md:text-base text-muted-foreground">Dashboard improvements and team page updates.</p>
+          <ul className="list-disc list-inside text-sm md:text-base text-muted-foreground space-y-1">
+            <li>Added delete button for reports in the dashboard, allowing users to remove unwanted analysis history entries</li>
+            <li>Updated team page layout for better visual balance</li>
+          </ul>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="text-xs md:text-sm text-muted-foreground">Jan 10, 2026</span>
+        </div>
+      </div>
+    ),
+  },
+  {
     title: 'v2.4.2',
     content: (
       <div className="space-y-4 text-foreground/90">

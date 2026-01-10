@@ -57,10 +57,6 @@ export default function ActivityHistory() {
   const handleHideReport = (e: React.MouseEvent, reportId: string) => {
     e.stopPropagation(); // Prevent row click from opening modal
     
-    if (!confirm('Are you sure you want to hide this report?')) {
-      return;
-    }
-
     // Add to hidden reports in localStorage
     addHiddenReport(reportId);
     // Update local state to hide the report
