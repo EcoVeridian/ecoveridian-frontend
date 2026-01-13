@@ -6,6 +6,22 @@ import { Changelog } from '@/components/ui/timeline';
 
 const timelineData = [
   {
+    title: 'v2.4.4',
+    content: (
+      <div className="space-y-4 text-foreground/90">
+        <div className="space-y-2">
+          <p className="text-sm md:text-base text-muted-foreground">Team page layout refinements.</p>
+          <ul className="list-disc list-inside text-sm md:text-base text-muted-foreground space-y-1">
+            <li>Updated team page layout for better visual balance and improved grid responsiveness</li>
+          </ul>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="text-xs md:text-sm text-muted-foreground">Jan 12, 2026</span>
+        </div>
+      </div>
+    ),
+  },
+  {
     title: 'v2.4.3',
     content: (
       <div className="space-y-4 text-foreground/90">

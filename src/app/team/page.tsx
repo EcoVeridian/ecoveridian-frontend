@@ -20,12 +20,22 @@ const teamMembers = [
     website: 'https://risithcha.com/',
   },
   {
-    name: 'Ritvik Rajkumar',
+    name: 'Santhosh Ilaiyaraja',
     role: 'Co-Founder & Lead Interface Architect',
     description:
-      'Designs and optimizes the platform\'s visual and interaction layer, overseeing interface architecture, component engineering, and end-to-end frontend performance.',
+      'Designs and optimizes the platform\'s visual layer. Oversees interface architecture, component engineering, and end-to-end frontend performance.',
+    imageUrl: '/santhosh-portrait.jpg',
+    alt: 'Portrait of Santhosh Ilaiyaraja',
+    linkedin: 'https://www.linkedin.com/in/santhosh-ilaiyaraja',
+    email: 'mailto:santhoshilaiyaraja@gmail.com',
+  },
+  {
+    name: 'Ritvik Rajkumar',
+    role: 'Co-Founder & Lead Product Engineer',
+    description:
+      'Drives product vision across user flows and feature design. Focuses on usability, interaction patterns, prototyping, and product flows across React/Tailwind.',
     imageUrl: '/ritvik-portrait.jpg',
-    alt: 'Portrait of Ritvik',
+    alt: 'Portrait of Ritvik Rajkumar',
     linkedin: 'https://www.linkedin.com/in/ritvik-sujan-rajkumar',
     email: 'mailto:rajkumarritvik1@gmail.com',
   },
@@ -60,8 +70,8 @@ export default function TeamPage() {
               We are a passionate team dedicated to making a difference.
             </p>
           </div>
-          {/* Team member grid (1-2 columns, centered) */}
-          <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 max-w-4xl mx-auto">
+          {/* Team member grid (1-3 columns, centered) */}
+          <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
             {teamMembers.map((member) => (
               <Card
                 key={member.name}
