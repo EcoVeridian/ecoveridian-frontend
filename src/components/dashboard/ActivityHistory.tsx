@@ -22,7 +22,15 @@ const getHiddenReports = (): string[] => {
   if (typeof window === 'undefined') return [];
   try {
     const stored = localStorage.getItem(HIDDEN_REPORTS_KEY);
-    return stored ? JSON.parse(stored) : [];
+    if (!stored) return [];
+    const parsed = JSON.parse(stored);
+    // Handle new format (array of objects) - convert back to simple strings
+    if (Array.isArray(parsed) && parsed.length > 0 && typeof parsed[0] === 'object') {
+      const converted: string[] = parsed.map((entry: any) => entry.reportId);
+      localStorage.setItem(HIDDEN_REPORTS_KEY, JSON.stringify(converted));
+      return converted;
+    }
+    return parsed as string[];
   } catch {
     return [];
   }

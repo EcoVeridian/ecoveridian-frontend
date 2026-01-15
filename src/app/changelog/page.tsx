@@ -10,13 +10,15 @@ const timelineData = [
     content: (
       <div className="space-y-4 text-foreground/90">
         <div className="space-y-2">
-          <p className="text-sm md:text-base text-muted-foreground">Team page layout refinements.</p>
+          <p className="text-sm md:text-base text-muted-foreground">Dashboard bug fixes and improvements.</p>
           <ul className="list-disc list-inside text-sm md:text-base text-muted-foreground space-y-1">
-            <li>Updated team page layout for better visual balance and improved grid responsiveness</li>
+            <li>Fixed hidden reports not persisting correctly in localStorage</li>
+            <li>Improved dashboard visual consistency and layout refinements</li>
+            <li>Added backwards compatibility for legacy hidden reports data format</li>
           </ul>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-xs md:text-sm text-muted-foreground">Jan 12, 2026</span>
+          <span className="text-xs md:text-sm text-muted-foreground">Jan 15, 2026</span>
         </div>
       </div>
     ),
