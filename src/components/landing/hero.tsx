@@ -96,7 +96,7 @@ export default function Hero() {
             variant="outline"
             size="lg"
             onClick={handleDownloadClick}
-            className="rounded-full px-8 h-12 text-base font-medium w-full sm:w-auto border-input hover:bg-secondary/50 hover-lift"
+            className="rounded-full px-8 h-12 text-base font-medium w-full sm:w-auto border border-input bg-background hover:bg-primary/10 hover:border-primary/50 transition-all duration-300"
           >
             <ArrowDownTrayIcon className="mr-2 w-4 h-4" /> Download Extension
           </Button>

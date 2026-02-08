@@ -155,7 +155,7 @@ export default function IconWave() {
                 opacity: opacity,
               }}
             >
-              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-background/80 backdrop-blur-sm border-2 border-primary/20 shadow-[0_8px_16px_rgba(0,0,0,0.1)] flex items-center justify-center transition-all duration-300 ease-out hover:border-primary/50 hover:scale-110 hover:shadow-[0_12px_24px_rgba(99,102,241,0.2)]">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-background/80 backdrop-blur-sm border-2 border-primary/20 shadow-[0_8px_16px_rgba(0,0,0,0.1)] flex items-center justify-center transition-all duration-300 ease-out hover:border-primary/50 hover:scale-110 hover:shadow-[0_12px_24px_hsl(var(--primary)/0.2)]">
                 <Icon className="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
               </div>
             </div>

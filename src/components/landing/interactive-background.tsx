@@ -121,22 +121,23 @@ export default function InteractiveBackground() {
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         
-        // Add glow
+        // Add glow (Electric Leaf, toned down)
         const gradient = ctx.createRadialGradient(
           particle.x, particle.y, 0,
           particle.x, particle.y, particle.size * 3
         );
-        gradient.addColorStop(0, `rgba(93, 95, 239, ${particle.opacity})`);
-        gradient.addColorStop(0.5, `rgba(93, 95, 239, ${particle.opacity * 0.3})`);
-        gradient.addColorStop(1, 'rgba(93, 95, 239, 0)');
-        
+        // Core glow use lower overall alpha so the network reads organic
+        gradient.addColorStop(0, `rgba(74, 222, 128, ${particle.opacity * 0.4})`);
+        gradient.addColorStop(0.5, `rgba(74, 222, 128, ${particle.opacity * 0.18})`);
+        gradient.addColorStop(1, 'rgba(74, 222, 128, 0)');
+
         ctx.fillStyle = gradient;
         ctx.fill();
-        
-        // Draw solid center
+
+        // Draw solid center (slightly richer leaf)
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size * 0.5, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(93, 95, 239, ${particle.opacity * 1.2})`;
+        ctx.fillStyle = `rgba(74, 222, 128, ${Math.min(particle.opacity * 0.9, 0.85)})`;
         ctx.fill();
 
         // Draw connections to nearby particles with stronger visibility
@@ -149,8 +150,9 @@ export default function InteractiveBackground() {
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(otherParticle.x, otherParticle.y);
-            const opacity = (1 - distance / 150) * 0.35; // Higher opacity
-            ctx.strokeStyle = `rgba(93, 95, 239, ${opacity})`;
+            // Subtle emerald lines
+            const opacity = (1 - distance / 150) * 0.2; // max ~0.2
+            ctx.strokeStyle = `rgba(16, 185, 129, ${opacity})`;
             ctx.lineWidth = 1; // Thicker lines
             ctx.stroke();
           }

@@ -99,8 +99,8 @@ export default function InteractiveBackground() {
 
     // Animation loop
     const animate = (timestamp: number) => {
-      // Fade effect instead of clear for trails
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+      // Fade effect instead of clear for trails (subtle deep-jungle tint)
+      ctx.fillStyle = 'rgba(2, 44, 34, 0.06)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       const time = timestamp * 0.001;
@@ -134,24 +134,24 @@ export default function InteractiveBackground() {
             const y = node.y + dy * t;
             
             const size = (3 + flow * 4) * (1 + mouseInfluence);
-            const hue = 250 + mouseInfluence * 30;
-            const opacity = (0.3 + flow * 0.5) * (1 + mouseInfluence * 0.5);
-            
-            // Glow
+            const hue = 142 + mouseInfluence * 25;
+            const opacity = (0.25 + flow * 0.45) * (1 + mouseInfluence * 0.45);
+
+            // Glow (emerald/leaf tones)
             const glow = ctx.createRadialGradient(x, y, 0, x, y, size * 3);
-            glow.addColorStop(0, `hsla(${hue}, 90%, 70%, ${opacity})`);
-            glow.addColorStop(0.5, `hsla(${hue}, 90%, 65%, ${opacity * 0.3})`);
-            glow.addColorStop(1, `hsla(${hue}, 90%, 60%, 0)`);
-            
+            glow.addColorStop(0, `hsla(${hue}, 75%, 56%, ${opacity})`);
+            glow.addColorStop(0.5, `hsla(${hue}, 75%, 52%, ${opacity * 0.28})`);
+            glow.addColorStop(1, `hsla(${hue}, 75%, 48%, 0)`);
+
             ctx.beginPath();
             ctx.arc(x, y, size * 3, 0, Math.PI * 2);
             ctx.fillStyle = glow;
             ctx.fill();
-            
+
             // Core
             ctx.beginPath();
             ctx.arc(x, y, size * 0.5, 0, Math.PI * 2);
-            ctx.fillStyle = `hsla(${hue + 10}, 95%, 85%, ${opacity * 1.5})`;
+            ctx.fillStyle = `hsla(${hue + 8}, 85%, 72%, ${opacity * 1.3})`;
             ctx.fill();
           }
         });
@@ -167,32 +167,32 @@ export default function InteractiveBackground() {
         const mouseInfluence = Math.max(0, 1 - mouseDist / 250);
         
         const radius = node.radius * pulse * (1 + mouseInfluence * 0.5);
-        const hue = 250 + mouseInfluence * 25;
-        
-        // Outer glow rings
+        const hue = 142 + mouseInfluence * 25;
+
+        // Outer glow rings (soft green)
         for (let ring = 3; ring > 0; ring--) {
           const ringGlow = ctx.createRadialGradient(
             node.x, node.y, 0,
             node.x, node.y, radius * (ring * 0.7)
           );
-          ringGlow.addColorStop(0, `hsla(${hue}, 85%, 65%, ${0.15 * ring})`);
-          ringGlow.addColorStop(1, `hsla(${hue}, 85%, 60%, 0)`);
-          
+          ringGlow.addColorStop(0, `hsla(${hue}, 75%, 56%, ${0.12 * ring})`);
+          ringGlow.addColorStop(1, `hsla(${hue}, 75%, 48%, 0)`);
+
           ctx.beginPath();
           ctx.arc(node.x, node.y, radius * (ring * 0.7), 0, Math.PI * 2);
           ctx.fillStyle = ringGlow;
           ctx.fill();
         }
-        
+
         // Core node
         const coreGradient = ctx.createRadialGradient(
           node.x, node.y, 0,
           node.x, node.y, radius * 0.6
         );
-        coreGradient.addColorStop(0, `hsla(${hue + 15}, 95%, 85%, 0.9)`);
-        coreGradient.addColorStop(0.7, `hsla(${hue}, 90%, 70%, 0.7)`);
-        coreGradient.addColorStop(1, `hsla(${hue}, 85%, 60%, 0.3)`);
-        
+        coreGradient.addColorStop(0, `hsla(${hue + 10}, 85%, 72%, 0.92)`);
+        coreGradient.addColorStop(0.7, `hsla(${hue}, 75%, 56%, 0.72)`);
+        coreGradient.addColorStop(1, `hsla(${hue}, 75%, 48%, 0.28)`);
+
         ctx.beginPath();
         ctx.arc(node.x, node.y, radius * 0.6, 0, Math.PI * 2);
         ctx.fillStyle = coreGradient;
@@ -211,16 +211,16 @@ export default function InteractiveBackground() {
         
         if (lifeRatio <= 0) return false;
         
-        // Draw trail particle with comet effect
-        const hue = 270 - lifeRatio * 30;
+        // Draw trail particle with comet effect (green-tinged)
+        const hue = 142 - lifeRatio * 15;
         const trailGradient = ctx.createRadialGradient(
           trail.x, trail.y, 0,
           trail.x, trail.y, trail.size * 4
         );
-        trailGradient.addColorStop(0, `hsla(${hue}, 90%, 75%, ${lifeRatio * 0.9})`);
-        trailGradient.addColorStop(0.5, `hsla(${hue}, 90%, 65%, ${lifeRatio * 0.4})`);
-        trailGradient.addColorStop(1, `hsla(${hue}, 90%, 55%, 0)`);
-        
+        trailGradient.addColorStop(0, `hsla(${hue}, 75%, 56%, ${lifeRatio * 0.82})`);
+        trailGradient.addColorStop(0.5, `hsla(${hue}, 75%, 52%, ${lifeRatio * 0.35})`);
+        trailGradient.addColorStop(1, `hsla(${hue}, 75%, 48%, 0)`);
+
         ctx.beginPath();
         ctx.arc(trail.x, trail.y, trail.size * 4, 0, Math.PI * 2);
         ctx.fillStyle = trailGradient;

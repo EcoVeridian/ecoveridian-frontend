@@ -98,8 +98,8 @@ export default function Snowfall() {
     initSnowflakes();
 
     // Theme-aware colors
-    const snowflakeColor = resolvedTheme === 'dark' ? 'white' : '#1a1a2e';
-    const glowColor = resolvedTheme === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(26, 26, 46, 0.3)';
+    const snowflakeColor = resolvedTheme === 'dark' ? '#f1f5f9' : '#064e3b';
+    const glowColor = resolvedTheme === 'dark' ? 'rgba(241, 245, 249, 0.3)' : 'rgba(6, 78, 59, 0.2)';
 
     // Draw a single snowflake (6-pointed star shape)
     const drawSnowflake = (flake: Snowflake, screenY: number) => {

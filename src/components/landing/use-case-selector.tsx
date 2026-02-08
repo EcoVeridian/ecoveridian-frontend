@@ -41,7 +41,7 @@ export default function UseCaseSelector() {
                 className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-300 ${
                   selectedIndex === index
                     ? 'bg-primary text-primary-foreground font-medium scale-hover'
-                    : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
+                    : 'text-muted-foreground hover:bg-primary/10 hover:text-foreground'
                 }`}
               >
                 {faq.question}

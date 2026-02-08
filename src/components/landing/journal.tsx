@@ -58,7 +58,7 @@ export default function Journal() {
               rel={entry.external ? "noopener noreferrer" : undefined}
               className="group block"
             >
-              <div className="rounded-2xl border border-border bg-background overflow-hidden transition-all duration-300 eco-card-hover h-full flex flex-col">
+              <div className="rounded-2xl border border-border bg-background overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-primary/30 h-full flex flex-col">
                 {/* Image placeholder */}
                 <div className="aspect-video bg-gradient-to-br from-primary/20 via-primary/10 to-secondary relative overflow-hidden">
                   <div className="absolute inset-0 flex items-center justify-center">

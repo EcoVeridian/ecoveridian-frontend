@@ -176,7 +176,7 @@ export default function ActivityHistory() {
                   <tr
                     key={item.id}
                     onClick={() => handleRowClick(item)}
-                    className="border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer group"
+                    className="border-b border-border hover:bg-primary/5 transition-colors cursor-pointer group"
                   >
                     <td className="py-4 px-4">
                       <div className="flex items-center gap-3">

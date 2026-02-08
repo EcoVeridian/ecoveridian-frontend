@@ -6,42 +6,43 @@
 /* CSS custom properties for theming */
 @layer base {
   :root {
-    /* Light mode colors */
-    --background: 220 17% 97%;
-    --foreground: 222 47% 11%;
-    --card: 220 17% 97%;
-    --card-foreground: 222 47% 11%;
-    --primary: 242 76% 58%; /* Vivid purple-blue */
-    --primary-foreground: 220 17% 97%;
-    --secondary: 220 14% 90%;
-    --secondary-foreground: 222 47% 11%;
-    --muted: 220 14% 93%;
-    --muted-foreground: 222 47% 41%;
-    --accent: 220 14% 90%;
-    --accent-foreground: 222 47% 11%;
-    --border: 220 14% 90%;
-    --input: 220 14% 90%;
-    --ring: 242 76% 58%;
+    /* Light mode colors - Grounded Innovation perspective */
+    --background: 152 31% 95%; /* Subtle sage/pale green */
+    --foreground: 164 86% 18%; /* Deep forest for text */
+    --card: 164 30% 92%; /* Soft light green-gray */
+    --card-foreground: 164 86% 18%; /* Deep forest text */
+    --primary: 142 61% 48%; /* Slightly darker Electric Leaf for light mode contrast */
+    --primary-foreground: 164 30% 92%; /* Light sage for button text bg */
+    --secondary: 176 22% 80%; /* Muted teal-gray */
+    --secondary-foreground: 164 86% 18%; /* Deep forest */
+    --muted: 152 15% 88%; /* Pale neutral */
+    --muted-foreground: 164 20% 45%; /* Muted dark green */
+    --accent: 142 61% 48%; /* Electric Leaf */
+    --accent-foreground: 164 30% 92%; /* Light sage */
+    --border: 176 22% 85%; /* Soft teal border */
+    --input: 176 22% 85%; /* Light teal input */
+    --ring: 142 61% 48%; /* Electric Leaf */
     --radius: 0.5rem;
   }
 
   /* Dark mode overrides (slightly darker) */
   .dark {
-    --background: 222 47% 8%;
-    --foreground: 220 17% 97%;
-    --card: 222 47% 8%;
-    --card-foreground: 220 17% 97%;
-    --primary: 242 76% 58%;
-    --primary-foreground: 220 17% 97%;
-    --secondary: 220 14% 15%;
-    --secondary-foreground: 220 17% 97%;
-    --muted: 220 14% 12%;
-    --muted-foreground: 220 17% 80%;
-    --accent: 220 14% 15%;
-    --accent-foreground: 220 17% 97%;
-    --border: 220 14% 20%;
-    --input: 220 14% 20%;
-    --ring: 242 76% 58%;
+    /* Grounded Innovation - Deep green night with organic neutrals */
+    --background: 166 20% 9%; /* #022c22 Deep Jungle Night */
+    --foreground: 209 39% 96%; /* #f1f5f9 Mist White for headings */
+    --card: 164 86% 16%; /* #064e3b Forest Midnight for surfaces */
+    --card-foreground: 209 39% 96%; /* Mist White */
+    --primary: 142 69% 58%; /* #4ade80 Electric Leaf for CTAs */
+    --primary-foreground: 164 86% 16%; /* #064e3b Deep Forest for button text */
+    --secondary: 164 86% 16%; /* Structure */
+    --secondary-foreground: 213 27% 84%; /* #cbd5e1 Stone for body text */
+    --muted: 166 20% 12%;
+    --muted-foreground: 213 27% 84%;
+    --accent: 142 69% 58%; /* same as primary energy */
+    --accent-foreground: 164 86% 16%;
+    --border: 176 61% 19%; /* #134e4a Teal Deep */
+    --input: 176 61% 19%;
+    --ring: 142 69% 58%;
   }
 }
 
@@ -92,7 +93,11 @@
 
   /* Glassmorphism utility */
   .glass {
-    @apply bg-background/80 backdrop-blur-md border-b border-border;
+    background: rgba(6, 78, 59, 0.6); /* green-tinted glass */
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(19, 78, 74, 0.35);
+    color: hsl(var(--card-foreground));
   }
 
   /* Modal scrollbar styling - always visible in light mode */

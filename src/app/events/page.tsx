@@ -28,7 +28,7 @@ function EventCard({ event }: { event: typeof eventsData[0] }) {
   return (
     <div
       ref={ref}
-      className={`border border-border rounded-2xl p-6 bg-card transition-all duration-300 hover:scale-[1.03] hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/20 hover:border-primary/50 ${
+      className={`border border-border rounded-2xl p-6 bg-card transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/25 hover:border-primary/40 ${
         isVisible ? 'scroll-animate-visible' : 'scroll-animate'
       }`}
     >

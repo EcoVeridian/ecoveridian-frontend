@@ -399,7 +399,7 @@ export default function EnvironmentalRiskReportModal({
                   </thead>
                   <tbody>
                     {report.key_articles.map((article, index) => (
-                      <tr key={index} className="border-b border-border hover:bg-secondary/30 transition-colors">
+                      <tr key={index} className="border-b border-border hover:bg-primary/5 transition-colors">
                         <td className="py-4 px-4 max-w-xs">
                           <p className="font-medium line-clamp-2">{article.title}</p>
                         </td>
@@ -458,67 +458,67 @@ export default function EnvironmentalRiskReportModal({
         /* Light theme (default): always visible, high-contrast scrollbars */
         .modal-table-scroll {
           scrollbar-width: auto; /* Firefox: always show, default width */
-          scrollbar-color: #222 #cfcfcf; /* thumb color, track color */
+          scrollbar-color: hsl(var(--muted-foreground)) hsl(var(--muted)); /* thumb color, track color */
           overscroll-behavior: contain;
         }
         .modal-table-scroll::-webkit-scrollbar {
           width: 14px; /* vertical scrollbar width */
           height: 14px; /* horizontal scrollbar height */
-          background: #cfcfcf;
+          background: hsl(var(--muted));
         }
         .modal-table-scroll::-webkit-scrollbar-track {
-          background: #cfcfcf;
+          background: hsl(var(--muted));
         }
         .modal-table-scroll::-webkit-scrollbar-thumb {
-          background: #222 !important;
+          background: hsl(var(--muted-foreground)) !important;
           border-radius: 8px;
-          border: 3px solid #cfcfcf;
+          border: 3px solid hsl(var(--muted));
           background-clip: padding-box;
           min-height: 40px;
           min-width: 40px;
           opacity: 1 !important;
-          -webkit-box-shadow: 0 0 2px #000, 0 0 1px #000;
+          -webkit-box-shadow: 0 0 2px hsl(var(--muted-foreground)), 0 0 1px hsl(var(--muted-foreground));
         }
         .modal-table-scroll::-webkit-scrollbar-thumb:hover {
-          background: #222 !important;
+          background: hsl(var(--muted-foreground)) !important;
         }
         .modal-table-scroll::-webkit-scrollbar-corner {
-          background: #cfcfcf;
+          background: hsl(var(--muted));
         }
         /* Fallback for browsers that ignore ::-webkit-scrollbar */
         .modal-table-scroll {
-          scrollbar-face-color: #222;
-          scrollbar-track-color: #cfcfcf;
+          scrollbar-face-color: hsl(var(--muted-foreground));
+          scrollbar-track-color: hsl(var(--muted));
         }
 
         /* Dark theme overrides: use lighter thumb for dark backgrounds.
            Support common dark-theme selectors and prefers-color-scheme. */
         .dark .modal-table-scroll,
         [data-theme="dark"] .modal-table-scroll {
-          scrollbar-color: rgba(255,255,255,0.16) rgba(255,255,255,0.03);
+          scrollbar-color: hsl(var(--muted-foreground) / 0.35) hsl(var(--muted) / 0.08);
         }
         .dark .modal-table-scroll::-webkit-scrollbar-track,
         [data-theme="dark"] .modal-table-scroll::-webkit-scrollbar-track {
-          background: rgba(255,255,255,0.02);
+          background: hsl(var(--muted) / 0.08);
         }
         .dark .modal-table-scroll::-webkit-scrollbar-thumb,
         [data-theme="dark"] .modal-table-scroll::-webkit-scrollbar-thumb {
-          background: rgba(255,255,255,0.12);
+          background: hsl(var(--muted-foreground) / 0.35);
           -webkit-box-shadow: none;
         }
         .dark .modal-table-scroll::-webkit-scrollbar-thumb:hover,
         [data-theme="dark"] .modal-table-scroll::-webkit-scrollbar-thumb:hover {
-          background: rgba(255,255,255,0.18);
+          background: hsl(var(--muted-foreground) / 0.5);
         }
 
         /* Respect user's OS preference as an additional fallback */
         @media (prefers-color-scheme: dark) {
           .modal-table-scroll {
-            scrollbar-color: rgba(255,255,255,0.16) rgba(255,255,255,0.03);
+            scrollbar-color: hsl(var(--muted-foreground) / 0.35) hsl(var(--muted) / 0.08);
           }
-          .modal-table-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
-          .modal-table-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); -webkit-box-shadow: none; }
-          .modal-table-scroll::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.18); }
+          .modal-table-scroll::-webkit-scrollbar-track { background: hsl(var(--muted) / 0.08); }
+          .modal-table-scroll::-webkit-scrollbar-thumb { background: hsl(var(--muted-foreground) / 0.35); -webkit-box-shadow: none; }
+          .modal-table-scroll::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground) / 0.5); }
         }
       `}</style>
     </div>

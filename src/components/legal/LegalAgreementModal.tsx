@@ -135,7 +135,7 @@ export default function LegalAgreementModal() {
           </Button>
           <Button
             onClick={handleAccept}
-            className="rounded-full bg-primary hover:bg-primary/90"
+            className="rounded-full bg-primary hover:brightness-105 hover:shadow-sm"
           >
             I Agree
           </Button>

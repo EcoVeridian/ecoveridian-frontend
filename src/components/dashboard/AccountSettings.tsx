@@ -178,7 +178,7 @@ export default function AccountSettings() {
 
             <div className="space-y-3">
               {/* Light Theme Option */}
-              <label className="flex items-center gap-3 p-3 border border-input rounded-lg cursor-pointer hover:bg-secondary/50 transition-colors">
+              <label className="flex items-center gap-3 p-3 border border-input rounded-lg cursor-pointer hover:bg-primary/5 transition-colors">
                 <input
                   type="radio"
                   name="theme"
@@ -196,7 +196,7 @@ export default function AccountSettings() {
               </label>
 
               {/* Dark Theme Option */}
-              <label className="flex items-center gap-3 p-3 border border-input rounded-lg cursor-pointer hover:bg-secondary/50 transition-colors">
+              <label className="flex items-center gap-3 p-3 border border-input rounded-lg cursor-pointer hover:bg-primary/5 transition-colors">
                 <input
                   type="radio"
                   name="theme"
@@ -214,7 +214,7 @@ export default function AccountSettings() {
               </label>
 
               {/* System Theme Option */}
-              <label className="flex items-center gap-3 p-3 border border-input rounded-lg cursor-pointer hover:bg-secondary/50 transition-colors">
+              <label className="flex items-center gap-3 p-3 border border-input rounded-lg cursor-pointer hover:bg-primary/5 transition-colors">
                 <input
                   type="radio"
                   name="theme"

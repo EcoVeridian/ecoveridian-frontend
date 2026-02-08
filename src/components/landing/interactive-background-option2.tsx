@@ -103,7 +103,7 @@ export default function InteractiveBackground() {
 
         // Calculate dynamic color based on distance to mouse
         const mouseInfluence = Math.max(0, 1 - distance / maxDistance);
-        const baseHue = 250; // Purple base
+        const baseHue = 142; // Green/Electric Leaf base
         const hue = baseHue + particle.hue + (mouseInfluence * 20); // Shift towards blue when near cursor
 
         // Draw particle with dynamic glow
@@ -114,9 +114,9 @@ export default function InteractiveBackground() {
           particle.x, particle.y, 0,
           particle.x, particle.y, glowSize
         );
-        gradient.addColorStop(0, `hsla(${hue}, 85%, 65%, ${particle.opacity})`);
-        gradient.addColorStop(0.4, `hsla(${hue}, 85%, 65%, ${particle.opacity * 0.4})`);
-        gradient.addColorStop(1, `hsla(${hue}, 85%, 65%, 0)`);
+        gradient.addColorStop(0, `hsla(${hue}, 75%, 56%, ${particle.opacity})`);
+        gradient.addColorStop(0.4, `hsla(${hue}, 75%, 56%, ${particle.opacity * 0.4})`);
+        gradient.addColorStop(1, `hsla(${hue}, 75%, 56%, 0)`);
         
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, glowSize, 0, Math.PI * 2);
@@ -126,7 +126,7 @@ export default function InteractiveBackground() {
         // Bright center
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size * 0.6, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${hue}, 90%, 75%, ${particle.opacity * 1.3})`;
+        ctx.fillStyle = `hsla(${hue}, 80%, 62%, ${particle.opacity * 1.3})`;
         ctx.fill();
 
         // Draw flowing connections
@@ -146,16 +146,16 @@ export default function InteractiveBackground() {
             );
             
             const lineInfluence = Math.max(0, 1 - mouseDist / maxDistance);
-            const opacity = (1 - dist / 120) * 0.4 * (1 + lineInfluence * 0.8);
+            const opacity = (1 - dist / 120) * 0.22 * (1 + lineInfluence * 0.8);
             
             // Create gradient line
             const lineGradient = ctx.createLinearGradient(
               particle.x, particle.y,
               otherParticle.x, otherParticle.y
             );
-            lineGradient.addColorStop(0, `hsla(${hue}, 85%, 65%, ${opacity})`);
-            lineGradient.addColorStop(0.5, `hsla(${hue + 10}, 85%, 65%, ${opacity * 1.2})`);
-            lineGradient.addColorStop(1, `hsla(${hue}, 85%, 65%, ${opacity})`);
+            lineGradient.addColorStop(0, `hsla(${hue}, 75%, 56%, ${opacity})`);
+            lineGradient.addColorStop(0.5, `hsla(${hue + 10}, 75%, 56%, ${opacity * 1.2})`);
+            lineGradient.addColorStop(1, `hsla(${hue}, 75%, 56%, ${opacity})`);
             
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);

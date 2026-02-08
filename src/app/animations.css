@@ -35,7 +35,7 @@
     color: hsl(var(--foreground));
   }
   50% {
-    color: hsl(242, 76%, 58%);
+    color: hsl(142, 69%, 58%);
   }
 }
 
@@ -115,16 +115,16 @@
 
 .eco-card-hover:hover {
   transform: scale(1.08) translateY(-20px);
-  box-shadow: 0 30px 60px -15px rgba(99, 102, 241, 0.5),
-              0 20px 40px -10px rgba(99, 102, 241, 0.4),
-              0 0 60px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 30px 60px -15px rgba(74, 222, 128, 0.35),
+              0 20px 40px -10px rgba(74, 222, 128, 0.25),
+              0 0 60px rgba(74, 222, 128, 0.2);
 }
 
 /* Dark mode eco shadow */
 .dark .eco-card-hover:hover {
-  box-shadow: 0 30px 60px -15px rgba(99, 102, 241, 0.6),
-              0 20px 40px -10px rgba(99, 102, 241, 0.5),
-              0 0 70px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 30px 60px -15px rgba(74, 222, 128, 0.4),
+              0 20px 40px -10px rgba(74, 222, 128, 0.3),
+              0 0 70px rgba(74, 222, 128, 0.25);
 }
 
 /* Smooth scale transition */
@@ -165,8 +165,8 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Purple wave text animation */
-@keyframes purpleWaveFlow {
+/* Green wave text animation - Grounded Innovation */
+@keyframes greenWaveFlow {
   0% {
     background-position: 0% 50%;
   }
@@ -183,9 +183,9 @@
     90deg,
     hsl(var(--muted-foreground)) 0%,
     hsl(var(--muted-foreground)) 20%,
-    hsl(242, 76%, 58%) 40%,
-    hsl(242, 80%, 65%) 50%,
-    hsl(242, 76%, 58%) 60%,
+    hsl(142, 69%, 58%) 40%,
+    hsl(142, 75%, 65%) 50%,
+    hsl(142, 69%, 58%) 60%,
     hsl(var(--muted-foreground)) 80%,
     hsl(var(--muted-foreground)) 100%
   );
@@ -193,5 +193,5 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: purpleWaveFlow 4s ease-in-out infinite;
+  animation: greenWaveFlow 4s ease-in-out infinite;
 }
