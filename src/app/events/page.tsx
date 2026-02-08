@@ -42,7 +42,7 @@ function EventCard({ event }: { event: typeof eventsData[0] }) {
             )}
           </div>
           <div className="flex items-center gap-3">
-            <h2 className="text-xl md:text-2xl font-semibold">
+            <h2 className="text-xl md:text-2xl font-semibold text-foreground">
               <a
                 href="https://www.wsta.net/2025Conference"
                 target="_blank"

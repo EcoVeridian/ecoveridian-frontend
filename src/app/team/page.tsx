@@ -90,7 +90,7 @@ export default function TeamPage() {
                   </div>
                 </CardHeader>
                 <CardContent className="flex flex-1 flex-col p-6">
-                  <CardTitle className="text-xl font-bold mb-2">
+                  <CardTitle className="text-xl font-bold mb-2 text-foreground">
                     {member.name}
                   </CardTitle>
                   <p className="text-sm font-semibold text-primary mb-3">
@@ -173,7 +173,7 @@ export default function TeamPage() {
                     </div>
                   </CardHeader>
                   <CardContent className="flex flex-1 flex-col p-6">
-                    <CardTitle className="text-xl font-bold mb-2">
+                    <CardTitle className="text-xl font-bold mb-2 text-foreground">
                       {member.name}
                     </CardTitle>
                     <p className="text-sm font-semibold text-primary mb-3">

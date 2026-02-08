@@ -58,7 +58,7 @@ function ReviewCard({
   return (
     <div
       ref={ref}
-      className={`p-8 rounded-2xl border border-border bg-background/50 eco-card-hover ${
+      className={`p-8 rounded-2xl border border-border bg-card eco-card-hover ${
         isVisible ? `scroll-animate-visible ${delays[index % 3]}` : 'scroll-animate'
       }`}
     >
@@ -68,7 +68,7 @@ function ReviewCard({
       </p>
       {/* Author info */}
       <div className="border-t border-border pt-4">
-        <p className="font-medium text-sm">{review.author}</p>
+        <p className="font-medium text-sm text-foreground">{review.author}</p>
       </div>
     </div>
   );

@@ -64,9 +64,9 @@ function FeatureItem({
 
       {/* Visual placeholder */}
       <div className={isEven ? '' : 'lg:order-1'}>
-        <div className={`rounded-2xl border border-border bg-secondary/20 flex items-center justify-center eco-card-hover overflow-hidden aspect-video`}>
+        <div className={`rounded-2xl border border-border bg-card flex items-center justify-center eco-card-hover overflow-hidden aspect-video`}>
           {videoSources[index] ? (
-            <video 
+            <video
               src={videoSources[index]}
               autoPlay
               muted

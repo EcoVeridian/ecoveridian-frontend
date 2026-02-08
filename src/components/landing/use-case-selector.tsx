@@ -51,18 +51,18 @@ export default function UseCaseSelector() {
 
           {/* Right panel - Selected answer */}
           <div className="lg:col-span-2">
-            <div className="rounded-2xl border border-border bg-secondary/20 p-8 eco-card-hover">
+            <div className="rounded-2xl border border-border bg-card p-8 eco-card-hover">
               {/* Answer label */}
-              <div className="flex items-center gap-2 mb-4 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2 mb-4 text-sm text-primary">
                 <CheckCircleIcon className="w-5 h-5" />
                 ANSWER
               </div>
               {/* Selected question */}
-              <h3 className="text-2xl font-bold mb-4">
+              <h3 className="text-2xl font-bold mb-4 text-foreground">
                 {faqs[selectedIndex].question}
               </h3>
               {/* Selected answer */}
-              <p className="text-muted-foreground leading-relaxed text-lg">
+              <p className="text-foreground leading-relaxed text-lg">
                 {faqs[selectedIndex].answer}
               </p>
             </div>

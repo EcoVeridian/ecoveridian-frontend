@@ -9,7 +9,7 @@
     /* Light mode colors - Grounded Innovation perspective */
     --background: 152 31% 95%; /* Subtle sage/pale green */
     --foreground: 164 86% 18%; /* Deep forest for text */
-    --card: 164 30% 92%; /* Soft light green-gray */
+    --card: 152 31% 95%; /* Same as background */
     --card-foreground: 164 86% 18%; /* Deep forest text */
     --primary: 142 61% 48%; /* Slightly darker Electric Leaf for light mode contrast */
     --primary-foreground: 164 30% 92%; /* Light sage for button text bg */
@@ -30,7 +30,7 @@
     /* Grounded Innovation - Deep green night with organic neutrals */
     --background: 166 20% 9%; /* #022c22 Deep Jungle Night */
     --foreground: 209 39% 96%; /* #f1f5f9 Mist White for headings */
-    --card: 164 86% 16%; /* #064e3b Forest Midnight for surfaces */
+    --card: 166 20% 9%; /* Same as dark background */
     --card-foreground: 209 39% 96%; /* Mist White */
     --primary: 142 69% 58%; /* #4ade80 Electric Leaf for CTAs */
     --primary-foreground: 164 86% 16%; /* #064e3b Deep Forest for button text */

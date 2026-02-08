@@ -270,8 +270,8 @@ export default function EnvironmentalRiskReportModal({
               </div>
               
               {/* Explanation */}
-              <div className="bg-secondary/50 rounded-lg p-4 mb-6">
-                <p className="text-sm leading-relaxed">
+              <div className="rounded-lg p-4 mb-6 bg-card">
+                <p className="text-sm leading-relaxed text-foreground">
                   {report.green_score_explanation}
                 </p>
               </div>
@@ -307,12 +307,12 @@ export default function EnvironmentalRiskReportModal({
               <div className="mt-6 pt-6 border-t border-border">
                 <h5 className="font-semibold mb-4">Key articles influencing this score</h5>
                 {report.key_articles.slice(0, 1).map((article, index) => (
-                  <div key={index} className="p-4 bg-secondary/30 rounded-lg">
-                    <p className="font-medium mb-2">{article.title}</p>
-                    <div className="flex flex-wrap gap-4 text-sm">
+                  <div key={index} className="p-4 rounded-lg bg-card">
+                    <p className="font-medium mb-2 text-foreground">{article.title}</p>
+                    <div className="flex flex-wrap gap-4 text-sm text-foreground">
                       <span>Event score: <span className={`font-semibold ${getScoreColor(article.event_score)}`}>{article.event_score}</span></span>
                       <span>Impact (−1..+1): <span className={`font-mono font-semibold ${getImpactColor(article.impact)}`}>{getImpactDisplay(article.impact)}</span></span>
-                      <span>Contribution: <span className="font-semibold">{article.contribution_percent.toFixed(1)}%</span></span>
+                      <span>Contribution: <span className="font-semibold text-foreground">{article.contribution_percent.toFixed(1)}%</span></span>
                     </div>
                     <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mt-2">
                       <span>Credibility {article.credibility.toFixed(2)}</span>
