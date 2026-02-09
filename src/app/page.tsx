@@ -1,4 +1,5 @@
 import Navbar from '@/components/landing/navbar';
+import StickyScrollNav from '@/components/landing/sticky-scroll-nav';
 import Hero from '@/components/landing/hero';
 import IconWave from '@/components/landing/icon-wave';
 import UseCaseSelector from '@/components/landing/use-case-selector';
@@ -11,6 +12,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
       <Navbar />
+      <StickyScrollNav />
       <Hero />
       <IconWave />
       <UseCaseSelector />
