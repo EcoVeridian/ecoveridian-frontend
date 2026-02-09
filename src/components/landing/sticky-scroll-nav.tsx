@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Calendar, Clock3, Home, Scale, ShieldCheck, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -21,17 +22,28 @@ const navItems = [
 export default function StickyScrollNav() {
   const [isVisible, setIsVisible] = useState(false);
   const { user, loading } = useAuth();
+  const pathname = usePathname();
+
+  // Check if we're on the home page
+  const isHomePage = pathname === '/';
 
   useEffect(() => {
+    // If not on home page, show immediately
+    if (!isHomePage) {
+      setIsVisible(true);
+      return;
+    }
+
+    // If on home page, show after scrolling
     const handleScroll = () => {
-      // Show sticky nav after scrolling 800px past hero section
       const showAfter = 800;
       setIsVisible(window.scrollY > showAfter);
     };
 
+    handleScroll(); // Check initial scroll position
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isHomePage]);
 
   if (!isVisible) return null;
 

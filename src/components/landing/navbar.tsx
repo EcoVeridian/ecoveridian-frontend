@@ -1,5 +1,7 @@
 'use client';
 
+import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Calendar, Clock3, Home, Scale, ShieldCheck, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -20,6 +22,31 @@ const navItems = [
 
 export default function Navbar() {
   const { user, loading } = useAuth();
+  const pathname = usePathname();
+  const [isVisible, setIsVisible] = useState(true);
+
+  // Check if we're on the home page
+  const isHomePage = pathname === '/';
+
+  useEffect(() => {
+    // If not on home page, hide this navbar (sticky scroll nav will show immediately)
+    if (!isHomePage) {
+      setIsVisible(false);
+      return;
+    }
+
+    // If on home page, hide when scrolled (when sticky scroll nav appears)
+    const handleScroll = () => {
+      const hideAfter = 800;
+      setIsVisible(window.scrollY <= hideAfter);
+    };
+
+    handleScroll(); // Check initial scroll position
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isHomePage]);
+
+  if (!isVisible) return null;
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-none border-none shadow-none animate-fade-in">

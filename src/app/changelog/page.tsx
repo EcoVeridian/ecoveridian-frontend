@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Navbar from '@/components/landing/navbar';
+import StickyScrollNav from '@/components/landing/sticky-scroll-nav';
 import Footer from '@/components/landing/footer';
 import { Button } from '@/components/ui/button';
 import { Changelog } from '@/components/ui/timeline';
@@ -307,6 +308,7 @@ export default function ChangelogPage() {
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
       <Navbar />
+      <StickyScrollNav />
       <section className="pt-28 pb-10">
         <div className="container mx-auto px-4">
           <Changelog data={timelineData} />

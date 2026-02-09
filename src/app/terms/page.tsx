@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/landing/navbar';
+import StickyScrollNav from '@/components/landing/sticky-scroll-nav';
 import Footer from '@/components/landing/footer';
 
 // Terms of Service page
@@ -11,6 +12,7 @@ export default function TermsPage() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <Navbar />
+      <StickyScrollNav />
       <div className="container mx-auto max-w-4xl px-4 py-24">
         <div className="mb-8">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">

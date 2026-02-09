@@ -4,6 +4,7 @@ import { SiLinkedin } from 'react-icons/si';
 import { HiOutlineMail } from 'react-icons/hi';
 import { FiGlobe } from 'react-icons/fi';
 import Navbar from '@/components/landing/navbar';
+import StickyScrollNav from '@/components/landing/sticky-scroll-nav';
 import Footer from '@/components/landing/footer';
 
 // Team member data
@@ -60,6 +61,7 @@ export default function TeamPage() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <Navbar />
+      <StickyScrollNav />
       <section className="py-20 sm:py-28">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-2xl text-center">
