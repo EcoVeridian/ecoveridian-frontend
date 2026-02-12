@@ -49,25 +49,48 @@ export default function StickyScrollNav() {
 
   return (
     <nav className="glass sticky top-0 z-50 border-b border-border animate-fade-in">
-      <div className="container mx-auto px-4 py-3 flex items-center justify-between gap-4">
-        {/* Left: Logo */}
-        <Logo />
-
-        {/* Center: Navigation menu */}
-        <div className="absolute left-1/2 -translate-x-1/2">
-          <NavBar items={navItems} variant="inline" className="w-auto" />
+      {/* Mobile Layout: Stacked with everything in one bar */}
+      <div className="sm:hidden px-4 py-3">
+        <div className="flex items-center justify-between mb-3">
+          <Logo />
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            {!loading && (
+              <Link href={user ? '/dashboard' : '/auth'}>
+                <Button className="rounded-full px-4 font-medium hover-lift" size="sm">
+                  {user ? 'Dashboard' : 'Get started'}
+                </Button>
+              </Link>
+            )}
+          </div>
         </div>
+        <div className="flex justify-center">
+          <NavBar items={navItems} variant="inline" className="w-full" />
+        </div>
+      </div>
 
-        {/* Right: Theme toggle and Dashboard button */}
-        <div className="flex items-center gap-3">
-          <ThemeToggle />
-          {!loading && (
-            <Link href={user ? '/dashboard' : '/auth'}>
-              <Button className="rounded-full px-5 font-medium hover-lift" size="sm">
-                {user ? 'Dashboard' : 'Get started'}
-              </Button>
-            </Link>
-          )}
+      {/* Desktop Layout: Original horizontal layout */}
+      <div className="hidden sm:block container mx-auto px-4 py-3">
+        <div className="flex items-center justify-between gap-4">
+          {/* Left: Logo */}
+          <Logo />
+
+          {/* Center: Navigation menu */}
+          <div className="absolute left-1/2 -translate-x-1/2">
+            <NavBar items={navItems} variant="inline" className="w-auto" />
+          </div>
+
+          {/* Right: Theme toggle and Dashboard button */}
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            {!loading && (
+              <Link href={user ? '/dashboard' : '/auth'}>
+                <Button className="rounded-full px-5 font-medium hover-lift" size="sm">
+                  {user ? 'Dashboard' : 'Get started'}
+                </Button>
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </nav>
