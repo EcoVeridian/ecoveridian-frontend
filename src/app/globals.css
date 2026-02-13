@@ -6,22 +6,22 @@
 /* CSS custom properties for theming */
 @layer base {
   :root {
-    /* Light mode colors - Grounded Innovation perspective */
-    --background: 152 31% 95%; /* Subtle sage/pale green */
-    --foreground: 164 86% 18%; /* Deep forest for text */
-    --card: 152 31% 95%; /* Same as background */
-    --card-foreground: 164 86% 18%; /* Deep forest text */
-    --primary: 142 61% 48%; /* Slightly darker Electric Leaf for light mode contrast */
-    --primary-foreground: 164 30% 92%; /* Light sage for button text bg */
-    --secondary: 176 22% 80%; /* Muted teal-gray */
-    --secondary-foreground: 164 86% 18%; /* Deep forest */
-    --muted: 152 15% 88%; /* Pale neutral */
-    --muted-foreground: 164 20% 45%; /* Muted dark green */
-    --accent: 142 61% 48%; /* Electric Leaf */
-    --accent-foreground: 164 30% 92%; /* Light sage */
-    --border: 176 22% 85%; /* Soft teal border */
-    --input: 176 22% 85%; /* Light teal input */
-    --ring: 142 61% 48%; /* Electric Leaf */
+    /* Light mode colors - EcoVeridian brand palette */
+    --background: 0 0% 100%; /* Pure white */
+    --foreground: 0 0% 15%; /* Deep charcoal for text */
+    --card: 0 0% 100%; /* Pure white */
+    --card-foreground: 0 0% 15%; /* Deep charcoal text */
+    --primary: 155 50% 35%; /* Rich eco green matching brand palette */
+    --primary-foreground: 0 0% 100%; /* White text on green */
+    --secondary: 155 50% 35%; /* Same rich eco green */
+    --secondary-foreground: 0 0% 100%; /* White text */
+    --muted: 0 0% 92%; /* Light gray */
+    --muted-foreground: 0 0% 45%; /* Medium gray */
+    --accent: 155 50% 35%; /* Rich eco green */
+    --accent-foreground: 0 0% 100%; /* White */
+    --border: 0 0% 90%; /* Light gray border */
+    --input: 0 0% 96%; /* Very light gray input */
+    --ring: 155 50% 35%; /* Rich eco green */
     --radius: 0.5rem;
   }
 
@@ -159,4 +159,16 @@
       transform: translateY(0);
     }
   }
+
+  /* Light mode only - darker green glow with higher intensity */
+  :root:not(.dark) .team-member-card:hover,
+  :root:not(.dark) .eco-card-hover:hover {
+    box-shadow: 
+      0 0 15px hsl(155 50% 35% / 0.9), 
+      0 0 30px hsl(155 50% 35% / 0.7), 
+      0 0 45px hsl(155 50% 35% / 0.5), 
+      0 0 60px hsl(155 50% 35% / 0.3) !important;
+  }
+
+
 }

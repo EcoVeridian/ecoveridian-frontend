@@ -77,11 +77,11 @@ export default function TeamPage() {
             {teamMembers.map((member) => (
               <Card
                 key={member.name}
-                className="flex flex-col items-center overflow-hidden text-center shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105"
+                className="team-member-card eco-card-hover flex flex-col items-center text-center"
               >
                 {/* Portrait image */}
                 <CardHeader className="p-0 pt-6">
-                  <div className="relative w-[150px] h-[150px] mx-auto">
+                  <div className="relative w-[150px] h-[150px] mx-auto rounded-full">
                     <Image
                       src={member.imageUrl}
                       alt={member.alt}
@@ -160,11 +160,11 @@ export default function TeamPage() {
               {boardMembers.map((member) => (
                 <Card
                   key={member.name}
-                  className="flex flex-col items-center overflow-hidden text-center shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105"
+                  className="team-member-card eco-card-hover flex flex-col items-center text-center"
                 >
                   {/* Portrait image */}
                   <CardHeader className="p-0 pt-6">
-                    <div className="relative w-[150px] h-[150px] mx-auto">
+                    <div className="relative w-[150px] h-[150px] mx-auto rounded-full">
                       <Image
                         src={member.imageUrl}
                         alt={member.alt}

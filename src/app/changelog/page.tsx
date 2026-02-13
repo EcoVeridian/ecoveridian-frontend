@@ -7,6 +7,25 @@ import { Changelog } from '@/components/ui/timeline';
 
 const timelineData = [
   {
+    title: 'v2.5.0',
+    content: (
+      <div className="space-y-4 text-foreground/90">
+        <div className="space-y-2">
+          <p className="text-sm md:text-base text-muted-foreground">Complete visual overhaul — switched from purple theme to green theme with UI/UX improvements.</p>
+          <ul className="list-disc list-inside text-sm md:text-base text-muted-foreground space-y-1">
+            <li>Revamped color system from purple to green with a darker shade for light mode and bright green for dark mode.</li>
+            <li>Added green glow hover effects to Team, Events, and Home page cards.</li>
+            <li>Updated navigation bar, interactive background, and animations to match the new theme.</li>
+            <li>Dashboard visibility fixes and various bug fixes.</li>
+          </ul>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="text-xs md:text-sm text-muted-foreground">Feb 12, 2026</span>
+        </div>
+      </div>
+    ),
+  },
+  {
     title: 'v2.4.4',
     content: (
       <div className="space-y-4 text-foreground/90">

@@ -27,6 +27,9 @@ export default function InteractiveBackground() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    // Detect dark mode
+    const isDark = () => document.documentElement.classList.contains('dark');
+
     // Set canvas size
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
@@ -126,18 +129,22 @@ export default function InteractiveBackground() {
           particle.x, particle.y, 0,
           particle.x, particle.y, particle.size * 3
         );
-        // Core glow use lower overall alpha so the network reads organic
-        gradient.addColorStop(0, `rgba(74, 222, 128, ${particle.opacity * 0.4})`);
-        gradient.addColorStop(0.5, `rgba(74, 222, 128, ${particle.opacity * 0.18})`);
-        gradient.addColorStop(1, 'rgba(74, 222, 128, 0)');
+        // Theme-aware colors: dark green for light mode, bright green for dark mode
+        const dark = isDark();
+        const r = dark ? 74 : 20;
+        const g = dark ? 222 : 83;
+        const b = dark ? 128 : 45;
+        gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${particle.opacity * (dark ? 0.4 : 0.55)})`);
+        gradient.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, ${particle.opacity * (dark ? 0.18 : 0.25)})`);
+        gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
 
         ctx.fillStyle = gradient;
         ctx.fill();
 
-        // Draw solid center (slightly richer leaf)
+        // Draw solid center
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size * 0.5, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(74, 222, 128, ${Math.min(particle.opacity * 0.9, 0.85)})`;
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${Math.min(particle.opacity * (dark ? 0.9 : 0.95), dark ? 0.85 : 0.9)})`;
         ctx.fill();
 
         // Draw connections to nearby particles with stronger visibility
@@ -151,8 +158,11 @@ export default function InteractiveBackground() {
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(otherParticle.x, otherParticle.y);
             // Subtle emerald lines
-            const opacity = (1 - distance / 150) * 0.2; // max ~0.2
-            ctx.strokeStyle = `rgba(16, 185, 129, ${opacity})`;
+            const opacity = (1 - distance / 150) * (isDark() ? 0.2 : 0.3);
+            const lr = isDark() ? 16 : 20;
+            const lg = isDark() ? 185 : 83;
+            const lb = isDark() ? 129 : 45;
+            ctx.strokeStyle = `rgba(${lr}, ${lg}, ${lb}, ${opacity})`;
             ctx.lineWidth = 1; // Thicker lines
             ctx.stroke();
           }

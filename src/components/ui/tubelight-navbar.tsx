@@ -48,7 +48,7 @@ export function NavBar({ items, className, variant = 'floating' }: NavBarProps) 
     >
       <div
         className={cn(
-          'flex items-center justify-center gap-1 sm:gap-3 bg-background/80 border border-border backdrop-blur-xl py-1 px-1 rounded-full shadow-lg shadow-black/10 dark:shadow-black/30',
+          'flex items-center justify-center gap-1 sm:gap-3 bg-background border border-primary backdrop-blur-xl py-1 px-1 rounded-full shadow-lg shadow-black/10 dark:bg-background/80 dark:border-border dark:shadow-black/30',
           isInline && 'w-full',
         )}
       >

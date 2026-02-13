@@ -35,7 +35,7 @@
     color: hsl(var(--foreground));
   }
   50% {
-    color: hsl(142, 69%, 58%);
+    color: hsl(155, 50%, 35%);
   }
 }
 
@@ -115,9 +115,9 @@
 
 .eco-card-hover:hover {
   transform: scale(1.08) translateY(-20px);
-  box-shadow: 0 30px 60px -15px rgba(74, 222, 128, 0.35),
-              0 20px 40px -10px rgba(74, 222, 128, 0.25),
-              0 0 60px rgba(74, 222, 128, 0.2);
+  box-shadow: 0 30px 60px -15px rgba(45, 134, 89, 0.35),
+              0 20px 40px -10px rgba(45, 134, 89, 0.25),
+              0 0 60px rgba(45, 134, 89, 0.2);
 }
 
 /* Dark mode eco shadow */
@@ -183,9 +183,9 @@
     90deg,
     hsl(var(--muted-foreground)) 0%,
     hsl(var(--muted-foreground)) 20%,
-    hsl(142, 69%, 58%) 40%,
-    hsl(142, 75%, 65%) 50%,
-    hsl(142, 69%, 58%) 60%,
+    hsl(155, 50%, 35%) 40%,
+    hsl(155, 50%, 40%) 50%,
+    hsl(155, 50%, 35%) 60%,
     hsl(var(--muted-foreground)) 80%,
     hsl(var(--muted-foreground)) 100%
   );

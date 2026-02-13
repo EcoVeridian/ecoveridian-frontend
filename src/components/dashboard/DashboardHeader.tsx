@@ -26,7 +26,7 @@ export default function DashboardHeader() {
         <div className="flex items-center gap-4">
           <div className="hidden sm:block text-right">
             <p className="text-sm font-medium">{user?.email}</p>
-            <p className="text-xs text-muted-foreground">Dashboard</p>
+            <p className="text-xs text-foreground">Dashboard</p>
           </div>
           <Button
             variant="outline"
