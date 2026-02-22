@@ -11,12 +11,14 @@ const timelineData = [
     content: (
       <div className="space-y-4 text-foreground/90">
         <div className="space-y-2">
-          <p className="text-sm md:text-base text-muted-foreground">Complete visual overhaul — switched from purple theme to green theme with UI/UX improvements.</p>
+          <p className="text-sm md:text-base text-muted-foreground">Complete visual overhaul — switched from purple theme to green theme with UI/UX improvements, plus a new floating analysis widget.</p>
           <ul className="list-disc list-inside text-sm md:text-base text-muted-foreground space-y-1">
+            <li>Floating analysis widget: a draggable button now appears on any webpage and lets you instantly view an ESG sustainability score for the company behind that site, without opening the popup.</li>
+            <li>Redesigned UI with a new dark &ldquo;Grounded Innovation&rdquo; theme across both the popup and widget.</li>
             <li>Revamped color system from purple to green with a darker shade for light mode and bright green for dark mode.</li>
-            <li>Added green glow hover effects to Team, Events, and Home page cards.</li>
             <li>Updated navigation bar, interactive background, and animations to match the new theme.</li>
-            <li>Dashboard visibility fixes and various bug fixes.</li>
+            <li>Improved background caching: widget analysis results are cached for 1 hour to reduce API calls.</li>
+            <li>Minor stability and performance improvements.</li>
           </ul>
         </div>
         <div className="flex items-center gap-3">
